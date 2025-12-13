@@ -23,7 +23,7 @@ export const Sidebar = ({
 }: SidebarProps) => {
   const { theme, setTheme } = useTheme();
 
-  const toggleTheme = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const toggleTheme = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newTheme = theme === "light" ? "dark" : "light";
 
     if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
