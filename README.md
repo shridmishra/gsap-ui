@@ -1,5 +1,44 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## shrid-ui
+
+A beautiful, animated UI component library showcasing various React components with smooth animations built with Framer Motion and Tailwind CSS.
+
+## Project Structure
+
+The app has been restructured for simplicity and better understanding:
+
+### Main Components
+
+- **`src/app/page.tsx`** - Main page component that manages state and layout
+  - Manages sidebar visibility (always open on desktop, toggle on mobile)
+  - Handles active component selection
+  - Renders Sidebar and PreviewArea components
+
+- **`src/app/_components/sidebar.tsx`** - Navigation sidebar
+  - Contains home link and theme toggle in the header
+  - Displays component categories and items
+  - Always visible on desktop (lg+)
+  - Can be toggled on mobile with close button inside
+  
+- **`src/app/_components/preview-area.tsx`** - Component preview and code display
+  - Shows the selected component with live preview
+  - Displays source code in a minimal, clean code block
+  - Includes mobile menu button to open sidebar
+  - Fullscreen mode for component preview
+  - Lists component dependencies
+
+- **`src/app/_registry/`** - Component registry
+  - Contains all UI components organized by category
+  - Exports component map and code snippets
+
+### Key Features
+
+- **Responsive Design**: Sidebar always open on desktop, collapsible on mobile
+- **Theme Switching**: Integrated theme toggle in sidebar with smooth transitions
+- **Code Display**: Clean, minimal code blocks with copy functionality
+- **Navigation**: Easy component browsing with visual active indicators
+
 ## Getting Started
 
 First, run the development server:
@@ -34,4 +73,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# shrid-ui
