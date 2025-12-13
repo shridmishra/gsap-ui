@@ -2,6 +2,9 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Home, Moon, Sun, X } from "lucide-react";
+import { useTheme } from "next-themes";
+import { flushSync } from "react-dom";
 import { cn } from "@/lib/utils";
 import { componentRegistry } from "@/app/_registry";
 
@@ -18,6 +21,46 @@ export const Sidebar = ({
   isOpen,
   onToggle,
 }: SidebarProps) => {
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const newTheme = theme === "light" ? "dark" : "light";
+
+    if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTheme(newTheme);
+      return;
+    }
+
+    const transition = document.startViewTransition(() => {
+      flushSync(() => {
+        setTheme(newTheme);
+      });
+    });
+
+    const x = e.clientX;
+    const y = e.clientY;
+    const endRadius = Math.hypot(
+      Math.max(x, innerWidth - x),
+      Math.max(y, innerHeight - y)
+    );
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+          ],
+        },
+        {
+          duration: 500,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        }
+      );
+    });
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -35,27 +78,36 @@ export const Sidebar = ({
             "lg:inset-auto lg:left-4 lg:top-1/2 lg:-translate-y-1/2 lg:w-[280px] lg:min-h-[calc(100vh-10rem)] lg:h-auto"
           )}
         >
-          <div className="w-full h-full overflow-y-auto py-6 px-4 pt-20 lg:pt-6">
-            <button
-              onClick={onToggle}
-              className="lg:hidden absolute top-6 right-4 p-2 rounded-lg hover:bg-foreground/10 transition-colors"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+          <div className="w-full h-full overflow-y-auto py-6 px-4">
+            {/* Header with home, theme toggle, and close button */}
+            <div className="flex items-center justify-between mb-6 pb-4 border-b border-border">
+              <div className="flex items-center gap-2">
+                <a
+                  href="https://shrid.in"
+                  className="flex items-center justify-center w-9 h-9 rounded-lg hover:bg-foreground/10 transition-colors"
+                  title="Go to home"
+                >
+                  <Home className="w-5 h-5" />
+                </a>
+                <button
+                  onClick={toggleTheme}
+                  className="flex items-center justify-center w-9 h-9 rounded-lg hover:bg-foreground/10 transition-colors relative"
+                  title="Toggle theme"
+                >
+                  <Sun className="w-5 h-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+                  <Moon className="w-5 h-5 absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+                </button>
+              </div>
+              <button
+                onClick={onToggle}
+                className="lg:hidden flex items-center justify-center w-9 h-9 rounded-lg hover:bg-foreground/10 transition-colors"
+                title="Close sidebar"
               >
-                <path d="M18 6 6 18" />
-                <path d="m6 6 12 12" />
-              </svg>
-            </button>
+                <X className="w-5 h-5" />
+              </button>
+            </div>
         
+            {/* Navigation */}
             <nav className="space-y-6">
               {componentRegistry.map((category) => (
                 <div key={category.category}>

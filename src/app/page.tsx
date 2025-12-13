@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Sidebar, PreviewArea, ToggleButton } from "./_components";
+import { Sidebar, PreviewArea } from "./_components";
 
 export default function ComponentsPage() {
   const [mounted, setMounted] = useState(false);
@@ -11,6 +11,7 @@ export default function ComponentsPage() {
   useEffect(() => {
     setMounted(true);
     const handleResize = () => {
+      // On desktop (lg+), sidebar is always open. On mobile, it's closed by default
       setSidebarOpen(window.innerWidth >= 1024);
     };
     handleResize();
@@ -21,7 +22,7 @@ export default function ComponentsPage() {
   if (!mounted) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="space-y-4 w-full max-w-2xl">
+        <div className="space-y-4 w-full max-w-2xl px-4">
           <div className="flex gap-4">
             <div className="w-16 h-16 rounded-full bg-accent animate-pulse" />
             <div className="flex-1 space-y-2">
@@ -38,11 +39,6 @@ export default function ComponentsPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <ToggleButton
-        isOpen={sidebarOpen}
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-      />
-
       <Sidebar
         activeComponent={activeComponent}
         setActiveComponent={setActiveComponent}
@@ -51,7 +47,11 @@ export default function ComponentsPage() {
       />
 
       <main className="min-h-screen">
-        <PreviewArea activeComponent={activeComponent} sidebarOpen={sidebarOpen} />
+        <PreviewArea 
+          activeComponent={activeComponent} 
+          sidebarOpen={sidebarOpen}
+          onSidebarToggle={() => setSidebarOpen(!sidebarOpen)}
+        />
       </main>
     </div>
   );
