@@ -1,58 +1,61 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { Sidebar, PreviewArea, ToggleButton } from "./_components";
+import { useEffect } from "react";
+import { 
+  Sidebar, 
+  PreviewArea, 
+  ToggleButton, 
+  InfoIsland, 
+  CodePanel, 
+  SearchPalette,
+  LoadingSkeleton 
+} from "@/components/layout";
+import { useMounted, componentActions } from "@/store";
 
 export default function ComponentsPage() {
-  const [mounted, setMounted] = useState(false);
-  const [activeComponent, setActiveComponent] = useState("border-frame");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const mounted = useMounted();
 
+  // Initialize on mount
   useEffect(() => {
-    setMounted(true);
+    componentActions.setMounted(true);
+
+    // Set initial sidebar state based on screen size
+    componentActions.setSidebarOpen(window.innerWidth >= 1024);
+
     const handleResize = () => {
-      setSidebarOpen(window.innerWidth >= 1024);
+      componentActions.setSidebarOpen(window.innerWidth >= 1024);
     };
-    handleResize();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        componentActions.openSearch();
+      }
+    };
+
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   if (!mounted) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="space-y-4 w-full max-w-2xl">
-          <div className="flex gap-4">
-            <div className="w-16 h-16 rounded-full bg-accent animate-pulse" />
-            <div className="flex-1 space-y-2">
-              <div className="h-6 w-1/2 bg-accent animate-pulse rounded" />
-              <div className="h-4 w-1/3 bg-accent animate-pulse rounded" />
-            </div>
-          </div>
-          <div className="h-10 w-full bg-accent animate-pulse rounded" />
-          <div className="h-64 w-full bg-accent animate-pulse rounded" />
-        </div>
-      </div>
-    );
+    return <LoadingSkeleton />;
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <ToggleButton
-        isOpen={sidebarOpen}
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-      />
-
-      <Sidebar
-        activeComponent={activeComponent}
-        setActiveComponent={setActiveComponent}
-        isOpen={sidebarOpen}
-        onToggle={() => setSidebarOpen(!sidebarOpen)}
-      />
-
-      <main className="min-h-screen">
-        <PreviewArea activeComponent={activeComponent} sidebarOpen={sidebarOpen} />
+    <div className="min-h-screen bg-background text-foreground overflow-hidden">
+      <ToggleButton />
+      <InfoIsland />
+      <Sidebar />
+      <main className="h-screen">
+        <PreviewArea />
       </main>
+      <CodePanel />
+      <SearchPalette />
     </div>
   );
 }
