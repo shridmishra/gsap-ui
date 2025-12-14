@@ -8,6 +8,12 @@ import { flushSync } from "react-dom";
 import { useFilteredComponents, type FlatComponentItem } from "@/hooks";
 import { useSearchOpen, useActiveComponent, componentActions } from "@/store";
 import { modalVariants, fadeVariants, springTransition } from "@/lib/animations";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 // Quick action item
 interface QuickAction {
@@ -32,18 +38,18 @@ const QuickActionItem = memo(function QuickActionItem({
         action.action();
         onExecute();
       }}
-      className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-zinc-800 group transition-colors text-left"
+      className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-accent group transition-colors text-left"
     >
       <div className="flex items-center gap-3">
-        <div className="text-zinc-400 group-hover:text-zinc-200">
+        <div className="text-muted-foreground group-hover:text-foreground">
           {action.icon}
         </div>
-        <span className="text-sm text-zinc-200 font-medium group-hover:text-white">
+        <span className="text-sm text-foreground font-medium">
           {action.name}
         </span>
       </div>
       {action.shortcut && (
-        <span className="text-xs text-zinc-600 bg-zinc-800 px-1.5 py-0.5 rounded">
+        <span className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
           {action.shortcut}
         </span>
       )}
@@ -62,17 +68,17 @@ const SearchResultItem = memo(function SearchResultItem({
   return (
     <button
       onClick={() => onSelect(item.id)}
-      className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-zinc-800 group transition-colors text-left"
+      className="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-accent group transition-colors text-left"
     >
       <div className="flex flex-col gap-0.5">
-        <span className="text-sm text-zinc-200 font-medium group-hover:text-white">
+        <span className="text-sm text-foreground font-medium">
           {item.name}
         </span>
-        <span className="text-xs text-zinc-500 group-hover:text-zinc-400">
+        <span className="text-xs text-muted-foreground group-hover:text-foreground/80">
           {item.category}
         </span>
       </div>
-      <ArrowRight className="w-4 h-4 text-zinc-600 group-hover:text-zinc-400 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+      <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
     </button>
   );
 });
@@ -80,7 +86,7 @@ const SearchResultItem = memo(function SearchResultItem({
 // Section header
 const SectionHeader = memo(function SectionHeader({ title }: { title: string }) {
   return (
-    <div className="px-3 py-1.5 text-[10px] uppercase tracking-wider text-zinc-500 font-medium">
+    <div className="px-3 py-1.5 text-[10px] uppercase tracking-wider text-muted-foreground font-medium">
       {title}
     </div>
   );
@@ -227,24 +233,33 @@ export const CommandPalette = memo(function CommandPalette() {
             transition={springTransition}
             className="fixed left-1/2 top-[15%] -translate-x-1/2 w-full max-w-lg z-[70] px-4"
           >
-            <div className="bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh]">
+            <div className="bg-popover border border-border rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh]">
               {/* Search Input */}
-              <div className="flex items-center px-4 py-3 border-b border-zinc-800 gap-3">
-                <Search className="w-5 h-5 text-zinc-500" />
+              <div className="flex items-center px-4 py-3 border-b border-border gap-3">
+                <Search className="w-5 h-5 text-muted-foreground" />
                 <input
                   ref={inputRef}
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search components or actions..."
-                  className="flex-1 bg-transparent border-none outline-none text-zinc-200 placeholder:text-zinc-600 text-sm h-6"
+                  className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground text-sm h-6"
                 />
-                <button
-                  onClick={componentActions.closeSearch}
-                  className="p-1 rounded hover:bg-zinc-800 text-zinc-500 transition-colors"
-                >
-                  <X className="w-4 h-4" />
-                </button>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={componentActions.closeSearch}
+                        className="p-1 rounded hover:bg-accent text-muted-foreground transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Close</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
 
               {/* Results */}
@@ -280,7 +295,7 @@ export const CommandPalette = memo(function CommandPalette() {
                         ))}
                       </div>
                     ) : query.trim() ? (
-                      <div className="py-4 text-center text-zinc-500 text-sm">
+                      <div className="py-4 text-center text-muted-foreground text-sm">
                         No components found for &quot;{query}&quot;
                       </div>
                     ) : null}
@@ -289,14 +304,14 @@ export const CommandPalette = memo(function CommandPalette() {
 
                 {/* No results at all */}
                 {query.trim() && filteredActions.length === 0 && filteredComponents.length === 0 && (
-                  <div className="py-8 text-center text-zinc-500 text-sm">
+                  <div className="py-8 text-center text-muted-foreground text-sm">
                     No results found for &quot;{query}&quot;
                   </div>
                 )}
               </div>
 
               {/* Footer */}
-              <div className="px-4 py-2 bg-zinc-950/50 border-t border-zinc-800 text-[10px] text-zinc-600 flex justify-between">
+              <div className="px-4 py-2 bg-muted/50 border-t border-border text-[10px] text-muted-foreground flex justify-between">
                 <span>↵ Select</span>
                 <span>ESC to close</span>
               </div>

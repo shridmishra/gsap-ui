@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams } from "next/navigation";
-import { componentMap } from "@/registry";
+import { componentMap, componentRegistry } from "@/registry";
+import { cn } from "@/lib/utils";
 
 export default function PreviewPage() {
   const params = useParams();
@@ -12,6 +13,16 @@ export default function PreviewPage() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const isFullWidth = useMemo(() => {
+    const category = componentRegistry.find((cat) =>
+      cat.items.some((item) => item.id === componentId)
+    );
+    return (
+      category?.category === "Hero Section" ||
+      category?.category === "Landing Page"
+    );
+  }, [componentId]);
 
   if (!mounted) {
     return (
@@ -32,8 +43,30 @@ export default function PreviewPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Component />
+    <div
+      className={cn(
+        "w-full bg-background",
+        isFullWidth ? "h-screen" : "min-h-screen flex items-center justify-center"
+      )}
+    >
+      {/* Subtle grid background */}
+      <div
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), 
+                            linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      <div
+        className={cn(
+          "relative z-10 w-full",
+          !isFullWidth ? "max-w-4xl px-4 py-12" : "h-full"
+        )}
+      >
+        <Component />
+      </div>
     </div>
   );
 }

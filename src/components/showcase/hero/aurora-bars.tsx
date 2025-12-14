@@ -26,7 +26,7 @@ export const AuroraBars = ({ className }: AuroraBarsProps) => {
   return (
     <div
       className={cn(
-        "relative w-full h-full bg-zinc-950 overflow-hidden flex items-end justify-center",
+        "relative w-full h-full bg-background overflow-hidden flex items-end justify-center",
         className
       )}
     >
@@ -47,7 +47,25 @@ export const AuroraBars = ({ className }: AuroraBarsProps) => {
      
       
       {/* Overlay for smoother fade at the top if needed, though gradient handles it */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-transparent to-transparent pointer-events-none h-1/2" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-transparent pointer-events-none h-1/2" />
+
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center z-10 pb-20">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground mb-6">
+          Aurora Bars
+        </h1>
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          A beautiful, animated hero section background with rhythmic bars resembling the northern lights.
+        </p>
+        <div className="flex gap-4">
+          <button className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">
+            Get Started
+          </button>
+          <button className="px-6 py-3 rounded-lg bg-secondary text-secondary-foreground font-medium hover:bg-secondary/80 transition-colors">
+            Learn More
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

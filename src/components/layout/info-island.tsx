@@ -7,6 +7,12 @@ import { cn } from "@/lib/utils";
 import { useActiveComponent as useActiveComponentFromStore, componentActions } from "@/store";
 import { useActiveComponent as useActiveItem } from "@/hooks";
 import { fadeUpVariants } from "@/lib/animations";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 // Shared button styles
 const buttonStyles = cn(
@@ -30,32 +36,53 @@ export const InfoIsland = memo(function InfoIsland() {
       animate="visible"
       className="fixed top-4 sm:top-6 right-3 sm:right-4 z-50"
     >
-      <div className="flex items-center gap-0.5 sm:gap-1 p-0.5 sm:p-1 rounded-lg sm:rounded-xl bg-background/80 backdrop-blur-xl border border-border shadow-lg h-9 sm:h-10">
-        <button
-          onClick={componentActions.openSearch}
-          className={buttonStyles}
-          title="Open command palette (⌘K)"
-        >
-          <Command className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
-        </button>
+      <div className="flex items-center gap-0.5 sm:gap-1 p-0.5 sm:p-1 rounded-lg sm:rounded-xl bg-background border border-border shadow-lg h-9 sm:h-10">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                onClick={componentActions.openSearch}
+                className={buttonStyles}
+              >
+                <Command className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Open command palette (⌘K)</p>
+            </TooltipContent>
+          </Tooltip>
 
-        <Divider />
+          <Divider />
 
-        <button onClick={componentActions.openCodePanel} className={buttonStyles} title="View source code">
-          <Code2 className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
-        </button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button onClick={componentActions.openCodePanel} className={buttonStyles}>
+                <Code2 className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>View source code</p>
+            </TooltipContent>
+          </Tooltip>
 
-        <Divider />
+          <Divider />
 
-        <a
-          href={`/preview/${activeComponent}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={buttonStyles}
-          title="Open in new tab"
-        >
-          <ExternalLink className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
-        </a>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <a
+                href={`/preview/${activeComponent}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonStyles}
+              >
+                <ExternalLink className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+              </a>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Full Preview</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
 
       {/* Component name tooltip */}

@@ -2,15 +2,22 @@
 
 import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "ghost" | "default";
   size?: "sm" | "md";
+  tooltip?: string;
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ className, variant = "ghost", size = "md", children, ...props }, ref) => {
-    return (
+  ({ className, variant = "ghost", size = "md", tooltip, children, ...props }, ref) => {
+    const button = (
       <button
         ref={ref}
         className={cn(
@@ -25,6 +32,21 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       >
         {children}
       </button>
+    );
+
+    if (!tooltip) {
+      return button;
+    }
+
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>{button}</TooltipTrigger>
+          <TooltipContent>
+            <p>{tooltip}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     );
   }
 );
