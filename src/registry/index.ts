@@ -3,16 +3,16 @@ import type { ComponentCategory } from "@/types";
 import { 
   BorderFrameDemo, borderFrameCode,
   SimpleHero, simpleHeroCode,
-  FeatureSection, featureSectionCode,
-  GlassCardDemo, glassCardCode
+  AuroraBars, auroraBarsCode,
+  FeatureSection, featureSectionCode
 } from "@/components/showcase";
 
 // Re-export showcase components for convenience
 export { 
   BorderFrameDemo, borderFrameCode,
   SimpleHero, simpleHeroCode,
-  FeatureSection, featureSectionCode,
-  GlassCardDemo, glassCardCode
+  AuroraBars, auroraBarsCode,
+  FeatureSection, featureSectionCode
 } from "@/components/showcase";
 
 // Re-export types from centralized location
@@ -27,6 +27,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "feature-section", 
         isFree: true,
         description: "A responsive feature section with icons and grid layout.",
+        url: "/landing/feature-section",
         installation: "npm install lucide-react",
       },
     ],
@@ -39,18 +40,15 @@ export const componentRegistry: ComponentCategory[] = [
         id: "simple-hero", 
         isFree: true,
         description: "A clean hero section with a title, description, and call-to-action buttons.",
+        url: "/hero/simple-hero",
         installation: "npm install lucide-react",
       },
-    ],
-  },
-  {
-    category: "Components",
-    items: [
       { 
-        name: "Glass Card", 
-        id: "glass-card", 
+        name: "Aurora Bars", 
+        id: "aurora-bars", 
         isFree: true,
-        description: "A modern glassmorphism card with hover effects.",
+        description: "A visual hero background with animated aurora-like bars.",
+        url: "/hero/aurora-bars",
         installation: "npm install clsx tailwind-merge",
       },
     ],
@@ -63,6 +61,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "border-frame", 
         isFree: true,
         description: "A card with a glowing border effect that follows the mouse cursor.",
+        url: "/cards/border-frame",
         installation: "npm install clsx tailwind-merge",
       },
     ],
@@ -73,13 +72,13 @@ export const componentRegistry: ComponentCategory[] = [
 export const componentMap: Record<string, React.ComponentType<any>> = {
   "border-frame": BorderFrameDemo,
   "simple-hero": SimpleHero,
+  "aurora-bars": AuroraBars,
   "feature-section": FeatureSection,
-  "glass-card": GlassCardDemo,
 };
 
 export const codeMap: Record<string, string> = {
   "border-frame": borderFrameCode,
   "simple-hero": simpleHeroCode,
+  "aurora-bars": auroraBarsCode,
   "feature-section": featureSectionCode,
-  "glass-card": glassCardCode,
 };

@@ -3,14 +3,14 @@
 import React, { useState, useEffect, memo, useMemo } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
-import { componentMap } from "@/registry";
+import { componentMap, componentRegistry } from "@/registry";
 import { useIsDesktop } from "@/hooks";
-import { useActiveComponent, useSidebarOpen } from "@/store";
+import { useActiveComponent } from "@/store";
 import { previewVariants, previewTransition } from "@/lib/animations";
+import { cn } from "@/lib/utils";
 
 export const PreviewArea = memo(function PreviewArea() {
   const activeComponent = useActiveComponent();
-  const sidebarOpen = useSidebarOpen();
   const isDesktop = useIsDesktop();
   const [loading, setLoading] = useState(false);
 
@@ -22,18 +22,22 @@ export const PreviewArea = memo(function PreviewArea() {
 
   const ActiveComponentRender = componentMap[activeComponent];
 
-  const containerStyle = useMemo(
-    () => ({
-      marginLeft: sidebarOpen && isDesktop ? 300 : 0,
-      width: sidebarOpen && isDesktop ? "calc(100% - 300px)" : "100%",
-    }),
-    [sidebarOpen, isDesktop]
-  );
+  const isFullWidth = useMemo(() => {
+    const category = componentRegistry.find((cat) =>
+      cat.items.some((item) => item.id === activeComponent)
+    );
+    return (
+      category?.category === "Hero Section" ||
+      category?.category === "Landing Page"
+    );
+  }, [activeComponent]);
 
   return (
     <div
-      className="h-screen w-full flex items-center justify-center transition-all duration-300 ease-out"
-      style={containerStyle}
+      className={cn(
+        "h-screen w-full",
+        !isFullWidth && "flex items-center justify-center"
+      )}
     >
       {/* Subtle grid background */}
       <div
@@ -46,7 +50,12 @@ export const PreviewArea = memo(function PreviewArea() {
       />
 
       {/* Centered component preview */}
-      <div className="relative z-10 w-full max-w-4xl px-4">
+      <div
+        className={cn(
+          "relative z-10 w-full",
+          !isFullWidth ? "max-w-4xl px-4" : "h-full"
+        )}
+      >
         {loading ? (
           <div className="flex flex-col items-center justify-center gap-4">
             <Skeleton className="h-8 w-48 rounded-lg" />
@@ -61,7 +70,10 @@ export const PreviewArea = memo(function PreviewArea() {
               animate="visible"
               exit="exit"
               transition={previewTransition}
-              className="flex items-center justify-center"
+              className={cn(
+                "w-full",
+                !isFullWidth ? "flex items-center justify-center" : "h-full"
+              )}
             >
               {ActiveComponentRender && <ActiveComponentRender />}
             </motion.div>

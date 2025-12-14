@@ -4,6 +4,7 @@ export interface ComponentItem {
   id: string;
   isFree: boolean;
   description: string;
+  url: string;
   installation?: string;
 }
 

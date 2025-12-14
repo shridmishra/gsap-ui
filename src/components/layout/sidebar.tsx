@@ -89,21 +89,32 @@ export const Sidebar = memo(function Sidebar() {
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.aside
-          variants={sidebarVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          transition={springTransition}
-          className={cn(
-            "fixed z-40",
-            "bg-background/95 lg:bg-background/80 backdrop-blur-xl",
-            "border-r lg:border border-border lg:rounded-2xl shadow-2xl",
-            "overflow-hidden",
-            "inset-0 w-full h-full",
-            "lg:inset-auto lg:left-4 lg:top-1/2 lg:-translate-y-1/2 lg:w-[280px] lg:min-h-[calc(100vh-10rem)] lg:h-auto"
-          )}
-        >
+        <>
+          {/* Backdrop overlay - closes sidebar on click */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-30 bg-black/20"
+            onClick={() => componentActions.setSidebarOpen(false)}
+            aria-hidden="true"
+          />
+          <motion.aside
+            variants={sidebarVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={springTransition}
+            className={cn(
+              "fixed z-40",
+              "bg-background",
+              "border-r lg:border border-border lg:rounded-2xl shadow-2xl",
+              "overflow-hidden",
+              "inset-0 w-full h-full",
+              "lg:inset-auto lg:left-4 lg:top-1/2 lg:-translate-y-1/2 lg:w-[280px] lg:min-h-[calc(100vh-10rem)] lg:h-auto"
+            )}
+          >
           <div className="w-full h-full overflow-y-auto py-6 px-4 pt-20 lg:pt-6">
             <button
               onClick={componentActions.toggleSidebar}
@@ -139,6 +150,7 @@ export const Sidebar = memo(function Sidebar() {
             </nav>
           </div>
         </motion.aside>
+        </>
       )}
     </AnimatePresence>
   );

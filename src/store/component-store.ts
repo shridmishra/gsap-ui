@@ -1,6 +1,18 @@
 import { create } from "zustand";
+import { componentRegistry } from "@/registry";
 
 const DEFAULT_COMPONENT = "border-frame";
+
+// Helper function to get URL for a component ID
+function getComponentUrl(id: string): string | null {
+  for (const category of componentRegistry) {
+    const item = category.items.find((item) => item.id === id);
+    if (item) {
+      return item.url;
+    }
+  }
+  return null;
+}
 
 interface ComponentExplorerState {
   // State
@@ -33,7 +45,15 @@ export const useComponentStore = create<ComponentExplorerState>((set) => ({
   // Actions
   setMounted: (mounted) => set({ mounted }),
   
-  setActiveComponent: (id) => set({ activeComponent: id }),
+  setActiveComponent: (id) => {
+    set({ activeComponent: id });
+    if (typeof window !== "undefined") {
+      const url = getComponentUrl(id);
+      if (url) {
+        window.history.pushState(null, "", url);
+      }
+    }
+  },
   
   setSidebarOpen: (open) => set({ sidebarOpen: open }),
   
@@ -64,7 +84,15 @@ export const useMounted = () => useComponentStore((state) => state.mounted);
 // Actions object - stable references, no re-renders
 export const componentActions = {
   setMounted: (mounted: boolean) => useComponentStore.setState({ mounted }),
-  setActiveComponent: (id: string) => useComponentStore.setState({ activeComponent: id }),
+  setActiveComponent: (id: string) => {
+    useComponentStore.setState({ activeComponent: id });
+    if (typeof window !== "undefined") {
+      const url = getComponentUrl(id);
+      if (url) {
+        window.history.pushState(null, "", url);
+      }
+    }
+  },
   setSidebarOpen: (open: boolean) => useComponentStore.setState({ sidebarOpen: open }),
   toggleSidebar: () => useComponentStore.setState((state) => ({ sidebarOpen: !state.sidebarOpen })),
   closeSidebarOnMobile: () => {
@@ -76,4 +104,5 @@ export const componentActions = {
   closeCodePanel: () => useComponentStore.setState({ codePanelOpen: false }),
   openSearch: () => useComponentStore.setState({ searchOpen: true }),
   closeSearch: () => useComponentStore.setState({ searchOpen: false }),
+  setActiveComponentFromUrl: (id: string) => useComponentStore.setState({ activeComponent: id }),
 };
