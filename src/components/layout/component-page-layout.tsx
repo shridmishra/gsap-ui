@@ -1,16 +1,18 @@
 "use client";
 
-import { useEffect } from "react";
-import { 
-  Sidebar, 
-  PreviewArea, 
-  ToggleButton, 
-  InfoIsland, 
-  CodePanel, 
+import { useEffect, useMemo } from "react";
+import {
+  Sidebar,
+  PreviewArea,
+  ToggleButton,
+  InfoIsland,
+  CodePanel,
   CommandPalette,
-  LoadingSkeleton 
+  LoadingSkeleton
 } from "@/components/layout";
-import { useMounted, componentActions } from "@/store";
+import { useMounted, componentActions, useSidebarOpen, useActiveComponent } from "@/store";
+import { componentRegistry } from "@/registry";
+import { cn } from "@/lib/utils";
 
 interface ComponentPageLayoutProps {
   componentId?: string;
@@ -18,6 +20,14 @@ interface ComponentPageLayoutProps {
 
 export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
   const mounted = useMounted();
+  const isOpen = useSidebarOpen();
+  const activeComponentId = useActiveComponent();
+
+  const activeComponent = useMemo(() => {
+    return componentRegistry
+      .flatMap((c) => c.items)
+      .find((i) => i.id === activeComponentId);
+  }, [activeComponentId]);
 
   useEffect(() => {
     componentActions.setMounted(true);
@@ -33,9 +43,6 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
         componentActions.setActiveComponentFromUrl(match[1]);
       }
     }
-
-    // Set initial sidebar state - closed by default
-    componentActions.setSidebarOpen(false);
 
     const handleResize = () => {
       // Keep sidebar closed on resize
@@ -72,12 +79,23 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden">
-      <ToggleButton />
-      <InfoIsland />
+    <div className="flex min-h-screen bg-background text-foreground overflow-hidden">
       <Sidebar />
-      <main className="h-screen">
-        <PreviewArea />
+      <main className="flex-1 flex flex-col h-screen overflow-hidden relative">
+        <div className="flex-1 p-4 md:p-6 overflow-hidden bg-muted/20 flex flex-col">
+          <header className="flex items-center justify-between mb-4 min-h-[40px]">
+            <div className="flex items-center gap-4">
+              {!isOpen && <ToggleButton />}
+              <h1 className="text-xl font-semibold tracking-tight">
+                {activeComponent?.name || "UI Components Library"}
+              </h1>
+            </div>
+            <InfoIsland />
+          </header>
+          <div className="flex-1 w-full rounded-xl border border-border bg-background shadow-sm overflow-hidden relative">
+            <PreviewArea />
+          </div>
+        </div>
       </main>
       <CodePanel />
       <CommandPalette />

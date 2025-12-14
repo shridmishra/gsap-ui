@@ -38,7 +38,7 @@ export const useComponentStore = create<ComponentExplorerState>((set) => ({
   // Initial state
   mounted: false,
   activeComponent: DEFAULT_COMPONENT,
-  sidebarOpen: false,
+  sidebarOpen: true,
   codePanelOpen: false,
   searchOpen: false,
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, memo, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Search, X, ArrowRight, Home, Moon, Sun, Sidebar, Code2, ExternalLink } from "lucide-react";
 import { useTheme } from "next-themes";
 import { flushSync } from "react-dom";
@@ -181,8 +181,8 @@ export const CommandPalette = memo(function CommandPalette() {
   // Filter quick actions based on query
   const filteredActions = query.trim()
     ? quickActions.filter((action) =>
-        action.name.toLowerCase().includes(query.toLowerCase())
-      )
+      action.name.toLowerCase().includes(query.toLowerCase())
+    )
     : quickActions;
 
   useEffect(() => {

@@ -1,12 +1,14 @@
 "use client";
 
-import React, { memo } from "react";
-import { motion } from "framer-motion";
-import { Command, Code2, ExternalLink } from "lucide-react";
+import React, { memo, useCallback } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Command, Code2, ExternalLink, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useActiveComponent as useActiveComponentFromStore, componentActions } from "@/store";
 import { useActiveComponent as useActiveItem } from "@/hooks";
 import { fadeUpVariants } from "@/lib/animations";
+import { useTheme } from "next-themes";
+import { flushSync } from "react-dom";
 import {
   Tooltip,
   TooltipContent,
@@ -28,15 +30,56 @@ const Divider = memo(function Divider() {
 export const InfoIsland = memo(function InfoIsland() {
   const activeComponent = useActiveComponentFromStore();
   const activeItem = useActiveItem(activeComponent);
+  const { theme, setTheme } = useTheme();
+
+  const toggleTheme = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    const newTheme = theme === "light" ? "dark" : "light";
+
+    if (
+      !document.startViewTransition ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setTheme(newTheme);
+      return;
+    }
+
+    const x = e.clientX;
+    const y = e.clientY;
+    const endRadius = Math.hypot(
+      Math.max(x, innerWidth - x),
+      Math.max(y, innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+      flushSync(() => {
+        setTheme(newTheme);
+      });
+    });
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+          ],
+        },
+        {
+          duration: 500,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        }
+      );
+    });
+  }, [theme, setTheme]);
 
   return (
     <motion.div
       variants={fadeUpVariants}
       initial="hidden"
       animate="visible"
-      className="fixed top-4 sm:top-6 right-3 sm:right-4 z-50"
     >
-      <div className="flex items-center gap-0.5 sm:gap-1 p-0.5 sm:p-1 rounded-lg sm:rounded-xl bg-background border border-border shadow-lg h-9 sm:h-10">
+      <div className="flex items-center gap-0.5 sm:gap-1 p-0.5 sm:p-1 rounded-lg sm:rounded-xl bg-background border border-border shadow-sm h-9 sm:h-10">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -69,6 +112,23 @@ export const InfoIsland = memo(function InfoIsland() {
 
           <Tooltip>
             <TooltipTrigger asChild>
+              <button onClick={toggleTheme} className={buttonStyles}>
+                {theme === "light" ? (
+                  <Moon className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                ) : (
+                  <Sun className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                )}
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Switch to {theme === "light" ? "Dark" : "Light"} Mode</p>
+            </TooltipContent>
+          </Tooltip>
+
+          <Divider />
+
+          <Tooltip>
+            <TooltipTrigger asChild>
               <a
                 href={`/preview/${activeComponent}`}
                 target="_blank"
@@ -85,17 +145,7 @@ export const InfoIsland = memo(function InfoIsland() {
         </TooltipProvider>
       </div>
 
-      {/* Component name tooltip */}
-      {activeItem && (
-        <motion.div
-          initial={{ opacity: 0, y: 5 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mt-2 text-right"
-        >
-          <span className="text-xs text-foreground/40 font-medium">{activeItem.name}</span>
-        </motion.div>
-      )}
+
     </motion.div>
   );
 });

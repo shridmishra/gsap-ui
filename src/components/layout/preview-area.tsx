@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, memo, useMemo } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { componentMap, componentRegistry } from "@/registry";
 import { useIsDesktop } from "@/hooks";
 import { useActiveComponent } from "@/store";
@@ -35,7 +35,7 @@ export const PreviewArea = memo(function PreviewArea() {
   return (
     <div
       className={cn(
-        "h-screen w-full",
+        "h-full w-full overflow-auto scrollbar-hide",
         !isFullWidth && "flex items-center justify-center"
       )}
     >

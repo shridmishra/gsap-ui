@@ -17,7 +17,6 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "simple-hero", file: "src/components/showcase/hero/simple-hero.tsx" },
   { id: "border-frame", file: "src/components/showcase/cards/border-frame.tsx" },
   { id: "feature-section", file: "src/components/showcase/landing/feature-section.tsx" },
-  { id: "glass-card", file: "src/components/showcase/ui/glass-card.tsx" },
   { id: "wave-button", file: "src/components/showcase/buttons/wave-button.tsx" },
 ];
 

@@ -1,17 +1,32 @@
 // Auto-generated file - DO NOT EDIT
 // Run `npm run generate-code` to regenerate
 
-export const auroraBarsCode = `import React from "react";
+export const auroraBarsCode = `"use client";
+
+import React from "react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { SiZapier, SiWebflow, SiSlack, SiHubspot, SiFiverr } from "react-icons/si";
+import { ArrowRight, Search, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 
 interface AuroraBarsProps {
   className?: string;
 }
 
 export const AuroraBars = ({ className }: AuroraBarsProps) => {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted ? resolvedTheme === "dark" : true;
+
   // Heights relative to the container, creating a V-shape
   const bars = [
-    { height: "60%", opacity: 0.3 },
+    { height: "65%", opacity: 0.3 },
     { height: "50%", opacity: 0.4 },
     { height: "40%", opacity: 0.5 },
     { height: "30%", opacity: 0.6 },
@@ -23,34 +38,133 @@ export const AuroraBars = ({ className }: AuroraBarsProps) => {
     { height: "30%", opacity: 0.6 },
     { height: "40%", opacity: 0.5 },
     { height: "50%", opacity: 0.4 },
-    { height: "60%", opacity: 0.3 },
+    { height: "65%", opacity: 0.3 },
   ];
 
   return (
-    <div
-      className={cn(
-        "relative w-full h-full bg-zinc-950 overflow-hidden flex items-end justify-center",
-        className
-      )}
-    >
-      {/* Bars Container */}
-      <div className="flex items-end w-full h-full gap-1 justify-between pb-0">
-        {bars.map((bar, index) => (
-          <div
-            key={index}
-            className="w-full rounded-t-sm bg-gradient-to-t from-emerald-300 via-emerald-500/40 to-transparent"
-            style={{
-              height: bar.height,
-              opacity: 1,
-            }}
-          />
-        ))}
-      </div>
+    <div className={isDark ? "dark" : ""}>
+      <div
+        className={cn(
+          "relative w-full min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white overflow-hidden font-sans selection:bg-emerald-500/30",
+          className
+        )}
+      >
+        {/* Navbar */}
+        <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 max-w-7xl mx-auto w-full">
+          {/* Logo */}
+          <div className="flex items-center gap-2 font-bold text-xl tracking-tight">
+            <div className="w-6 h-6 bg-black dark:bg-white rounded-full flex items-center justify-center">
+              <div className="w-2 h-2 bg-white dark:bg-black rounded-full" />
+            </div>
+            Topflow
+          </div>
 
-     
-      
-      {/* Overlay for smoother fade at the top if needed, though gradient handles it */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-transparent to-transparent pointer-events-none h-1/2" />
+          {/* Links */}
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
+              Find talent +
+            </a>
+            <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
+              About
+            </a>
+            <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
+              Customers
+            </a>
+            <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
+              Pricing
+            </a>
+          </div>
+
+          {/* Auth */}
+          <div className="flex items-center gap-6 text-sm font-medium">
+            <a
+              href="#"
+              className="hidden md:block hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+            >
+              Log in ↗
+            </a>
+            <button className="bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-white px-5 py-2 rounded-full transition-colors">
+              Get started
+            </button>
+            <button
+              onClick={() => setTheme(isDark ? "light" : "dark")}
+              className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white transition-colors"
+            >
+              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+          </div>
+        </nav>
+
+        {/* Bars Background */}
+        <div className="absolute inset-0 flex items-end w-full h-full gap-0 justify-between pb-0 pointer-events-none">
+          {bars.map((bar, index) => (
+            <motion.div
+              key={index}
+              className="w-full rounded-t-sm bg-gradient-to-t from-pink-400 via-pink-400/60 dark:from-pink-600 dark:via-pink-600/60 to-transparent"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: bar.height, opacity: 1 }}
+              transition={{
+                duration: 0.8,
+                delay: Math.abs(index - Math.floor(bars.length / 2)) * 0.1,
+                ease: "easeOut",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Gradient Overlay to fade top and bottom */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white/60 dark:from-zinc-950 dark:via-transparent dark:to-zinc-950/30 pointer-events-none" />
+
+        {/* Hero Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 pt-20">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 max-w-5xl leading-tight">
+            Hire the top 1% of <br className="hidden md:block" /> Webflow
+            freelancers
+          </h1>
+          <p className="text-zinc-500 dark:text-zinc-400 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
+            Tell us your requirement and we&apos;ll match you with a vetted Webflow
+            expert in less than <span className="text-zinc-900 dark:text-white font-semibold">48 hours</span>.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center gap-6 mb-24">
+            <button
+              className="flex items-center justify-start gap-3 bg-zinc-900 dark:bg-white text-white dark:text-black py-2 rounded-full font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95"
+              style={{ paddingLeft: '4px', paddingRight: '24px' }}
+            >
+              <div className="bg-white dark:bg-black rounded-full p-2"><Search className="w-4 h-4 text-black dark:text-white" /></div>
+              Find talent
+            </button>
+            <button className="flex items-center gap-2 text-zinc-900 dark:text-white font-medium hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors group">
+              Learn more{" "}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+
+          {/* Trusted By */}
+          <div className="flex flex-col items-center gap-8 w-full max-w-4xl mx-auto">
+            <p className="text-zinc-500 dark:text-zinc-500 text-sm font-medium tracking-wide uppercase">
+              Trusted by <span className="text-zinc-900 dark:text-white/80">400+</span> companies
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-zinc-900 dark:text-white w-full">
+              <div className="flex items-center gap-2 text-xl font-bold">
+                <SiZapier className="w-6 h-6" /> _zapier
+              </div>
+              <div className="flex items-center gap-2 text-xl font-bold">
+                <SiWebflow className="w-6 h-6" /> Webflow
+              </div>
+              <div className="flex items-center gap-2 text-xl font-bold">
+                <SiSlack className="w-6 h-6" /> slack
+              </div>
+              <div className="flex items-center gap-2 text-xl font-bold">
+                <SiHubspot className="w-6 h-6" /> HubSpot
+              </div>
+              <div className="flex items-center gap-2 text-xl font-bold">
+                <SiFiverr className="w-14 h-14" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -58,31 +172,83 @@ export const AuroraBars = ({ className }: AuroraBarsProps) => {
 
 export const simpleHeroCode = `"use client";
 
-import React from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Command, Github } from "lucide-react";
+import { SiReact, SiTailwindcss, SiFramer, SiNextdotjs } from "react-icons/si";
 
 export const SimpleHero = () => {
   return (
-    <div className="relative overflow-hidden bg-background py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
-            Build faster with <span className="text-primary">Shrid UI</span>
+    <div className="relative overflow-hidden h-screen w-full font-sans">
+      {/* Background Image */}
+      <div className="absolute inset-0 -z-20">
+        <img
+          src="https://images.unsplash.com/photo-1635776063328-153b13e3c245?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Background"
+          className="h-full w-full object-cover"
+        />
+      </div>
+
+      {/* Navbar */}
+      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 max-w-7xl mx-auto w-full">
+        <div className="flex items-center gap-2 font-bold text-xl tracking-tight text-black">
+          <div className="w-8 h-8 bg-black text-white rounded-lg flex items-center justify-center">
+            <Command className="w-5 h-5" />
+          </div>
+          Shrid UI
+        </div>
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-black/80">
+          <a href="#" className="hover:text-black transition-colors">Components</a>
+          <a href="#" className="hover:text-black transition-colors">Templates</a>
+          <a href="#" className="hover:text-black transition-colors">Docs</a>
+          <a href="#" className="hover:text-black transition-colors">Pricing</a>
+        </div>
+        <div className="flex items-center gap-4">
+          <a href="#" className="text-black/80 hover:text-black transition-colors">
+            <Github className="w-5 h-5" />
+          </a>
+          <button className="bg-black text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-black/80 transition-colors">
+            Get Access
+          </button>
+        </div>
+      </nav>
+
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 pt-20">
+        <div className="mx-auto max-w-3xl text-center">
+          {/* Announcement Pill */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/40  backdrop-blur-sm border border-black text-sm font-medium text-black mb-8 animate-fade-in">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-500"></span>
+            v2.0 is now available
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-8 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60">
+            Build faster with <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60">Shrid UI</span>
           </h1>
-          <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            A collection of beautiful, reusable components built with React, Tailwind CSS, and Framer Motion.
+
+          <p className="text-lg md:text-xl leading-relaxed text-black/80 max-w-2xl mx-auto mb-10">
+            A collection of beautiful, reusable components built with React, Tailwind CSS, and Motion. Copy and paste into your apps.
           </p>
-          <div className="mt-10 flex items-center justify-center gap-x-6">
-            <button className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary flex items-center gap-2">
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <button className="h-12 px-8 rounded-full bg-black text-white text-sm font-semibold shadow-lg hover:bg-black/90 hover:scale-105 transition-all flex items-center gap-2">
               Get started <ArrowRight className="w-4 h-4" />
             </button>
-            <button className="text-sm font-semibold leading-6 text-foreground">
-              Learn more <span aria-hidden="true">→</span>
+            <button className="h-12 px-8 rounded-full bg-white/80 backdrop-blur-sm border border-black/10 text-black text-sm font-semibold hover:bg-white/50 transition-all">
+              View Components
             </button>
+          </div>
+
+          {/* Trusted By */}
+          <div className="flex flex-col items-center gap-6">
+            <p className="text-sm font-medium text-black/60 uppercase tracking-wider">Powered by modern stack</p>
+            <div className="flex items-center gap-8 text-black/70">
+              <SiReact className="w-8 h-8 hover:text-black transition-colors" />
+              <SiNextdotjs className="w-8 h-8 hover:text-black transition-colors" />
+              <SiTailwindcss className="w-8 h-8 hover:text-black transition-colors" />
+              <SiFramer className="w-8 h-8 hover:text-black transition-colors" />
+            </div>
           </div>
         </div>
       </div>
-      <div className="absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
     </div>
   );
 };
@@ -212,7 +378,9 @@ export const FeatureSection = () => {
 };
 `;
 
-export const waveButtonCode = `import React, { useRef } from "react";
+export const waveButtonCode = `"use client";
+
+import React, { useRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface WaveButtonProps {

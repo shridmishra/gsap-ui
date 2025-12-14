@@ -4,7 +4,8 @@ import {
   BorderFrameDemo, borderFrameCode,
   SimpleHero, simpleHeroCode,
   AuroraBars, auroraBarsCode,
-  FeatureSection, featureSectionCode
+  FeatureSection, featureSectionCode,
+  WaveButton, waveButtonCode
 } from "@/components/showcase";
 
 // Re-export showcase components for convenience
@@ -12,7 +13,8 @@ export {
   BorderFrameDemo, borderFrameCode,
   SimpleHero, simpleHeroCode,
   AuroraBars, auroraBarsCode,
-  FeatureSection, featureSectionCode
+  FeatureSection, featureSectionCode,
+  WaveButton, waveButtonCode
 } from "@/components/showcase";
 
 // Re-export types from centralized location
@@ -41,7 +43,7 @@ export const componentRegistry: ComponentCategory[] = [
         isFree: true,
         description: "A clean hero section with a title, description, and call-to-action buttons.",
         url: "/hero/simple-hero",
-        installation: "npm install lucide-react",
+        installation: "npm install lucide-react react-icons",
       },
       { 
         name: "Aurora Bars", 
@@ -49,7 +51,7 @@ export const componentRegistry: ComponentCategory[] = [
         isFree: true,
         description: "A visual hero background with animated aurora-like bars.",
         url: "/hero/aurora-bars",
-        installation: "npm install clsx tailwind-merge",
+        installation: "npm install motion react-icons lucide-react next-themes clsx tailwind-merge",
       },
     ],
   },
@@ -66,6 +68,19 @@ export const componentRegistry: ComponentCategory[] = [
       },
     ],
   },
+  {
+    category: "Buttons",
+    items: [
+      { 
+        name: "Wave Button", 
+        id: "wave-button", 
+        isFree: true,
+        description: "A button with a wave effect that follows the mouse cursor.",
+        url: "/buttons/wave-button",
+        installation: "npm install clsx tailwind-merge",
+      },
+    ],
+  },
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -74,6 +89,7 @@ export const componentMap: Record<string, React.ComponentType<any>> = {
   "simple-hero": SimpleHero,
   "aurora-bars": AuroraBars,
   "feature-section": FeatureSection,
+  "wave-button": WaveButton,
 };
 
 export const codeMap: Record<string, string> = {
@@ -81,4 +97,5 @@ export const codeMap: Record<string, string> = {
   "simple-hero": simpleHeroCode,
   "aurora-bars": auroraBarsCode,
   "feature-section": featureSectionCode,
+  "wave-button": waveButtonCode,
 };

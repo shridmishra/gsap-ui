@@ -1,4 +1,4 @@
-import type { Transition, Variants } from "framer-motion";
+import type { Transition, Variants } from "motion/react";
 
 // Shared spring transition for panels and modals
 export const springTransition: Transition = {

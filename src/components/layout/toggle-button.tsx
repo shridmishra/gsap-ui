@@ -1,7 +1,7 @@
 "use client";
 
 import React, { memo } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { TbLayoutSidebarFilled } from "react-icons/tb";
 import { cn } from "@/lib/utils";
 import { useSidebarOpen, componentActions } from "@/store";
@@ -18,8 +18,7 @@ export const ToggleButton = memo(function ToggleButton() {
   return (
     <div
       className={cn(
-        "fixed top-4 sm:top-6 left-3 sm:left-4 z-50 flex items-center gap-1.5 sm:gap-2",
-        isOpen && "hidden lg:flex"
+        "flex items-center gap-1.5 sm:gap-2"
       )}
     >
       <TooltipProvider>

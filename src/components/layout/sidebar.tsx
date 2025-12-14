@@ -1,12 +1,14 @@
 "use client";
 
 import React, { memo, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { sidebarVariants, springTransition } from "@/lib/animations";
 import { componentRegistry } from "@/registry";
 import { useActiveComponent, useSidebarOpen, componentActions } from "@/store";
 import type { ComponentItem } from "@/types";
+import { ToggleButton } from "./toggle-button";
+import { InfoIsland } from "./info-island";
 
 // Memoized category section
 const CategorySection = memo(function CategorySection({
@@ -87,7 +89,7 @@ export const Sidebar = memo(function Sidebar() {
   );
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isOpen && (
         <>
           {/* Backdrop overlay - closes sidebar on click */}
@@ -101,55 +103,54 @@ export const Sidebar = memo(function Sidebar() {
             aria-hidden="true"
           />
           <motion.aside
-            variants={sidebarVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            transition={springTransition}
+            initial={{ width: 0, x: -20, opacity: 0 }}
+            animate={{
+              width: 256,
+              x: 0,
+              opacity: 1,
+              transition: {
+                width: { type: "spring", stiffness: 300, damping: 30 },
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.2 }
+              }
+            }}
+            exit={{
+              width: 0,
+              x: -20,
+              opacity: 0,
+              transition: {
+                width: { duration: 0.2, ease: "easeInOut" },
+                x: { duration: 0.2, ease: "easeInOut" },
+                opacity: { duration: 0.1 }
+              }
+            }}
             className={cn(
-              "fixed z-40",
-              "bg-background",
-              "border-r lg:border border-border lg:rounded-2xl shadow-2xl",
-              "overflow-hidden",
-              "inset-0 w-full h-full",
-              "lg:inset-auto lg:left-4 lg:top-1/2 lg:-translate-y-1/2 lg:w-[280px] lg:min-h-[calc(100vh-10rem)] lg:max-h-[calc(100vh-4rem)] lg:h-auto"
+              "fixed inset-y-0 left-0 z-40 bg-background border-r border-border",
+              "lg:static lg:block lg:h-screen lg:border-r lg:border-border lg:bg-background lg:shadow-none",
+              "overflow-hidden"
             )}
           >
-          <div className="w-full h-full overflow-y-auto py-6 px-4 pt-20 lg:pt-6">
-            <button
-              onClick={componentActions.toggleSidebar}
-              className="lg:hidden absolute top-6 right-4 p-2 rounded-lg hover:bg-foreground/10 transition-colors"
-              aria-label="Close sidebar"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M18 6 6 18" />
-                <path d="m6 6 12 12" />
-              </svg>
-            </button>
+            <div className="w-64 h-full overflow-y-auto py-6 px-4 pt-20 lg:pt-6">
+              <div className="flex items-center justify-between mb-6 px-2">
+                <a href="https://shrid.in" className="font-extralight text-2xl font-instrument-serif">Shrid Mishra </a>
+                <div className="flex items-center gap-2">
+                  <ToggleButton />
+                </div>
+              </div>
 
-            <nav className="space-y-6">
-              {componentRegistry.map((category) => (
-                <CategorySection
-                  key={category.category}
-                  category={category.category}
-                  items={category.items}
-                  activeComponent={activeComponent}
-                  onItemClick={handleItemClick}
-                />
-              ))}
-            </nav>
-          </div>
-        </motion.aside>
+              <nav className="space-y-6">
+                {componentRegistry.map((category) => (
+                  <CategorySection
+                    key={category.category}
+                    category={category.category}
+                    items={category.items}
+                    activeComponent={activeComponent}
+                    onItemClick={handleItemClick}
+                  />
+                ))}
+              </nav>
+            </div>
+          </motion.aside>
         </>
       )}
     </AnimatePresence>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { memo, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Copy, Check, X } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -34,9 +34,8 @@ const CopyButton = memo(function CopyButton({
         <TooltipTrigger asChild>
           <button
             onClick={() => copy(text)}
-            className={`flex items-center gap-2 rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors ${
-              size === "sm" ? "p-1.5" : "px-2 py-1"
-            }`}
+            className={`flex items-center gap-2 rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors ${size === "sm" ? "p-1.5" : "px-2 py-1"
+              }`}
           >
             {copied ? (
               <>
