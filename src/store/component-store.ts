@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { componentRegistry } from "@/registry";
 
-const DEFAULT_COMPONENT = "border-frame";
+const DEFAULT_COMPONENT = "aurora-bars";
 
 // Helper function to get URL for a component ID
 function getComponentUrl(id: string): string | null {

@@ -5,7 +5,8 @@ import {
   SimpleHero, simpleHeroCode,
   AuroraBars, auroraBarsCode,
   FeatureSection, featureSectionCode,
-  WaveButton, waveButtonCode
+  WaveButton, waveButtonCode,
+  MangoCards, mangoCardsCode
 } from "@/components/showcase";
 
 // Re-export showcase components for convenience
@@ -14,7 +15,8 @@ export {
   SimpleHero, simpleHeroCode,
   AuroraBars, auroraBarsCode,
   FeatureSection, featureSectionCode,
-  WaveButton, waveButtonCode
+  WaveButton, waveButtonCode,
+  MangoCards, mangoCardsCode
 } from "@/components/showcase";
 
 // Re-export types from centralized location
@@ -66,6 +68,14 @@ export const componentRegistry: ComponentCategory[] = [
         url: "/cards/border-frame",
         installation: "npm install clsx tailwind-merge",
       },
+      { 
+        name: "Mango Cards", 
+        id: "mango-cards", 
+        isFree: true,
+        description: "Two mango product cards: a compact preview and an expanded immersive version.",
+        url: "/cards/mango-cards",
+        installation: "npm install lucide-react",
+      },
     ],
   },
   {
@@ -90,6 +100,7 @@ export const componentMap: Record<string, React.ComponentType<any>> = {
   "aurora-bars": AuroraBars,
   "feature-section": FeatureSection,
   "wave-button": WaveButton,
+  "mango-cards": MangoCards,
 };
 
 export const codeMap: Record<string, string> = {
@@ -98,4 +109,5 @@ export const codeMap: Record<string, string> = {
   "aurora-bars": auroraBarsCode,
   "feature-section": featureSectionCode,
   "wave-button": waveButtonCode,
+  "mango-cards": mangoCardsCode,
 };

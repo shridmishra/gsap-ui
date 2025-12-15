@@ -18,6 +18,7 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "border-frame", file: "src/components/showcase/cards/border-frame.tsx" },
   { id: "feature-section", file: "src/components/showcase/landing/feature-section.tsx" },
   { id: "wave-button", file: "src/components/showcase/buttons/wave-button.tsx" },
+  { id: "mango-cards", file: "src/components/showcase/cards/mango-cards/mango-cards.tsx" },
 ];
 
 const toVariableName = (id: string): string =>

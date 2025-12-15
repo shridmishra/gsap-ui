@@ -28,7 +28,8 @@ export const PreviewArea = memo(function PreviewArea() {
     );
     return (
       category?.category === "Hero Section" ||
-      category?.category === "Landing Page"
+      category?.category === "Landing Page" ||
+      activeComponent === "mango-cards"
     );
   }, [activeComponent]);
 

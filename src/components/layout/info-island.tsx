@@ -2,7 +2,7 @@
 
 import React, { memo, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Command, Code2, ExternalLink, Moon, Sun } from "lucide-react";
+import { Command, Code2, Maximize, Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useActiveComponent as useActiveComponentFromStore, componentActions } from "@/store";
 import { useActiveComponent as useActiveItem } from "@/hooks";
@@ -135,7 +135,7 @@ export const InfoIsland = memo(function InfoIsland() {
                 rel="noopener noreferrer"
                 className={buttonStyles}
               >
-                <ExternalLink className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                <Maximize className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
               </a>
             </TooltipTrigger>
             <TooltipContent>
