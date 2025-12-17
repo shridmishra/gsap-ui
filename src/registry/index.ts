@@ -4,9 +4,11 @@ import {
   BorderFrameDemo, borderFrameCode,
   SimpleHero, simpleHeroCode,
   AuroraBars, auroraBarsCode,
-  FeatureSection, featureSectionCode,
-  WaveButton, waveButtonCode,
-  MangoCards, mangoCardsCode
+  MangoCards, mangoCardsCode,
+  RaycastBackground,
+  RaycastHero, raycastHeroCode,
+  SpotlightGallery, spotlightGalleryCode,
+  StickyScroll, stickyScrollCode,
 } from "@/components/showcase";
 
 // Re-export showcase components for convenience
@@ -14,9 +16,13 @@ export {
   BorderFrameDemo, borderFrameCode,
   SimpleHero, simpleHeroCode,
   AuroraBars, auroraBarsCode,
-  FeatureSection, featureSectionCode,
-  WaveButton, waveButtonCode,
-  MangoCards, mangoCardsCode
+ 
+  
+  MangoCards, mangoCardsCode,
+  RaycastBackground,
+  RaycastHero, raycastHeroCode,
+  SpotlightGallery, spotlightGalleryCode,
+  StickyScroll, stickyScrollCode,
 } from "@/components/showcase";
 
 // Re-export types from centralized location
@@ -24,15 +30,23 @@ export type { ComponentItem, ComponentCategory } from "@/types";
 
 export const componentRegistry: ComponentCategory[] = [
   {
-    category: "Landing Page",
+    category: "Sections",
     items: [
       { 
-        name: "Feature Section", 
-        id: "feature-section", 
+        name: "Spotlight Gallery", 
+        id: "spotlight-gallery", 
         isFree: true,
-        description: "A responsive feature section with icons and grid layout.",
-        url: "/landing/feature-section",
-        installation: "npm install lucide-react",
+        description: "A scrolling spotlight gallery with GSAP animations.",
+        url: "/sections/spotlight-gallery",
+        installation: "npm install gsap @gsap/react lenis",
+      },
+      { 
+        name: "Sticky Scroll", 
+        id: "sticky-scroll", 
+        isFree: true,
+        description: "A sticky scroll section with transforming cards.",
+        url: "/sections/sticky-scroll",
+        installation: "npm install gsap @gsap/react lenis",
       },
     ],
   },
@@ -54,6 +68,14 @@ export const componentRegistry: ComponentCategory[] = [
         description: "A visual hero background with animated aurora-like bars.",
         url: "/hero/aurora-bars",
         installation: "npm install motion react-icons lucide-react next-themes clsx tailwind-merge",
+      },
+      { 
+        name: "Raycast Hero", 
+        id: "raycast-hero", 
+        isFree: true,
+        description: "A Raycast-inspired hero section with a glowing arc and dashboard preview.",
+        url: "/hero/raycast-hero",
+        installation: "npm install motion lucide-react clsx tailwind-merge",
       },
     ],
   },
@@ -79,14 +101,14 @@ export const componentRegistry: ComponentCategory[] = [
     ],
   },
   {
-    category: "Buttons",
+    category: "Backgrounds",
     items: [
       { 
-        name: "Wave Button", 
-        id: "wave-button", 
+        name: "Raycast Background", 
+        id: "raycast-background", 
         isFree: true,
-        description: "A button with a wave effect that follows the mouse cursor.",
-        url: "/buttons/wave-button",
+        description: "A glowing beam background effect inspired by Raycast.",
+        url: "/backgrounds/raycast-background",
         installation: "npm install clsx tailwind-merge",
       },
     ],
@@ -98,16 +120,20 @@ export const componentMap: Record<string, React.ComponentType<any>> = {
   "border-frame": BorderFrameDemo,
   "simple-hero": SimpleHero,
   "aurora-bars": AuroraBars,
-  "feature-section": FeatureSection,
-  "wave-button": WaveButton,
   "mango-cards": MangoCards,
+  "raycast-background": RaycastBackground,
+  "raycast-hero": RaycastHero,
+  "spotlight-gallery": SpotlightGallery,
+  "sticky-scroll": StickyScroll,
 };
 
 export const codeMap: Record<string, string> = {
   "border-frame": borderFrameCode,
   "simple-hero": simpleHeroCode,
   "aurora-bars": auroraBarsCode,
-  "feature-section": featureSectionCode,
-  "wave-button": waveButtonCode,
+
   "mango-cards": mangoCardsCode,
+  "raycast-hero": raycastHeroCode,
+  "spotlight-gallery": spotlightGalleryCode,
+  "sticky-scroll": stickyScrollCode,
 };

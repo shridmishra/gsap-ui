@@ -21,7 +21,9 @@ export function PreviewClient({ componentId }: PreviewClientProps) {
         );
         return (
             category?.category === "Hero Section" ||
-            category?.category === "Landing Page"
+            category?.category === "Landing Page" ||
+            category?.category === "Sections" ||
+            componentId === "mango-cards"
         );
     }, [componentId]);
 
@@ -47,7 +49,7 @@ export function PreviewClient({ componentId }: PreviewClientProps) {
         <div
             className={cn(
                 "w-full bg-background",
-                isFullWidth ? "h-screen" : "min-h-screen flex items-center justify-center"
+                isFullWidth ? "min-h-screen" : "min-h-screen flex items-center justify-center"
             )}
         >
             {/* Subtle grid background */}

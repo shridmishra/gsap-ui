@@ -29,6 +29,15 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
       .find((i) => i.id === activeComponentId);
   }, [activeComponentId]);
 
+  const isFullWidth = useMemo(() => {
+    const category = componentRegistry.find((cat) =>
+      cat.items.some((item) => item.id === activeComponentId)
+    );
+    return (
+      activeComponentId === "mango-cards"
+    );
+  }, [activeComponentId]);
+
   useEffect(() => {
     componentActions.setMounted(true);
 
@@ -38,7 +47,7 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
     } else {
       // Read component from URL on initial load (supports /category/component-id pattern)
       const path = window.location.pathname;
-      const match = path.match(/^\/(?:hero|landing|cards|components)\/([^/]+)$/);
+      const match = path.match(/^\/(?:hero|landing|cards|components|sections)\/([^/]+)$/);
       if (match && match[1]) {
         componentActions.setActiveComponentFromUrl(match[1]);
       }
@@ -57,7 +66,7 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
 
     const handlePopState = () => {
       const path = window.location.pathname;
-      const match = path.match(/^\/(?:hero|landing|cards|components)\/([^/]+)$/);
+      const match = path.match(/^\/(?:hero|landing|cards|components|sections)\/([^/]+)$/);
       if (match && match[1]) {
         componentActions.setActiveComponentFromUrl(match[1]);
       }
@@ -82,18 +91,28 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
     <div className="flex min-h-screen bg-background text-foreground overflow-hidden">
       <Sidebar />
       <main className="flex-1 flex flex-col h-screen overflow-hidden relative">
-        <div className="flex-1 p-4 md:p-6 overflow-hidden bg-muted/20 flex flex-col">
-          <header className="flex items-center justify-between mb-4 min-h-[40px]">
-            <div className="flex items-center gap-4">
-              {!isOpen && <ToggleButton />}
-              <h1 className="text-xl font-semibold tracking-tight">
-                {activeComponent?.name || "UI Components Library"}
-              </h1>
+        <div className="flex-1 overflow-hidden bg-muted/20 flex flex-col">
+          <div className="px-4 pt-4 md:px-6 md:pt-6">
+            <header className="flex items-center justify-between mb-4 min-h-[40px]">
+              <div className="flex items-center gap-4">
+                {!isOpen && <ToggleButton />}
+                <h1 className="text-xl font-semibold tracking-tight">
+                  {activeComponent?.name || "UI Components Library"}
+                </h1>
+              </div>
+              <InfoIsland />
+            </header>
+          </div>
+          <div className={cn(
+            "flex-1 w-full overflow-hidden relative",
+            !isFullWidth && "px-4 pb-4 md:px-6 md:pb-6"
+          )}>
+            <div className={cn(
+              "w-full h-full overflow-hidden relative",
+              !isFullWidth && "rounded-xl border border-border bg-background shadow-sm"
+            )}>
+              <PreviewArea />
             </div>
-            <InfoIsland />
-          </header>
-          <div className="flex-1 w-full rounded-xl border border-border bg-background shadow-sm overflow-hidden relative">
-            <PreviewArea />
           </div>
         </div>
       </main>

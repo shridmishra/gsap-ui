@@ -184,6 +184,9 @@ export const SimpleHero = () => {
           src="https://images.unsplash.com/photo-1635776063328-153b13e3c245?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Background"
           className="h-full w-full object-cover"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
         />
       </div>
 
@@ -310,154 +313,11 @@ export const BorderFrameDemo = () => {
           src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
           alt="Mountain landscape"
           className="w-full h-48 object-cover"
+          loading="lazy"
+          decoding="async"
         />
       </BorderFrame>
     </div>
-  );
-};
-`;
-
-export const featureSectionCode = `"use client";
-
-import React from "react";
-import { Zap, Shield, Smartphone } from "lucide-react";
-
-const features = [
-  {
-    name: 'Lightning Fast',
-    description:
-      'Optimized for speed and performance. Built with the latest technologies to ensure your app runs smoothly.',
-    icon: Zap,
-  },
-  {
-    name: 'Secure by Default',
-    description:
-      'Security is our top priority. We follow best practices to keep your data safe and secure.',
-    icon: Shield,
-  },
-  {
-    name: 'Mobile First',
-    description:
-      'Responsive design that looks great on any device. Your users will love the experience on mobile.',
-    icon: Smartphone,
-  },
-];
-
-export const FeatureSection = () => {
-  return (
-    <div className="py-24 sm:py-32 bg-background">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-primary">Deploy faster</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Everything you need to build your app
-          </p>
-          <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-            pulvinar et feugiat blandit at. In mi viverra elit nunc.
-          </p>
-        </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
-            {features.map((feature) => (
-              <div key={feature.name} className="relative pl-16">
-                <dt className="text-base font-semibold leading-7 text-foreground">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                    <feature.icon className="h-6 w-6 text-primary-foreground" aria-hidden="true" />
-                  </div>
-                  {feature.name}
-                </dt>
-                <dd className="mt-2 text-base leading-7 text-muted-foreground">{feature.description}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </div>
-    </div>
-  );
-};
-`;
-
-export const waveButtonCode = `"use client";
-
-import React, { useRef } from "react";
-import { cn } from "@/lib/utils";
-
-interface WaveButtonProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export const WaveButton = ({ children, className }: WaveButtonProps) => {
-  const btnRef = useRef<HTMLButtonElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const btn = btnRef.current;
-    if (!btn) return;
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    btn.style.setProperty("--wave-x", \`\${x}px\`);
-    btn.style.setProperty("--wave-y", \`\${y}px\`);
-  };
-
-  return (
-    <button
-      ref={btnRef}
-      className={cn(
-        "relative overflow-hidden px-12 py-6 rounded-xl font-bold text-xl transition-colors duration-300 bg-foreground text-background group focus:outline-none",
-        "before:content-[''] before:absolute before:inset-0 before:bg-transparent before:pointer-events-none",
-        "after:content-[''] after:absolute after:rounded-full after:opacity-0 after:transition after:duration-700",
-        className
-      )}
-      style={{
-        position: "relative",
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => {
-        const btn = btnRef.current;
-        if (btn) {
-          btn.style.setProperty("--wave-x", \`-100px\`);
-          btn.style.setProperty("--wave-y", \`-100px\`);
-        }
-      }}
-    >
-      <span className="relative z-10">{children}</span>
-      <span
-        className="pointer-events-none absolute left-0 top-0 w-full h-full"
-        aria-hidden="true"
-        style={{
-          zIndex: 1,
-        }}
-      >
-        <span
-          className="block w-0 h-0"
-          style={{
-            left: "var(--wave-x, -100px)",
-            top: "var(--wave-y, -100px)",
-            position: "absolute",
-            pointerEvents: "none",
-            zIndex: 2,
-          }}
-        >
-          <svg width="200" height="200" viewBox="0 0 200 200" style={{
-            position: "absolute",
-            left: "-100px",
-            top: "-100px",
-            pointerEvents: "none",
-            zIndex: 2,
-          }}>
-            <defs>
-              <radialGradient id="wave-gradient" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#a5b4fc" stopOpacity="0.7" />
-                <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-            <circle cx="100" cy="100" r="60" fill="url(#wave-gradient)" />
-          </svg>
-        </span>
-      </span>
-    </button>
   );
 };
 `;
@@ -666,3 +526,750 @@ export function MangoCards() {
     );
 }
 `;
+
+export const raycastHeroCode = `"use client";
+
+import React from "react";
+import { Play, Sparkles, ChevronDown, Search, Bell, Settings, Plus, LayoutGrid } from "lucide-react";
+import { motion } from "motion/react";
+
+import Image from "next/image";
+import heroBg from "./image.png";
+
+export default function RaycastHero() {
+    return (
+        <div className="relative min-h-screen w-full overflow-hidden bg-[#030616] text-white selection:bg-blue-500/30 font-sans">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src={heroBg}
+                    alt="Hero Background"
+                    className="w-full h-auto opacity-100"
+                    priority
+                />
+            </div>
+
+            {/* Navbar */}
+            <nav className="relative z-50 flex items-center justify-between px-6 py-6 md:px-12 max-w-7xl mx-auto">
+                <div className="flex items-center gap-2">
+                    <div className="relative flex items-center justify-center w-8 h-8">
+                        {/* Logo Icon */}
+                        <Sparkles className="w-6 h-6 text-blue-400 fill-blue-400/20" />
+                    </div>
+                    <span className="text-lg font-bold tracking-tight text-white">NEONE</span>
+                </div>
+
+                <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+                    <a href="#" className="hover:text-white transition-colors">Features</a>
+                    <button className="flex items-center gap-1 hover:text-white transition-colors">
+                        Templates <ChevronDown className="w-3 h-3" />
+                    </button>
+                    <button className="flex items-center gap-1 hover:text-white transition-colors">
+                        Docs <ChevronDown className="w-3 h-3" />
+                    </button>
+                    <button className="flex items-center gap-1 hover:text-white transition-colors">
+                        Pricing <ChevronDown className="w-3 h-3" />
+                    </button>
+                </div>
+
+                <div className="flex items-center gap-6 text-sm font-medium">
+                    <a href="#" className="hidden md:block text-gray-400 hover:text-white transition-colors">Sign in</a>
+                    <button className="bg-white text-black px-5 py-2 rounded-full font-semibold hover:bg-gray-100 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                        Get Started
+                    </button>
+                </div>
+            </nav>
+
+            {/* Hero Content */}
+            <main className="relative z-10 flex flex-col items-center justify-center px-4 pt-32 pb-32 text-center max-w-5xl mx-auto">
+
+                {/* Headline */}
+                <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]"
+                >
+                    Build Faster <br className="hidden md:block" />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-500 to-indigo-500">
+                        With Lumine Insights
+                    </span>
+                </motion.h1>
+
+                {/* Subheadline */}
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="max-w-2xl text-lg text-gray-400 mb-10 leading-relaxed"
+                >
+                    A minimal AI-powered system that transforms complex workflows
+                    into clear, glowing, effortless structures — helping you ship ideas faster.
+                </motion.p>
+
+                {/* CTA Buttons */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="flex flex-col sm:flex-row items-center gap-4"
+                >
+                    <button className="h-12 px-8 rounded-full bg-gradient-to-b from-white to-gray-200 text-black font-semibold shadow-[0_4px_20px_rgba(59,130,246,0.4)] hover:shadow-[0_4px_25px_rgba(59,130,246,0.6)] hover:scale-105 transition-all duration-300">
+                        Get Started
+                    </button>
+                    <button className="h-12 px-8 rounded-full border border-gray-700 bg-gray-900/50 text-white font-medium hover:bg-gray-800 transition-colors backdrop-blur-sm flex items-center gap-2 group">
+                        Watch Demo
+                        <Play className="w-4 h-4 fill-white group-hover:scale-110 transition-transform" />
+                    </button>
+                </motion.div>
+
+                {/* Dashboard Preview */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="mt-24 w-full max-w-6xl relative"
+                >
+                    {/* Glow behind dashboard */}
+                    <div className="absolute -inset-1 bg-gradient-to-b from-blue-500/20 to-transparent blur-2xl opacity-50 rounded-t-3xl" />
+
+                    {/* Dashboard Container */}
+                    <div className="relative rounded-t-3xl border border-white/10 bg-[#0A0F1E]/90 backdrop-blur-xl shadow-2xl overflow-hidden">
+                        {/* Window Controls */}
+                        <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-white/5">
+                            <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-2">
+                                    <Sparkles className="w-4 h-4 text-blue-400" />
+                                    <span className="text-sm font-semibold text-gray-300">NEONE</span>
+                                </div>
+                                <div className="h-4 w-[1px] bg-white/10" />
+                                <div className="flex items-center gap-4 text-xs font-medium text-gray-500">
+                                    <span className="text-gray-300">Overview</span>
+                                    <span className="hover:text-gray-300 cursor-pointer">Projects</span>
+                                    <span className="hover:text-gray-300 cursor-pointer">Dashboards</span>
+                                </div>
+                            </div>
+
+                            {/* Search Bar Placeholder */}
+                            <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-black/20 border border-white/5 text-xs text-gray-500 w-64">
+                                <Search className="w-3.5 h-3.5" />
+                                <span>Search...</span>
+                                <span className="ml-auto text-[10px] opacity-50">⌘K</span>
+                            </div>
+
+                            <div className="flex items-center gap-3 text-gray-500">
+                                <Bell className="w-4 h-4 hover:text-gray-300 cursor-pointer" />
+                                <Settings className="w-4 h-4 hover:text-gray-300 cursor-pointer" />
+                            </div>
+                        </div>
+
+                        {/* Dashboard Content */}
+                        <div className="p-6 md:p-8 min-h-[400px] flex flex-col gap-6">
+                            {/* Header */}
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-xl font-semibold text-white">Order List</h3>
+                                <div className="flex gap-2">
+                                    <button className="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 text-gray-400">
+                                        <Plus className="w-4 h-4" />
+                                    </button>
+                                    <button className="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 text-gray-400">
+                                        <LayoutGrid className="w-4 h-4" />
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Table Placeholder */}
+                            <div className="w-full overflow-hidden rounded-xl border border-white/5 bg-white/[0.02]">
+                                <div className="grid grid-cols-6 gap-4 p-4 border-b border-white/5 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <div className="col-span-1">Order ID</div>
+                                    <div className="col-span-1">User</div>
+                                    <div className="col-span-1">Project</div>
+                                    <div className="col-span-1">Address</div>
+                                    <div className="col-span-1">Date</div>
+                                    <div className="col-span-1">Status</div>
+                                </div>
+                                {/* Rows */}
+                                {[1, 2, 3].map((i) => (
+                                    <div key={i} className="grid grid-cols-6 gap-4 p-4 border-b border-white/5 text-sm text-gray-300 items-center hover:bg-white/[0.02] transition-colors">
+                                        <div className="col-span-1 font-mono text-xs text-gray-500">#CM980{i}</div>
+                                        <div className="col-span-1 flex items-center gap-2">
+                                            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-500" />
+                                            <span>Natal Craig</span>
+                                        </div>
+                                        <div className="col-span-1">Landing Page</div>
+                                        <div className="col-span-1 text-gray-500 truncate">Meadow Lane Oakland</div>
+                                        <div className="col-span-1 text-gray-500">Just now</div>
+                                        <div className="col-span-1">
+                                            <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-medium">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                                                In Progress
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+            </main>
+        </div>
+    );
+}
+`;
+
+export const spotlightGalleryCode = `"use client";
+/* eslint-disable @next/next/no-img-element */
+
+import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
+import "./spotlight-gallery.css";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const spotlightItems = [
+    { name: "Silent Arc", img: "https://images.unsplash.com/photo-1499002238440-d264edd596ec?q=80&w=2070&auto=format&fit=crop" },
+    { name: "Bloom", img: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=2076&auto=format&fit=crop" },
+    { name: "Dark Sky", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2094&auto=format&fit=crop" },
+    { name: "Moon Glow", img: "https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?q=80&w=2070&auto=format&fit=crop" },
+    { name: "Star Dust", img: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=2013&auto=format&fit=crop" },
+    { name: "Night Wave", img: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=2052&auto=format&fit=crop" },
+    { name: "Frost", img: "https://images.unsplash.com/photo-1478719059408-592965723cbc?q=80&w=2070&auto=format&fit=crop" },
+    { name: "Dawn Light", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2132&auto=format&fit=crop" },
+    { name: "Mist", img: "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?q=80&w=2068&auto=format&fit=crop" },
+    { name: "Sun Spark", img: "https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=2050&auto=format&fit=crop" },
+];
+
+export function SpotlightGallery() {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const spotlightRef = useRef<HTMLElement>(null);
+    const titlesContainerRef = useRef<HTMLDivElement>(null);
+    const titlesRef = useRef<HTMLDivElement>(null);
+    const imagesContainerRef = useRef<HTMLDivElement>(null);
+    const headerRef = useRef<HTMLDivElement>(null);
+    const bgImageRef = useRef<HTMLDivElement>(null);
+    const bgImgElementRef = useRef<HTMLImageElement>(null);
+    const introTextRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const titleRefs = useRef<(HTMLHeadingElement | null)[]>([]);
+
+    useEffect(() => {
+        const scrollContainer = document.querySelector(".preview-scroll-container") as HTMLElement;
+
+        // Initialize Lenis
+        const lenis = new Lenis({
+            wrapper: scrollContainer || window,
+            content: scrollContainer ? containerRef.current! : undefined, // We might need to be careful here
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+        });
+
+        // Integrate Lenis with GSAP ScrollTrigger
+        if (scrollContainer) {
+            ScrollTrigger.defaults({ scroller: scrollContainer });
+
+            ScrollTrigger.scrollerProxy(scrollContainer, {
+                scrollTop(value) {
+                    if (arguments.length && value !== undefined) {
+                        lenis.scrollTo(value, { immediate: true });
+                    }
+                    return lenis.scroll;
+                },
+                getBoundingClientRect() {
+                    return {
+                        top: 0,
+                        left: 0,
+                        width: scrollContainer.clientWidth,
+                        height: scrollContainer.clientHeight,
+                    };
+                },
+                pinType: "transform"
+            });
+        }
+
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        ScrollTrigger.refresh();
+
+        // However, if we want the exact effect from the snippet which pins the body/window
+        // we should just use standard ScrollTrigger.
+
+        const config = {
+            gap: 0.08,
+            speed: 0.3,
+            arcRadius: 500,
+        };
+
+        let currentActiveIndex = 0;
+
+        const containerWidth = window.innerWidth * 0.3;
+        const containerHeight = window.innerHeight;
+        const arcStartX = containerWidth - 200;
+        const arcStartY = -200;
+        const arcEndX = containerWidth + 200;
+        const arcEndY = containerHeight + 200;
+        const arcControlPointX = arcStartX + config.arcRadius;
+        const arcControlPointY = containerHeight / 2;
+
+        function getBezierPosition(t: number) {
+            const x =
+                (1 - t) * (1 - t) * arcStartX +
+                2 * (1 - t) * t * arcControlPointX +
+                t * t * arcEndX;
+
+            const y =
+                (1 - t) * (1 - t) * arcStartY +
+                2 * (1 - t) * t * arcControlPointY +
+                t * t * arcEndY;
+
+            return { x, y };
+        }
+
+        function getImgProgressState(index: number, overallProgress: number) {
+            const startTime = index * config.gap;
+            const endTime = startTime + config.speed;
+            if (overallProgress < startTime) return -1;
+            if (overallProgress > endTime) return 2;
+            return (overallProgress - startTime) / config.speed;
+        }
+
+        // Initial states
+        imageRefs.current.forEach((img) => {
+            if (img) gsap.set(img, { opacity: 0 });
+        });
+
+        const ctx = gsap.context(() => {
+            ScrollTrigger.create({
+                trigger: spotlightRef.current,
+                start: "top top",
+                end: \`+=\${window.innerHeight * 10}px\`,
+                pin: true,
+                pinSpacing: true,
+                scrub: 1,
+                onUpdate: (self) => {
+                    const progress = self.progress;
+
+                    if (progress <= 0.2) {
+                        const animationProgress = progress / 0.2;
+                        const moveDistance = window.innerWidth * 0.6;
+
+                        if (introTextRefs.current[0]) {
+                            gsap.set(introTextRefs.current[0], {
+                                x: -animationProgress * moveDistance,
+                                opacity: 1 - animationProgress,
+                            });
+                        }
+
+                        if (introTextRefs.current[1]) {
+                            gsap.set(introTextRefs.current[1], {
+                                x: animationProgress * moveDistance,
+                                opacity: 1 - animationProgress,
+                            });
+                        }
+
+                        if (bgImageRef.current) {
+                            gsap.set(bgImageRef.current, {
+                                transform: \`scale(\${animationProgress})\`,
+                            });
+                        }
+
+                        if (bgImgElementRef.current) {
+                            gsap.set(bgImgElementRef.current, {
+                                transform: \`scale(\${1.5 - animationProgress * 0.5})\`,
+                            });
+                        }
+
+                        imageRefs.current.forEach((img) => {
+                            if (img) gsap.set(img, { opacity: 0 });
+                        });
+
+                        if (headerRef.current) headerRef.current.style.opacity = "0";
+
+                        if (titlesContainerRef.current) {
+                            gsap.set(titlesContainerRef.current, {
+                                "--before-opacity": "0",
+                                "--after-opacity": "0",
+                            });
+                        }
+                    } else if (progress > 0.2 && progress <= 0.25) {
+                        if (bgImageRef.current) gsap.set(bgImageRef.current, { transform: "scale(1)" });
+                        if (bgImgElementRef.current) gsap.set(bgImgElementRef.current, { transform: "scale(1)" });
+
+                        introTextRefs.current.forEach(el => {
+                            if (el) gsap.set(el, { opacity: 0 });
+                        });
+
+                        imageRefs.current.forEach((img) => {
+                            if (img) gsap.set(img, { opacity: 0 });
+                        });
+
+                        if (headerRef.current) headerRef.current.style.opacity = "1";
+
+                        if (titlesContainerRef.current) {
+                            gsap.set(titlesContainerRef.current, {
+                                "--before-opacity": "1",
+                                "--after-opacity": "1",
+                            });
+                        }
+                    } else if (progress > 0.25 && progress <= 0.95) {
+                        if (bgImageRef.current) gsap.set(bgImageRef.current, { transform: "scale(1)" });
+                        if (bgImgElementRef.current) gsap.set(bgImgElementRef.current, { transform: "scale(1)" });
+
+                        introTextRefs.current.forEach(el => {
+                            if (el) gsap.set(el, { opacity: 0 });
+                        });
+
+                        if (headerRef.current) headerRef.current.style.opacity = "1";
+
+                        if (titlesContainerRef.current) {
+                            gsap.set(titlesContainerRef.current, {
+                                "--before-opacity": "1",
+                                "--after-opacity": "1",
+                            });
+                        }
+
+                        const switchProgress = (progress - 0.25) / 0.7;
+                        const viewportHeight = window.innerHeight;
+                        const titlesContainerHeight = titlesRef.current?.scrollHeight || 0;
+                        const startPosition = viewportHeight;
+                        const targetPosition = -titlesContainerHeight;
+                        const totalDistance = startPosition - targetPosition;
+                        const currentY = startPosition - switchProgress * totalDistance;
+
+                        if (titlesRef.current) {
+                            gsap.set(titlesRef.current, {
+                                y: currentY,
+                            });
+                        }
+
+                        imageRefs.current.forEach((img, index) => {
+                            if (!img) return;
+                            const imageProgress = getImgProgressState(index, switchProgress);
+
+                            // Remove active class from all images
+                            img.classList.remove("active");
+
+                            if (imageProgress < 0 || imageProgress > 1) {
+                                gsap.set(img, { opacity: 0 });
+                            } else {
+                                const pos = getBezierPosition(imageProgress);
+                                gsap.set(img, {
+                                    x: pos.x - 100,
+                                    y: pos.y - 75,
+                                    opacity: index === currentActiveIndex ? 1 : imageProgress,
+                                });
+                                if (index === currentActiveIndex) {
+                                    img.classList.add("active");
+                                }
+                            }
+                        });
+
+                        // Fixed title activation logic
+                        const viewportMiddle = viewportHeight / 2;
+                        const activationThreshold = 150; // Distance threshold for activation
+                        let closestIndex = 0;
+                        let closestDistance = Infinity;
+
+                        titleRefs.current.forEach((title, index) => {
+                            if (!title) return;
+                            const titleRect = title.getBoundingClientRect();
+                            const titleCenter = titleRect.top + titleRect.height / 2;
+                            const distanceFromCenter = Math.abs(titleCenter - viewportMiddle);
+
+                            if (distanceFromCenter < closestDistance) {
+                                closestDistance = distanceFromCenter;
+                                closestIndex = index;
+                            }
+                        });
+
+                        // Only activate if within threshold and different from current
+                        if (
+                            closestDistance < activationThreshold &&
+                            closestIndex !== currentActiveIndex
+                        ) {
+                            // Remove active class from current title
+                            if (titleRefs.current[currentActiveIndex]) {
+                                titleRefs.current[currentActiveIndex]?.classList.remove("active");
+                            }
+
+                            // Add active class to new title
+                            if (titleRefs.current[closestIndex]) {
+                                titleRefs.current[closestIndex]?.classList.add("active");
+                            }
+
+                            // Update background image
+                            if (bgImgElementRef.current) {
+                                bgImgElementRef.current.src = spotlightItems[closestIndex].img;
+                            }
+
+                            currentActiveIndex = closestIndex;
+                        }
+                    } else if (progress > 0.95) {
+                        if (headerRef.current) headerRef.current.style.opacity = "0";
+                        if (titlesContainerRef.current) {
+                            gsap.set(titlesContainerRef.current, {
+                                "--before-opacity": "0",
+                                "--after-opacity": "0",
+                            });
+                        }
+                        imageRefs.current.forEach((img) => {
+                            if (img) gsap.set(img, { opacity: 0 });
+                        });
+                    }
+                },
+            });
+        }, containerRef);
+
+        const handleResize = () => {
+            ScrollTrigger.refresh();
+        };
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            ctx.revert();
+            lenis.destroy();
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+    return (
+        <div className="spotlight-gallery" ref={containerRef}>
+            <section className="intro">
+                <h1>A curated series of surreal frames.</h1>
+            </section>
+            <section className="spotlight" ref={spotlightRef}>
+                <div className="spotlight-intro-text-wrapper">
+                    <div className="spotlight-intro-text" ref={(el) => { introTextRefs.current[0] = el; }}>
+                        <p>Beneath</p>
+                    </div>
+                    <div className="spotlight-intro-text" ref={(el) => { introTextRefs.current[1] = el; }}>
+                        <p>Beyond</p>
+                    </div>
+                </div>
+                <div className="spotlight-bg-image" ref={bgImageRef}>
+                    <img
+                        src={spotlightItems[0].img}
+                        alt="bg"
+                        ref={bgImgElementRef}
+                        loading="eager"
+                        decoding="async"
+                        fetchPriority="high"
+                    />
+                </div>
+                <div className="spotlight-titles-container" ref={titlesContainerRef}>
+                    <div className="spotlight-titles" ref={titlesRef}>
+                        {spotlightItems.map((item, index) => (
+                            <h1
+                                key={index}
+                                ref={(el) => { titleRefs.current[index] = el; }}
+                                className={index === 0 ? "active" : ""}
+                            >
+                                {item.name}
+                            </h1>
+                        ))}
+                    </div>
+                </div>
+                <div className="spotlight-images" ref={imagesContainerRef}>
+                    {spotlightItems.map((item, index) => (
+                        <div
+                            key={index}
+                            className="spotlight-img"
+                            ref={(el) => { imageRefs.current[index] = el; }}
+                        >
+                            <img
+                                src={item.img}
+                                alt={item.name}
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                    ))}
+                </div>
+                <div className="spotlight-header" ref={headerRef}>
+                    <p>Discover</p>
+                </div>
+            </section>
+            <section className="outro">
+                <h1>Moments still in motion.</h1>
+            </section>
+        </div>
+    );
+}
+`;
+
+export const stickyScrollCode = `"use client";
+
+import "./sticky-scroll.css";
+import React, { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export function StickyScroll() {
+  const cards = [
+    {
+      index: "01",
+      title: "Modularity",
+      imagePath: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+      description:
+        "Breaking a system into smaller, independent modules makes code easier to maintain, scale, and reuse.",
+    },
+    {
+      index: "02",
+      title: "Abstraction",
+      imagePath: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=2070&auto=format&fit=crop",
+      description:
+        "Abstraction hides unnecessary details and exposes only essential features, simplifying complex systems.",
+    },
+    {
+      index: "03",
+      title: "Scalability",
+      imagePath: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+      description:
+        "A scalable system can handle increasing workloads without a drop in performance or the need for major redesigns.",
+    },
+    {
+      index: "04",
+      title: "Concurrency",
+      imagePath: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2034&auto=format&fit=crop",
+      description:
+        "Concurrency allows multiple tasks to run at the same time, improving efficiency and responsiveness.",
+    },
+  ];
+
+  const container = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scrollContainer = document.querySelector(".preview-scroll-container") as HTMLElement;
+
+    // Initialize Lenis for smooth scrolling
+    const lenis = new Lenis({
+      wrapper: scrollContainer || window,
+      content: scrollContainer ? container.current! : undefined,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    // Integrate Lenis with GSAP ScrollTrigger
+    if (scrollContainer) {
+      ScrollTrigger.defaults({ scroller: scrollContainer });
+
+      ScrollTrigger.scrollerProxy(scrollContainer, {
+        scrollTop(value) {
+          if (arguments.length && value !== undefined) {
+            lenis.scrollTo(value, { immediate: true });
+          }
+          return lenis.scroll;
+        },
+        getBoundingClientRect() {
+          return {
+            top: 0,
+            left: 0,
+            width: scrollContainer.clientWidth,
+            height: scrollContainer.clientHeight,
+          };
+        },
+        pinType: "transform"
+      });
+    }
+
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    ScrollTrigger.refresh();
+
+    const ctx = gsap.context(() => {
+      const stickyCards = gsap.utils.toArray(".sticky-card") as HTMLElement[];
+
+      stickyCards.forEach((card, index) => {
+        if (index < stickyCards.length - 1) {
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top top",
+            endTrigger: stickyCards[stickyCards.length - 1],
+            end: "top top",
+            pin: true,
+            pinSpacing: false,
+          });
+        }
+
+        if (index < stickyCards.length - 1) {
+          ScrollTrigger.create({
+            trigger: stickyCards[index + 1],
+            start: "top bottom",
+            end: "top top",
+            onUpdate: (self) => {
+              const progress = self.progress;
+              const scale = 1 - progress * 0.25;
+              const rotation = (index % 2 === 0 ? 5 : -5) * progress;
+              const afterOpacity = progress;
+
+              gsap.set(card, {
+                scale: scale,
+                rotation: rotation,
+                "--after-opacity": afterOpacity,
+              });
+            },
+          });
+        }
+      });
+    }, container);
+
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      ctx.revert();
+      lenis.destroy();
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <div className="sticky-cards" ref={container}>
+      {cards.map((card) => (
+        <div className="sticky-card" key={card.index}>
+          <div className="sticky-card-index">
+            <h1>{card.index}</h1>
+          </div>
+          <div className="sticky-card-content">
+            <div className="sticky-card-content-wrapper">
+              <h1 className="sticky-card-header">{card.title}</h1>
+              <div className="sticky-card-img">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={card.imagePath}
+                  alt={card.title}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className="sticky-card-copy">
+                <div className="sticky-card-copy-title">
+                  <p>(About the concept)</p>
+                </div>
+                <div className="sticky-card-copy-description">
+                  <p>{card.description}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}`;

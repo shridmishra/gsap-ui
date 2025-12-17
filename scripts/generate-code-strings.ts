@@ -16,9 +16,10 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "aurora-bars", file: "src/components/showcase/hero/aurora-bars.tsx" },
   { id: "simple-hero", file: "src/components/showcase/hero/simple-hero.tsx" },
   { id: "border-frame", file: "src/components/showcase/cards/border-frame.tsx" },
-  { id: "feature-section", file: "src/components/showcase/landing/feature-section.tsx" },
-  { id: "wave-button", file: "src/components/showcase/buttons/wave-button.tsx" },
   { id: "mango-cards", file: "src/components/showcase/cards/mango-cards/mango-cards.tsx" },
+  { id: "raycast-hero", file: "src/components/showcase/hero/raycast-hero/raycast-hero.tsx" },
+  { id: "spotlight-gallery", file: "src/components/showcase/sections/spotlight-gallery.tsx" },
+  { id: "sticky-scroll", file: "src/components/showcase/sections/sticky-scroll.tsx" },
 ];
 
 const toVariableName = (id: string): string =>
