@@ -20,6 +20,7 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "raycast-hero", file: "src/components/showcase/hero/raycast-hero/raycast-hero.tsx" },
   { id: "spotlight-gallery", file: "src/components/showcase/sections/spotlight-gallery.tsx" },
   { id: "sticky-scroll", file: "src/components/showcase/sections/sticky-scroll.tsx" },
+  { id: "illustrated-hero", file: "src/components/showcase/hero/illustated-hero/illustrated.tsx" },
 ];
 
 const toVariableName = (id: string): string =>

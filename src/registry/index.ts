@@ -7,6 +7,7 @@ import {
   MangoCards, mangoCardsCode,
   RaycastBackground,
   RaycastHero, raycastHeroCode,
+  IllustratedHero, illustratedHeroCode,
   SpotlightGallery, spotlightGalleryCode,
   StickyScroll, stickyScrollCode,
 } from "@/components/showcase";
@@ -21,6 +22,7 @@ export {
   MangoCards, mangoCardsCode,
   RaycastBackground,
   RaycastHero, raycastHeroCode,
+  IllustratedHero, illustratedHeroCode,
   SpotlightGallery, spotlightGalleryCode,
   StickyScroll, stickyScrollCode,
 } from "@/components/showcase";
@@ -77,6 +79,14 @@ export const componentRegistry: ComponentCategory[] = [
         url: "/hero/raycast-hero",
         installation: "npm install motion lucide-react clsx tailwind-merge",
       },
+      { 
+        name: "Illustrated Hero", 
+        id: "illustrated-hero", 
+        isFree: true,
+        description: "A modern hero section with specific illustration.",
+        url: "/hero/illustrated-hero",
+        installation: "npm install motion lucide-react",
+      },
     ],
   },
   {
@@ -123,6 +133,7 @@ export const componentMap: Record<string, React.ComponentType<any>> = {
   "mango-cards": MangoCards,
   "raycast-background": RaycastBackground,
   "raycast-hero": RaycastHero,
+  "illustrated-hero": IllustratedHero,
   "spotlight-gallery": SpotlightGallery,
   "sticky-scroll": StickyScroll,
 };
@@ -134,6 +145,7 @@ export const codeMap: Record<string, string> = {
 
   "mango-cards": mangoCardsCode,
   "raycast-hero": raycastHeroCode,
+  "illustrated-hero": illustratedHeroCode,
   "spotlight-gallery": spotlightGalleryCode,
   "sticky-scroll": stickyScrollCode,
 };

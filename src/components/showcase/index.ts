@@ -6,6 +6,7 @@ export { AuroraBars } from "./hero/aurora-bars";
 export { MangoCards } from "./cards/mango-cards/mango-cards";
 export { RaycastBackground } from "./backgrounds/raycast";
 export { default as RaycastHero } from "./hero/raycast-hero/raycast-hero";
+export { default as IllustratedHero } from "./hero/illustated-hero/illustrated";
 export { SpotlightGallery } from "./sections/spotlight-gallery";
 
 // Re-export code strings from generated file
@@ -17,6 +18,7 @@ export {
   raycastHeroCode,
   spotlightGalleryCode,
   stickyScrollCode,
+  illustratedHeroCode,
 } from "@/registry/code-strings";
 
 export { StickyScroll } from "./sections/sticky-scroll";
