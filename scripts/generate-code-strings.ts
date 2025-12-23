@@ -17,6 +17,7 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "simple-hero", file: "src/components/showcase/hero/simple-hero.tsx" },
   { id: "border-frame", file: "src/components/showcase/cards/border-frame.tsx" },
   { id: "mango-cards", file: "src/components/showcase/cards/mango-cards/mango-cards.tsx" },
+  { id: "media-player", file: "src/components/showcase/cards/media-player.tsx" },
   { id: "raycast-hero", file: "src/components/showcase/hero/raycast-hero/raycast-hero.tsx" },
   { id: "spotlight-gallery", file: "src/components/showcase/sections/spotlight-gallery.tsx" },
   { id: "sticky-scroll", file: "src/components/showcase/sections/sticky-scroll.tsx" },

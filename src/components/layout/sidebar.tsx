@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { sidebarVariants, springTransition } from "@/lib/animations";
 import { componentRegistry } from "@/registry";
 import { useActiveComponent, useSidebarOpen, componentActions } from "@/store";
+import { useMediaPreloader } from "@/hooks";
 import type { ComponentItem } from "@/types";
 import { ToggleButton } from "./toggle-button";
 import { InfoIsland } from "./info-island";
@@ -16,11 +17,13 @@ const CategorySection = memo(function CategorySection({
   items,
   activeComponent,
   onItemClick,
+  onItemHover,
 }: {
   category: string;
   items: ComponentItem[];
   activeComponent: string;
   onItemClick: (id: string) => void;
+  onItemHover: (id: string) => void;
 }) {
   return (
     <div>
@@ -34,6 +37,7 @@ const CategorySection = memo(function CategorySection({
             item={item}
             isActive={activeComponent === item.id}
             onClick={() => onItemClick(item.id)}
+            onHover={() => onItemHover(item.id)}
           />
         ))}
       </ul>
@@ -46,15 +50,18 @@ const SidebarItem = memo(function SidebarItem({
   item,
   isActive,
   onClick,
+  onHover,
 }: {
   item: ComponentItem;
   isActive: boolean;
   onClick: () => void;
+  onHover: () => void;
 }) {
   return (
     <li>
       <button
         onClick={onClick}
+        onMouseEnter={onHover}
         className={cn(
           "w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all",
           isActive
@@ -79,6 +86,7 @@ const SidebarItem = memo(function SidebarItem({
 export const Sidebar = memo(function Sidebar() {
   const activeComponent = useActiveComponent();
   const isOpen = useSidebarOpen();
+  const { prefetchOnHover } = useMediaPreloader();
 
   const handleItemClick = useCallback(
     (id: string) => {
@@ -86,6 +94,13 @@ export const Sidebar = memo(function Sidebar() {
       componentActions.closeSidebarOnMobile();
     },
     []
+  );
+
+  const handleItemHover = useCallback(
+    (id: string) => {
+      prefetchOnHover(id);
+    },
+    [prefetchOnHover]
   );
 
   return (
@@ -146,6 +161,7 @@ export const Sidebar = memo(function Sidebar() {
                     items={category.items}
                     activeComponent={activeComponent}
                     onItemClick={handleItemClick}
+                    onItemHover={handleItemHover}
                   />
                 ))}
               </nav>

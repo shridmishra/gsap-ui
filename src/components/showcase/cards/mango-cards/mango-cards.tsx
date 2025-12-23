@@ -152,7 +152,7 @@ export function MangoCards() {
                 <div className="absolute inset-0">
                     <Carousel setIndex={setIndex2} />
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#D98808] via-[#D98808]/80 to-transparent pt-40 pointer-events-none z-10" />
+                    <div className="absolute inset-0 bg-linear-to-t from-[#D98808] via-[#D98808]/80 to-transparent pt-40 pointer-events-none z-10" />
                 </div>
 
                 <div className="absolute top-4 right-4 bg-black/10 backdrop-blur-md text-white text-xs font-medium px-3 py-1.5 rounded-full z-20">

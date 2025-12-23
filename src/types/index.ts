@@ -6,6 +6,7 @@ export interface ComponentItem {
   description: string;
   url: string;
   installation?: string;
+  previewBackground?: string;
 }
 
 export interface ComponentCategory {

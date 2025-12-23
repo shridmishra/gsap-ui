@@ -4,6 +4,7 @@ export { HoverIndicator } from "./cards/hover-indicator";
 export { SimpleHero } from "./hero/simple-hero";
 export { AuroraBars } from "./hero/aurora-bars";
 export { MangoCards } from "./cards/mango-cards/mango-cards";
+export { MediaPlayer, MediaPlayerDemo } from "./cards/media-player";
 export { RaycastBackground } from "./backgrounds/raycast";
 export { default as RaycastHero } from "./hero/raycast-hero/raycast-hero";
 export { default as IllustratedHero } from "./hero/illustated-hero/illustrated";
@@ -18,6 +19,7 @@ export {
   raycastHeroCode,
   spotlightGalleryCode,
   stickyScrollCode,
+  mediaPlayerCode,
   illustratedHeroCode,
 } from "@/registry/code-strings";
 

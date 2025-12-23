@@ -22,17 +22,24 @@ export const PreviewArea = memo(function PreviewArea() {
 
   const ActiveComponentRender = componentMap[activeComponent];
 
-  const isFullWidth = useMemo(() => {
-    const category = componentRegistry.find((cat) =>
-      cat.items.some((item) => item.id === activeComponent)
-    );
-    return (
-      category?.category === "Hero Section" ||
-      category?.category === "Landing Page" ||
-      category?.category === "Sections" ||
-      activeComponent === "mango-cards"
-    );
+  const activeItem = useMemo(() => {
+    for (const cat of componentRegistry) {
+      const item = cat.items.find((item) => item.id === activeComponent);
+      if (item) return { item, category: cat.category };
+    }
+    return null;
   }, [activeComponent]);
+
+  const isFullWidth = useMemo(() => {
+    if (!activeItem) return false;
+    const { category, item } = activeItem;
+    return (
+      category === "Hero Section" ||
+      category === "Landing Page" ||
+      category === "Sections" ||
+      item.id === "mango-cards"
+    );
+  }, [activeItem]);
 
   return (
     <div
@@ -40,8 +47,9 @@ export const PreviewArea = memo(function PreviewArea() {
     >
       <div
         className={cn(
-          "min-h-full w-full relative",
-          !isFullWidth && "flex items-center justify-center"
+          "min-h-full w-full relative transition-colors duration-300 bg-background",
+          !isFullWidth && "flex items-center justify-center",
+          activeItem?.item.previewBackground
         )}
       >
         {/* Subtle grid background */}

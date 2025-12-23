@@ -10,6 +10,7 @@ import {
   CommandPalette,
   LoadingSkeleton
 } from "@/components/layout";
+import { SponsorButton } from "@/components/ui/sponsor-button";
 import { useMounted, componentActions, useSidebarOpen, useActiveComponent } from "@/store";
 import { componentRegistry } from "@/registry";
 import { cn } from "@/lib/utils";
@@ -100,7 +101,10 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
                   {activeComponent?.name || "UI Components Library"}
                 </h1>
               </div>
-              <InfoIsland />
+              <div className="flex items-center gap-2">
+                <SponsorButton />
+                <InfoIsland />
+              </div>
             </header>
           </div>
           <div className={cn(

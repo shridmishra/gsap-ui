@@ -2,6 +2,7 @@
 
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
+import { MediaPreloadProvider } from "@/components/layout/media-preload-provider";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
@@ -11,7 +12,8 @@ export function Providers({ children }: { children: ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <MediaPreloadProvider>{children}</MediaPreloadProvider>
     </ThemeProvider>
   );
 }
+

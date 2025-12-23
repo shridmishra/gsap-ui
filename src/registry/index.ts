@@ -5,7 +5,9 @@ import {
   SimpleHero, simpleHeroCode,
   AuroraBars, auroraBarsCode,
   MangoCards, mangoCardsCode,
+  MediaPlayerDemo, mediaPlayerCode,
   RaycastBackground,
+
   RaycastHero, raycastHeroCode,
   IllustratedHero, illustratedHeroCode,
   SpotlightGallery, spotlightGalleryCode,
@@ -20,7 +22,9 @@ export {
  
   
   MangoCards, mangoCardsCode,
+  MediaPlayerDemo, mediaPlayerCode,
   RaycastBackground,
+
   RaycastHero, raycastHeroCode,
   IllustratedHero, illustratedHeroCode,
   SpotlightGallery, spotlightGalleryCode,
@@ -107,6 +111,16 @@ export const componentRegistry: ComponentCategory[] = [
         description: "Two mango product cards: a compact preview and an expanded immersive version.",
         url: "/cards/mango-cards",
         installation: "npm install lucide-react",
+        
+      },
+      { 
+        name: "Media Player", 
+        id: "media-player", 
+        isFree: true,
+        description: "A minimal, modern media player device with a soft rounded-square shape.",
+        url: "/cards/media-player",
+        installation: "npm install lucide-react",
+        previewBackground: "bg-foreground", 
       },
     ],
   },
@@ -131,7 +145,9 @@ export const componentMap: Record<string, React.ComponentType<any>> = {
   "simple-hero": SimpleHero,
   "aurora-bars": AuroraBars,
   "mango-cards": MangoCards,
+  "media-player": MediaPlayerDemo,
   "raycast-background": RaycastBackground,
+
   "raycast-hero": RaycastHero,
   "illustrated-hero": IllustratedHero,
   "spotlight-gallery": SpotlightGallery,
@@ -144,7 +160,9 @@ export const codeMap: Record<string, string> = {
   "aurora-bars": auroraBarsCode,
 
   "mango-cards": mangoCardsCode,
+  "media-player": mediaPlayerCode,
   "raycast-hero": raycastHeroCode,
+
   "illustrated-hero": illustratedHeroCode,
   "spotlight-gallery": spotlightGalleryCode,
   "sticky-scroll": stickyScrollCode,
