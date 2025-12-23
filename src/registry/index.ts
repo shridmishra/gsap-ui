@@ -44,7 +44,7 @@ export const componentRegistry: ComponentCategory[] = [
         isFree: true,
         description: "A scrolling spotlight gallery with GSAP animations.",
         url: "/sections/spotlight-gallery",
-        installation: "npm install gsap @gsap/react lenis",
+        installation: "npm install gsap lenis",
       },
       { 
         name: "Sticky Scroll", 
@@ -52,7 +52,7 @@ export const componentRegistry: ComponentCategory[] = [
         isFree: true,
         description: "A sticky scroll section with transforming cards.",
         url: "/sections/sticky-scroll",
-        installation: "npm install gsap @gsap/react lenis",
+        installation: "npm install gsap lenis",
       },
     ],
   },
@@ -110,7 +110,7 @@ export const componentRegistry: ComponentCategory[] = [
         isFree: true,
         description: "Two mango product cards: a compact preview and an expanded immersive version.",
         url: "/cards/mango-cards",
-        installation: "npm install lucide-react",
+        installation: "npm install motion",
         
       },
       { 
@@ -119,7 +119,7 @@ export const componentRegistry: ComponentCategory[] = [
         isFree: true,
         description: "A minimal, modern media player device with a soft rounded-square shape.",
         url: "/cards/media-player",
-        installation: "npm install lucide-react",
+        installation: "npm install lucide-react react-icons",
         previewBackground: "bg-foreground", 
       },
     ],
