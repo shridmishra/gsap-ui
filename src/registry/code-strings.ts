@@ -326,9 +326,10 @@ export const mangoCardsCode = `"use client";
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import mango from "./mango.png";
+// import mango from "/public/assets/showcase/cards/mango.png";
 
-const images = [mango.src, mango.src, mango.src];
+const mango = "/assets/showcase/cards/mango.png";
+const images = [mango, mango, mango];
 
 const wrap = (min: number, max: number, v: number) => {
     const rangeSize = max - min;
@@ -541,8 +542,8 @@ interface MediaPlayerProps {
 
 export function MediaPlayer({ className }: MediaPlayerProps) {
     const videos = [
-        { src: "/card/vhs.mp4", title: "Retro VHS", duration: "0:15" },
-        { src: "/card/rose.mp4", title: "Rose Garden", duration: "0:12" }
+        { src: "/assets/showcase/cards/vhs.mp4", title: "Retro VHS", duration: "0:15" },
+        { src: "/assets/showcase/cards/rose.mp4", title: "Rose Garden", duration: "0:12" }
     ];
 
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -741,7 +742,8 @@ import { Play, Sparkles, ChevronDown, Search, Bell, Settings, Plus, LayoutGrid }
 import { motion } from "motion/react";
 
 import Image from "next/image";
-import heroBg from "./image.png";
+// import heroBg from "/public/assets/showcase/hero/raycast-hero.png";
+const heroBg = "/assets/showcase/hero/raycast-hero.png";
 
 export default function RaycastHero() {
     return (
@@ -751,6 +753,8 @@ export default function RaycastHero() {
                 <Image
                     src={heroBg}
                     alt="Hero Background"
+                    width={1920}
+                    height={1080}
                     className="w-full h-auto opacity-100"
                     priority
                 />
@@ -1494,7 +1498,7 @@ export default function IllustratedHero() {
             {/* Background Image */}
             <div className="absolute inset-0 z-0 -mt-24 select-none pointer-events-none">
                 <Image
-                    src="/hero/illustrated.png"
+                    src="/assets/showcase/hero/illustrated.png"
                     alt="Hero Background"
                     fill
                     className="w-full h-screen object-cover opacity-40 md:opacity-100" // Adjust opacity for mobile readability if needed, or keeping it clean

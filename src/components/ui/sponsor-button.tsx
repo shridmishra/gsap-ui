@@ -62,7 +62,7 @@ export const SponsorButton = () => {
                     </div>
                     <div className="relative w-64 h-64 rounded-lg overflow-hidden border bg-blue-50">
                         <Image
-                            src="/upi.jpg"
+                            src="/assets/common/upi.jpg"
                             alt="UPI QR Code"
                             fill
                             className="object-contain"

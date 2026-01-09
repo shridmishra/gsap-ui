@@ -20,16 +20,16 @@ export interface MediaConfig {
  */
 export const componentMediaMap: Record<string, MediaConfig> = {
   "media-player": {
-    videos: ["/card/vhs.mp4", "/card/rose.mp4"],
-    images: ["/card/retro.png"],
+    videos: ["/assets/showcase/cards/vhs.mp4", "/assets/showcase/cards/rose.mp4"],
+    images: ["/assets/showcase/cards/retro.png"],
     priority: "high",
   },
   "illustrated-hero": {
-    images: ["/hero/illustrated.png"],
+    images: ["/assets/showcase/hero/illustrated.png"],
     priority: "high",
   },
   "raycast-hero": {
-    images: ["/raycast-bg.png"],
+    images: ["/assets/showcase/hero/raycast-bg.png"],
     priority: "medium",
   },
   // External images cannot be preloaded via document hints due to CORS

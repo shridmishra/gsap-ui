@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import mango from "./mango.png";
+// import mango from "/public/assets/showcase/cards/mango.png";
 
-const images = [mango.src, mango.src, mango.src];
+const mango = "/assets/showcase/cards/mango.png";
+const images = [mango, mango, mango];
 
 const wrap = (min: number, max: number, v: number) => {
     const rangeSize = max - min;

@@ -11,7 +11,7 @@ export default function IllustratedHero() {
             {/* Background Image */}
             <div className="absolute inset-0 z-0 -mt-24 select-none pointer-events-none">
                 <Image
-                    src="/hero/illustrated.png"
+                    src="/assets/showcase/hero/illustrated.png"
                     alt="Hero Background"
                     fill
                     className="w-full h-screen object-cover opacity-40 md:opacity-100" // Adjust opacity for mobile readability if needed, or keeping it clean

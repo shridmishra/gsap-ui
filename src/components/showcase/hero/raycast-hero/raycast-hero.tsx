@@ -5,7 +5,8 @@ import { Play, Sparkles, ChevronDown, Search, Bell, Settings, Plus, LayoutGrid }
 import { motion } from "motion/react";
 
 import Image from "next/image";
-import heroBg from "./image.png";
+// import heroBg from "/public/assets/showcase/hero/raycast-hero.png";
+const heroBg = "/assets/showcase/hero/raycast-hero.png";
 
 export default function RaycastHero() {
     return (
@@ -15,6 +16,8 @@ export default function RaycastHero() {
                 <Image
                     src={heroBg}
                     alt="Hero Background"
+                    width={1920}
+                    height={1080}
                     className="w-full h-auto opacity-100"
                     priority
                 />

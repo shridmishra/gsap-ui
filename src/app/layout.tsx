@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "shrid.in",
     images: [
       {
-        url: "/logo.png",
+        url: "/assets/brand/logo.png",
         width: 1200,
         height: 630,
         alt: "UI Components | shrid.in",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     title: "UI Components | shrid.in",
     description:
       "Beautiful, animated UI components for your next project. Built with React, Tailwind CSS, and Framer Motion.",
-    images: ["/logo.png"],
+    images: ["/assets/brand/logo.png"],
     creator: "@shridmishra",
   },
   robots: {
