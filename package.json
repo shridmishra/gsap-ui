@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "generate-code": "npx tsx scripts/generate-code-strings.ts",
+    "validate-components": "npx tsx scripts/validate-components.ts",
     "dev": "npm run generate-code && next dev --webpack",
     "build": "npm run generate-code && next build --webpack",
     "start": "next start",

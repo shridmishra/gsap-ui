@@ -29,7 +29,7 @@ export const componentMediaMap: Record<string, MediaConfig> = {
     priority: "high",
   },
   "raycast-hero": {
-    images: ["/assets/showcase/hero/raycast-bg.png"],
+    images: ["/assets/showcase/hero/raycast-hero.png"],
     priority: "medium",
   },
   // External images cannot be preloaded via document hints due to CORS

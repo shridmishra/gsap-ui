@@ -181,7 +181,7 @@ export const SimpleHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 -z-20">
         <img
-          src="https://images.unsplash.com/photo-1635776063328-153b13e3c245?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="/assets/stock/Serene Green Hills.png"
           alt="Background"
           className="h-full w-full object-cover"
           loading="eager"
@@ -227,9 +227,6 @@ export const SimpleHero = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60">Shrid UI</span>
           </h1>
 
-          <p className="text-lg md:text-xl leading-relaxed text-black/80 max-w-2xl mx-auto mb-10">
-            A collection of beautiful, reusable components built with React, Tailwind CSS, and Motion. Copy and paste into your apps.
-          </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <button className="h-12 px-8 rounded-full bg-black text-white text-sm font-semibold shadow-lg hover:bg-black/90 hover:scale-105 transition-all flex items-center gap-2">
@@ -310,7 +307,7 @@ export const BorderFrameDemo = () => {
       <BorderFrame className="w-72">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
+          src="/assets/stock/Serene Green Hills.png"
           alt="Mountain landscape"
           className="w-full h-48 object-cover"
           loading="lazy"
@@ -580,7 +577,7 @@ export function MediaPlayer({ className }: MediaPlayerProps) {
         const video = videoRef.current;
         if (!video) return;
 
-       
+
         const playVideo = async () => {
             try {
                 video.load();
@@ -728,9 +725,9 @@ export function MediaPlayerDemo() {
     return (
         <>
             <MediaPlayer />
-        
+
         </>
-        
+
     );
 }
 `;
@@ -940,16 +937,16 @@ import "./spotlight-gallery.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const spotlightItems = [
-    { name: "Silent Arc", img: "https://images.unsplash.com/photo-1499002238440-d264edd596ec?q=80&w=2070&auto=format&fit=crop" },
-    { name: "Bloom", img: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=2076&auto=format&fit=crop" },
-    { name: "Dark Sky", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2094&auto=format&fit=crop" },
-    { name: "Moon Glow", img: "https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?q=80&w=2070&auto=format&fit=crop" },
-    { name: "Star Dust", img: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=2013&auto=format&fit=crop" },
-    { name: "Night Wave", img: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=2052&auto=format&fit=crop" },
-    { name: "Frost", img: "https://images.unsplash.com/photo-1478719059408-592965723cbc?q=80&w=2070&auto=format&fit=crop" },
-    { name: "Dawn Light", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2132&auto=format&fit=crop" },
-    { name: "Mist", img: "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?q=80&w=2068&auto=format&fit=crop" },
-    { name: "Sun Spark", img: "https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=2050&auto=format&fit=crop" },
+    { name: "Silent Arc", img: "/assets/stock/Mystical Portal Landscape.png" },
+    { name: "Bloom", img: "/assets/stock/Serene Daisy Meadow.png" },
+    { name: "Dark Sky", img: "/assets/stock/Serene Landscape with Solitary Figure.png" },
+    { name: "Moon Glow", img: "/assets/stock/Pastoral Monolith Scene.png" },
+    { name: "Star Dust", img: "/assets/stock/Vintage TV on Hill.png" },
+    { name: "Night Wave", img: "/assets/stock/Serene Green Hills.png" },
+    { name: "Frost", img: "/assets/stock/Floral Fusion Figure.png" },
+    { name: "Dawn Light", img: "/assets/stock/Serene Landscape of Rolling Hills.png" },
+    { name: "Mist", img: "/assets/stock/Ethereal Cavern Scene.png" },
+    { name: "Sun Spark", img: "/assets/stock/Surreal Landscape with Geometric Structures and Lone Figure.png" },
 ];
 
 export function SpotlightGallery() {
@@ -1329,28 +1326,28 @@ export function StickyScroll() {
     {
       index: "01",
       title: "Modularity",
-      imagePath: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+      imagePath: "/assets/stock/Mystical Portal Landscape.png",
       description:
         "Breaking a system into smaller, independent modules makes code easier to maintain, scale, and reuse.",
     },
     {
       index: "02",
       title: "Abstraction",
-      imagePath: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=2070&auto=format&fit=crop",
+      imagePath: "/assets/stock/Floral Fusion Figure.png",
       description:
         "Abstraction hides unnecessary details and exposes only essential features, simplifying complex systems.",
     },
     {
       index: "03",
       title: "Scalability",
-      imagePath: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+      imagePath: "/assets/stock/Pastoral Monolith Scene.png",
       description:
         "A scalable system can handle increasing workloads without a drop in performance or the need for major redesigns.",
     },
     {
       index: "04",
       title: "Concurrency",
-      imagePath: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2034&auto=format&fit=crop",
+      imagePath: "/assets/stock/Serene Landscape with Solitary Figure.png",
       description:
         "Concurrency allows multiple tasks to run at the same time, improving efficiency and responsiveness.",
     },
@@ -1561,6 +1558,157 @@ export default function IllustratedHero() {
                         </button>
                     </motion.div>
                 </div>
+            </div>
+        </div>
+    );
+}
+`;
+
+export const hoverImageCode = `"use client";
+
+import "./hover-image.css";
+import React, { useRef, useEffect } from "react";
+import gsap from "gsap";
+
+interface ProjectItem {
+    title: string;
+    label: string;
+    imageSrc: string;
+}
+
+const defaultProjects: ProjectItem[] = [
+    {
+        title: "Luminara",
+        label: "Interactive Experience",
+        imageSrc: "/assets/stock/Ethereal Cavern Scene.png",
+    },
+    {
+        title: "Velocity",
+        label: "Motion Design Studio",
+        imageSrc: "/assets/stock/Ethereal Motion Scene.png",
+    },
+    {
+        title: "Botanical",
+        label: "Nature & Wellness",
+        imageSrc: "/assets/stock/Serene Daisy Meadow.png",
+    },
+    {
+        title: "Horizon",
+        label: "Landscape Architecture",
+        imageSrc: "/assets/stock/Serene Green Hills.png",
+    },
+];
+
+interface HoverImageProps {
+    projects?: ProjectItem[];
+}
+
+export function HoverImage({ projects = defaultProjects }: HoverImageProps) {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const thumbnailRef = useRef<HTMLDivElement>(null);
+    const xToRef = useRef<gsap.QuickToFunc | null>(null);
+    const yToRef = useRef<gsap.QuickToFunc | null>(null);
+
+    useEffect(() => {
+        const projectThumbnail = thumbnailRef.current;
+        const projectsContainer = containerRef.current?.querySelector(
+            ".projects"
+        ) as HTMLElement | null;
+
+        if (!projectThumbnail || !projectsContainer) return;
+
+        const projectElements = gsap.utils.toArray(
+            ".project",
+            projectsContainer
+        ) as HTMLElement[];
+        const thumbnails = gsap.utils.toArray(
+            ".thumbnail",
+            projectThumbnail
+        ) as HTMLElement[];
+
+        gsap.set(projectThumbnail, { scale: 0, xPercent: -50, yPercent: -50 });
+
+        xToRef.current = gsap.quickTo(projectThumbnail, "x", {
+            duration: 0.4,
+            ease: "power3.out",
+        });
+        yToRef.current = gsap.quickTo(projectThumbnail, "y", {
+            duration: 0.4,
+            ease: "power3.out",
+        });
+
+        const handleMouseMove = (e: MouseEvent) => {
+            xToRef.current?.(e.clientX);
+            yToRef.current?.(e.clientY);
+        };
+
+        const handleMouseLeave = () => {
+            gsap.to(projectThumbnail, {
+                scale: 0,
+                duration: 0.3,
+                ease: "power2.out",
+                overwrite: "auto",
+            });
+        };
+
+        projectsContainer.addEventListener("mousemove", handleMouseMove);
+        projectsContainer.addEventListener("mouseleave", handleMouseLeave);
+
+        const projectListeners: Array<() => void> = [];
+
+        projectElements.forEach((project, index) => {
+            const handleMouseEnter = () => {
+                gsap.to(projectThumbnail, {
+                    scale: 1,
+                    duration: 0.4,
+                    ease: "power2.out",
+                    overwrite: "auto",
+                });
+
+                gsap.to(thumbnails, {
+                    yPercent: -100 * index,
+                    duration: 0.4,
+                    ease: "power2.out",
+                    overwrite: "auto",
+                });
+            };
+
+            project.addEventListener("mouseenter", handleMouseEnter);
+            projectListeners.push(() =>
+                project.removeEventListener("mouseenter", handleMouseEnter)
+            );
+        });
+
+        return () => {
+            projectsContainer.removeEventListener("mousemove", handleMouseMove);
+            projectsContainer.removeEventListener("mouseleave", handleMouseLeave);
+            projectListeners.forEach((cleanup) => cleanup());
+        };
+    }, [projects]);
+
+    return (
+        <div className="hover-image-container" ref={containerRef}>
+            {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+            <link
+                href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap"
+                rel="stylesheet"
+            />
+            <div className="projects">
+                {projects.map((project, index) => (
+                    <div className="project" key={index}>
+                        <h2>{project.title}</h2>
+                        <p>{project.label}</p>
+                    </div>
+                ))}
+            </div>
+
+            <div className="project-thumbnail" ref={thumbnailRef}>
+                {projects.map((project, index) => (
+                    <div className="thumbnail" key={index}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={project.imageSrc} alt={project.title} />
+                    </div>
+                ))}
             </div>
         </div>
     );

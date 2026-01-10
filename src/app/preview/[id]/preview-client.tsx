@@ -23,6 +23,7 @@ export function PreviewClient({ componentId }: PreviewClientProps) {
             category?.category === "Hero Section" ||
             category?.category === "Landing Page" ||
             category?.category === "Sections" ||
+            category?.category === "GSAP Section" ||
             componentId === "mango-cards"
         );
     }, [componentId]);

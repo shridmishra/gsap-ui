@@ -37,6 +37,7 @@ export const PreviewArea = memo(function PreviewArea() {
       category === "Hero Section" ||
       category === "Landing Page" ||
       category === "Sections" ||
+      category === "GSAP Section" ||
       item.id === "mango-cards"
     );
   }, [activeItem]);

@@ -12,6 +12,7 @@ import {
   IllustratedHero, illustratedHeroCode,
   SpotlightGallery, spotlightGalleryCode,
   StickyScroll, stickyScrollCode,
+  HoverImage, hoverImageCode,
 } from "@/components/showcase";
 
 // Re-export showcase components for convenience
@@ -29,6 +30,7 @@ export {
   IllustratedHero, illustratedHeroCode,
   SpotlightGallery, spotlightGalleryCode,
   StickyScroll, stickyScrollCode,
+  HoverImage, hoverImageCode,
 } from "@/components/showcase";
 
 // Re-export types from centralized location
@@ -36,7 +38,7 @@ export type { ComponentItem, ComponentCategory } from "@/types";
 
 export const componentRegistry: ComponentCategory[] = [
   {
-    category: "Sections",
+    category: "GSAP Section",
     items: [
       { 
         name: "Spotlight Gallery", 
@@ -53,6 +55,14 @@ export const componentRegistry: ComponentCategory[] = [
         description: "A sticky scroll section with transforming cards.",
         url: "/sections/sticky-scroll",
         installation: "npm install gsap lenis",
+      },
+      { 
+        name: "Hover Image", 
+        id: "hover-image", 
+        isFree: true,
+        description: "A project gallery with cursor-following image thumbnails.",
+        url: "/sections/hover-image",
+        installation: "npm install gsap",
       },
     ],
   },
@@ -152,6 +162,7 @@ export const componentMap: Record<string, React.ComponentType<any>> = {
   "illustrated-hero": IllustratedHero,
   "spotlight-gallery": SpotlightGallery,
   "sticky-scroll": StickyScroll,
+  "hover-image": HoverImage,
 };
 
 export const codeMap: Record<string, string> = {
@@ -166,4 +177,5 @@ export const codeMap: Record<string, string> = {
   "illustrated-hero": illustratedHeroCode,
   "spotlight-gallery": spotlightGalleryCode,
   "sticky-scroll": stickyScrollCode,
+  "hover-image": hoverImageCode,
 };

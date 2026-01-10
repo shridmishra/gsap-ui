@@ -10,16 +10,16 @@ import "./spotlight-gallery.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const spotlightItems = [
-    { name: "Silent Arc", img: "https://images.unsplash.com/photo-1499002238440-d264edd596ec?q=80&w=2070&auto=format&fit=crop" },
-    { name: "Bloom", img: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?q=80&w=2076&auto=format&fit=crop" },
-    { name: "Dark Sky", img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=2094&auto=format&fit=crop" },
-    { name: "Moon Glow", img: "https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?q=80&w=2070&auto=format&fit=crop" },
-    { name: "Star Dust", img: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=2013&auto=format&fit=crop" },
-    { name: "Night Wave", img: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=2052&auto=format&fit=crop" },
-    { name: "Frost", img: "https://images.unsplash.com/photo-1478719059408-592965723cbc?q=80&w=2070&auto=format&fit=crop" },
-    { name: "Dawn Light", img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2132&auto=format&fit=crop" },
-    { name: "Mist", img: "https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?q=80&w=2068&auto=format&fit=crop" },
-    { name: "Sun Spark", img: "https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=2050&auto=format&fit=crop" },
+    { name: "Silent Arc", img: "/assets/stock/Mystical Portal Landscape.png" },
+    { name: "Bloom", img: "/assets/stock/Serene Daisy Meadow.png" },
+    { name: "Dark Sky", img: "/assets/stock/Serene Landscape with Solitary Figure.png" },
+    { name: "Moon Glow", img: "/assets/stock/Pastoral Monolith Scene.png" },
+    { name: "Star Dust", img: "/assets/stock/Vintage TV on Hill.png" },
+    { name: "Night Wave", img: "/assets/stock/Serene Green Hills.png" },
+    { name: "Frost", img: "/assets/stock/Floral Fusion Figure.png" },
+    { name: "Dawn Light", img: "/assets/stock/Serene Landscape of Rolling Hills.png" },
+    { name: "Mist", img: "/assets/stock/Ethereal Cavern Scene.png" },
+    { name: "Sun Spark", img: "/assets/stock/Surreal Landscape with Geometric Structures and Lone Figure.png" },
 ];
 
 export function SpotlightGallery() {

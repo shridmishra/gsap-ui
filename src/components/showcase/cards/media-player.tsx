@@ -12,8 +12,8 @@ interface MediaPlayerProps {
 
 export function MediaPlayer({ className }: MediaPlayerProps) {
     const videos = [
-        { src: "/card/vhs.mp4", title: "Retro VHS", duration: "0:15" },
-        { src: "/card/rose.mp4", title: "Rose Garden", duration: "0:12" }
+        { src: "/assets/showcase/cards/vhs.mp4", title: "Retro VHS", duration: "0:15" },
+        { src: "/assets/showcase/cards/rose.mp4", title: "Rose Garden", duration: "0:12" }
     ];
 
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -50,7 +50,7 @@ export function MediaPlayer({ className }: MediaPlayerProps) {
         const video = videoRef.current;
         if (!video) return;
 
-       
+
         const playVideo = async () => {
             try {
                 video.load();
@@ -198,8 +198,8 @@ export function MediaPlayerDemo() {
     return (
         <>
             <MediaPlayer />
-        
+
         </>
-        
+
     );
 }

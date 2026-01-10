@@ -9,7 +9,7 @@ export const SimpleHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 -z-20">
         <img
-          src="https://images.unsplash.com/photo-1635776063328-153b13e3c245?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="/assets/stock/Serene Green Hills.png"
           alt="Background"
           className="h-full w-full object-cover"
           loading="eager"
@@ -55,9 +55,6 @@ export const SimpleHero = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60">Shrid UI</span>
           </h1>
 
-          <p className="text-lg md:text-xl leading-relaxed text-black/80 max-w-2xl mx-auto mb-10">
-            A collection of beautiful, reusable components built with React, Tailwind CSS, and Motion. Copy and paste into your apps.
-          </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <button className="h-12 px-8 rounded-full bg-black text-white text-sm font-semibold shadow-lg hover:bg-black/90 hover:scale-105 transition-all flex items-center gap-2">

@@ -50,7 +50,7 @@ export const BorderFrameDemo = () => {
       <BorderFrame className="w-72">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
+          src="/assets/stock/Serene Green Hills.png"
           alt="Mountain landscape"
           className="w-full h-48 object-cover"
           loading="lazy"

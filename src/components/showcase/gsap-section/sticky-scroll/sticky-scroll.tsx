@@ -13,28 +13,28 @@ export function StickyScroll() {
     {
       index: "01",
       title: "Modularity",
-      imagePath: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+      imagePath: "/assets/stock/Mystical Portal Landscape.png",
       description:
         "Breaking a system into smaller, independent modules makes code easier to maintain, scale, and reuse.",
     },
     {
       index: "02",
       title: "Abstraction",
-      imagePath: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=2070&auto=format&fit=crop",
+      imagePath: "/assets/stock/Floral Fusion Figure.png",
       description:
         "Abstraction hides unnecessary details and exposes only essential features, simplifying complex systems.",
     },
     {
       index: "03",
       title: "Scalability",
-      imagePath: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+      imagePath: "/assets/stock/Pastoral Monolith Scene.png",
       description:
         "A scalable system can handle increasing workloads without a drop in performance or the need for major redesigns.",
     },
     {
       index: "04",
       title: "Concurrency",
-      imagePath: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2034&auto=format&fit=crop",
+      imagePath: "/assets/stock/Serene Landscape with Solitary Figure.png",
       description:
         "Concurrency allows multiple tasks to run at the same time, improving efficiency and responsiveness.",
     },
