@@ -11,6 +11,8 @@ import { useActiveComponent, useCodePanelOpen, componentActions } from "@/store"
 import { slidePanelVariants, fadeVariants, springTransition } from "@/lib/animations";
 import { useTheme } from "next-themes";
 import { CopyButton } from "@/components/ui";
+import { cn } from "@/lib/utils";
+import { transformTsToJs } from "@/lib/transform-code";
 
 
 
@@ -18,17 +20,85 @@ interface CodePanelContentProps {
   onClose?: () => void;
   showCloseButton?: boolean;
   hideInstall?: boolean;
+  framework?: "react" | "html";
+  setFramework?: (f: "react" | "html") => void;
+  language?: "typescript" | "javascript";
+  setLanguage?: (l: "typescript" | "javascript") => void;
 }
 
-export const CodePanelContent = memo(function CodePanelContent({ onClose, showCloseButton = true, hideInstall = false }: CodePanelContentProps) {
+export const CodePanelContent = memo(function CodePanelContent({
+  onClose,
+  showCloseButton = true,
+  hideInstall = false,
+  framework: propFramework,
+  setFramework: propSetFramework,
+  language: propLanguage,
+  setLanguage: propSetLanguage
+}: CodePanelContentProps) {
   const activeComponent = useActiveComponent();
   const activeItem = useActiveItem(activeComponent);
-  const code = useMemo(() => codeMap[activeComponent] || "// No code available", [activeComponent]);
+  const codeEntry = useMemo(() => codeMap[activeComponent] || "// No code available", [activeComponent]);
+
+  const [internalFramework, setInternalFramework] = React.useState<"react" | "html">("react");
+  const [internalLanguage, setInternalLanguage] = React.useState<"typescript" | "javascript">("typescript");
+
+  const framework = propFramework ?? internalFramework;
+  const setFramework = propSetFramework ?? setInternalFramework;
+  const language = propLanguage ?? internalLanguage;
+  const setLanguage = propSetLanguage ?? setInternalLanguage;
+
   const { theme } = useTheme();
+
+  // Parse the code entry
+  const { currentCode, showFrameworkToggle } = useMemo(() => {
+    let parsedCode = { react: "", html: "" };
+    let hasHtml = false;
+
+    if (typeof codeEntry === "string") {
+      parsedCode.react = codeEntry;
+    } else {
+      parsedCode.react = codeEntry.code;
+      if (codeEntry.html) {
+        parsedCode.html = codeEntry.html;
+        hasHtml = true;
+      }
+    }
+
+    // If current framework is html but no html code, switch back to react
+    if (framework === "html" && !hasHtml) {
+      // safe fallback
+    }
+
+    // Transform if Javascript
+    let displayCode = framework === "react" ? parsedCode.react : parsedCode.html;
+    if (framework === "react" && language === "javascript") {
+      displayCode = transformTsToJs(displayCode);
+    }
+
+    return {
+      currentCode: displayCode || "// No code found",
+      showFrameworkToggle: hasHtml
+    };
+  }, [codeEntry, framework, language]);
+
+  // Adjust framework state if needed when activeComponent changes
+  React.useEffect(() => {
+    if (typeof codeEntry !== "string" && codeEntry.html) {
+      // If the component has HTML, we *could* default to it? No, default to React.
+    } else {
+      setFramework("react");
+    }
+  }, [codeEntry]);
+
 
   const syntaxStyle = useMemo(() => {
     return theme === "dark" ? oneDark : oneLight;
   }, [theme]);
+
+  // Handle Copy
+  const handleCopy = () => {
+    navigator.clipboard.writeText(currentCode);
+  }
 
   return (
     <div className="flex flex-col h-full bg-background relative">
@@ -52,21 +122,52 @@ export const CodePanelContent = memo(function CodePanelContent({ onClose, showCl
 
       {/* Code Section */}
       <div className="flex-1 overflow-hidden flex flex-col">
-        <div className="flex items-center justify-between px-4 py-3 md:px-6 border-b border-border bg-card/50 backdrop-blur-md sticky top-0 z-20">
-          <div className="flex items-center gap-2.5">
-           
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold tracking-tight">
-                {activeComponent}.tsx
-              </span>
-            </div>
+        <div className="flex items-center justify-between px-4 sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+          <div className="flex items-center gap-6 relative">
+            {/* Tabs */}
+            {(showFrameworkToggle ? ["TypeScript", "JavaScript", "HTML"] : ["TypeScript", "JavaScript"]).map((tab) => {
+              const isActive =
+                (tab === "HTML" && framework === "html") ||
+                (tab === "TypeScript" && framework === "react" && language === "typescript") ||
+                (tab === "JavaScript" && framework === "react" && language === "javascript");
+
+              return (
+                <button
+                  key={tab}
+                  onClick={() => {
+                    if (tab === "HTML") {
+                      setFramework("html");
+                    } else {
+                      setFramework("react");
+                      setLanguage(tab.toLowerCase() as "typescript" | "javascript");
+                    }
+                  }}
+                  className={cn(
+                    "relative py-3 px-1 text-sm font-medium transition-all duration-200",
+                    isActive
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  <span className="relative z-10">{tab}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeCodeTab"
+                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary z-0"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
+
           <div className="flex items-center gap-3">
-            <CopyButton text={code} label="Copy code" iconSize="sm" variant="outline" className="h-8 bg-background/50" />
+            <CopyButton text={currentCode} label="Copy" iconSize="sm" variant="outline" className="h-7 text-xs gap-1.5 px-2 bg-background/50" />
             {showCloseButton && (
               <button
                 onClick={onClose}
-                className="p-2 rounded-lg hover:bg-accent text-muted-foreground hover:text-foreground transition-all duration-200"
+                className="p-1.5 rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-all duration-200"
                 aria-label="Close panel"
               >
                 <X className="w-4 h-4" />
@@ -77,7 +178,7 @@ export const CodePanelContent = memo(function CodePanelContent({ onClose, showCl
 
         <div className="flex-1 overflow-auto bg-code-bg relative">
           <SyntaxHighlighter
-            language="tsx"
+            language={framework === "html" ? "html" : (language === "typescript" ? "tsx" : "jsx")}
             style={syntaxStyle}
             customStyle={{
               margin: 0,
@@ -92,7 +193,7 @@ export const CodePanelContent = memo(function CodePanelContent({ onClose, showCl
             showLineNumbers={true}
             lineNumberStyle={{ minWidth: "2.5em", paddingRight: "1em", opacity: 0.3 }}
           >
-            {code}
+            {currentCode}
           </SyntaxHighlighter>
         </div>
       </div>

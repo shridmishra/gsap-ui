@@ -6,8 +6,8 @@ export const auroraBarsCode = `"use client";
 import React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { SiZapier, SiWebflow, SiSlack, SiHubspot, SiFiverr } from "react-icons/si";
-import { ArrowRight, Search, Sun, Moon } from "lucide-react";
+import { SiReact, SiTailwindcss, SiTypescript, SiNextdotjs } from "react-icons/si";
+import { ArrowRight, Search, Sun, Moon, Github } from "lucide-react";
 import { useTheme } from "next-themes";
 
 interface AuroraBarsProps {
@@ -45,7 +45,7 @@ export const AuroraBars = ({ className }: AuroraBarsProps) => {
     <div className={isDark ? "dark" : ""}>
       <div
         className={cn(
-          "relative w-full min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white overflow-hidden font-sans selection:bg-emerald-500/30",
+          "relative w-full min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white overflow-hidden font-sans selection:bg-pink-500/30",
           className
         )}
       >
@@ -53,25 +53,35 @@ export const AuroraBars = ({ className }: AuroraBarsProps) => {
         <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 max-w-7xl mx-auto w-full">
           {/* Logo */}
           <div className="flex items-center gap-2 font-bold text-xl tracking-tight">
-            <div className="w-6 h-6 bg-black dark:bg-white rounded-full flex items-center justify-center">
-              <div className="w-2 h-2 bg-white dark:bg-black rounded-full" />
-            </div>
-            Topflow
+            <div
+                    className="size-6 bg-rose-500 mt-2"
+                    style={{
+                      maskImage: 'url("/logo.png")',
+                      maskSize: 'contain',
+                      maskRepeat: 'no-repeat',
+                      maskPosition: 'center',
+                      WebkitMaskImage: 'url("/logo.png")',
+                      WebkitMaskSize: 'contain',
+                      WebkitMaskRepeat: 'no-repeat',
+                      WebkitMaskPosition: 'center',
+                    }}
+                  />
+            gsap-ui
           </div>
 
           {/* Links */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-500 dark:text-zinc-400">
             <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
-              Find talent +
+              Components
             </a>
             <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
-              About
+              Documentation
             </a>
             <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
-              Customers
+              Templates
             </a>
             <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">
-              Pricing
+              Showcase
             </a>
           </div>
 
@@ -79,12 +89,13 @@ export const AuroraBars = ({ className }: AuroraBarsProps) => {
           <div className="flex items-center gap-6 text-sm font-medium">
             <a
               href="#"
-              className="hidden md:block hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+              className="hidden md:flex items-center gap-2 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
             >
-              Log in ↗
+              <Github className="w-4 h-4" />
+              GitHub
             </a>
             <button className="bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 text-white px-5 py-2 rounded-full transition-colors">
-              Get started
+              Get Started
             </button>
             <button
               onClick={() => setTheme(isDark ? "light" : "dark")}
@@ -118,12 +129,11 @@ export const AuroraBars = ({ className }: AuroraBarsProps) => {
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 pt-20">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 max-w-5xl leading-tight">
-            Hire the top 1% of <br className="hidden md:block" /> Webflow
-            freelancers
+            Beautiful UI components <br className="hidden md:block" /> built with <span className="text-rose-500">GSAP</span>
           </h1>
           <p className="text-zinc-500 dark:text-zinc-400 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed">
-            Tell us your requirement and we&apos;ll match you with a vetted Webflow
-            expert in less than <span className="text-zinc-900 dark:text-white font-semibold">48 hours</span>.
+            A collection of modern, animated components for your next project. Copy
+            and paste, open source, and <span className="text-zinc-900 dark:text-white font-semibold">production ready</span>.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-6 mb-24">
@@ -132,10 +142,10 @@ export const AuroraBars = ({ className }: AuroraBarsProps) => {
               style={{ paddingLeft: '4px', paddingRight: '24px' }}
             >
               <div className="bg-white dark:bg-black rounded-full p-2"><Search className="w-4 h-4 text-black dark:text-white" /></div>
-              Find talent
+              Browse Components
             </button>
             <button className="flex items-center gap-2 text-zinc-900 dark:text-white font-medium hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors group">
-              Learn more{" "}
+              View Documentation{" "}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -143,23 +153,20 @@ export const AuroraBars = ({ className }: AuroraBarsProps) => {
           {/* Trusted By */}
           <div className="flex flex-col items-center gap-8 w-full max-w-4xl mx-auto">
             <p className="text-zinc-500 dark:text-zinc-500 text-sm font-medium tracking-wide uppercase">
-              Trusted by <span className="text-zinc-900 dark:text-white/80">400+</span> companies
+              Powered by modern tech stack
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-zinc-900 dark:text-white w-full">
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-zinc-900 dark:text-white w-full opacity-80">
               <div className="flex items-center gap-2 text-xl font-bold">
-                <SiZapier className="w-6 h-6" /> _zapier
+                <SiReact className="w-6 h-6" /> React
               </div>
               <div className="flex items-center gap-2 text-xl font-bold">
-                <SiWebflow className="w-6 h-6" /> Webflow
+                <SiNextdotjs className="w-6 h-6" /> Next.js
               </div>
               <div className="flex items-center gap-2 text-xl font-bold">
-                <SiSlack className="w-6 h-6" /> slack
+                <SiTailwindcss className="w-6 h-6" /> Tailwind
               </div>
               <div className="flex items-center gap-2 text-xl font-bold">
-                <SiHubspot className="w-6 h-6" /> HubSpot
-              </div>
-              <div className="flex items-center gap-2 text-xl font-bold">
-                <SiFiverr className="w-14 h-14" />
+                <SiTypescript className="w-6 h-6" /> TypeScript
               </div>
             </div>
           </div>
@@ -196,7 +203,7 @@ export const SimpleHero = () => {
           <div className="w-8 h-8 bg-black text-white rounded-lg flex items-center justify-center">
             <Command className="w-5 h-5" />
           </div>
-          GSAP UI
+          Gsap UI
         </div>
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-black/80">
           <a href="#" className="hover:text-black transition-colors">Components</a>

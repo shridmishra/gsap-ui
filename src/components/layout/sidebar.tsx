@@ -3,7 +3,7 @@
 import React, { memo, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { sidebarVariants, springTransition } from "@/lib/animations";
+import Image from "next/image";
 import { componentRegistry } from "@/registry";
 import { useActiveComponent, useSidebarOpen, componentActions } from "@/store";
 import { useMediaPreloader, useMediaQuery } from "@/hooks";
@@ -26,10 +26,10 @@ const CategorySection = memo(function CategorySection({
 }) {
   return (
     <div>
-      <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/80 mb-3 px-2">
+      <h3 className="text-sm font-semibold text-foreground/80 mb-2 px-2">
         {category}
       </h3>
-      <ul className="space-y-1">
+      <ul className="space-y-1 border-l border-zinc-800 ml-2">
         {items.map((item) => (
           <SidebarItem
             key={item.id}
@@ -62,23 +62,23 @@ const SidebarItem = memo(function SidebarItem({
         onClick={onClick}
         onMouseEnter={onHover}
         className={cn(
-          "w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all",
+          "relative w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all",
           isActive
-            ? "bg-foreground/10 text-foreground font-medium"
+            ? " text-foreground font-medium"
             : "text-foreground/60 hover:text-foreground hover:bg-foreground/5"
         )}
       >
-        <span className="flex items-center gap-2">
+        <span className="flex items-center">
           {isActive && (
             <motion.div
               layoutId="activeIndicator"
-              className="w-1 h-4 bg-pink-500 rounded-full"
+              className="absolute -left-[2.5px] top-1/2 -translate-y-1/2 w-1 h-4 bg-pink-500 rounded-full"
             />
           )}
           {item.name}
         </span>
       </button>
-    </li>
+    </li >
   );
 });
 
@@ -152,8 +152,23 @@ export const Sidebar = memo(function Sidebar() {
             )}
           >
             <div className="w-64 h-full overflow-y-auto py-6 px-4 pt-20 lg:pt-6">
-              <div className="flex items-center justify-between mb-6 px-2">
-                <a href="https://gsap-ui.shrid.in" className="font-semibold text-2xl ">GSAP UI </a>
+              <div className="flex items-center justify-between mb-6 px-2 py-2">
+                <a href="https://gsap-ui.shrid.in" className="flex items-center gap-2.5 ">
+                  <div
+                    className="size-6 bg-rose-500"
+                    style={{
+                      maskImage: 'url("/logo.png")',
+                      maskSize: 'contain',
+                      maskRepeat: 'no-repeat',
+                      maskPosition: 'center',
+                      WebkitMaskImage: 'url("/logo.png")',
+                      WebkitMaskSize: 'contain',
+                      WebkitMaskRepeat: 'no-repeat',
+                      WebkitMaskPosition: 'center',
+                    }}
+                  />
+                  <div className="font-medium text-3xl -mt-2 ">gsap-ui</div>
+                </a>
               </div>
 
               <nav className="space-y-6">

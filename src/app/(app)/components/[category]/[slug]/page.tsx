@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ComponentPageLayout } from "@/components/layout";
+import { JsonLd } from "@/components/seo/json-ld";
 import { componentRegistry } from "@/registry";
 import { notFound } from "next/navigation";
 
@@ -27,7 +28,18 @@ export async function generateMetadata({
     return {
         title: component.name,
         description: component.description,
+        keywords: component.keywords,
         openGraph: {
+            title: component.name,
+            description: component.description,
+            type: "article",
+            url: `https://gsap-ui.shrid.in${component.url}`,
+        },
+        alternates: {
+            canonical: `https://gsap-ui.shrid.in${component.url}`,
+        },
+        twitter: {
+            card: "summary_large_image",
             title: component.name,
             description: component.description,
         },
@@ -49,7 +61,45 @@ export default async function ComponentPage({ params }: PageProps) {
     // const expectedUrl = `/components/${category}/${slug}`;
     // if (component.url !== expectedUrl) { ... }
 
-    return <ComponentPageLayout componentId={slug} />;
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Components",
+                "item": "https://gsap-ui.shrid.in/components"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": component.name,
+                "item": `https://gsap-ui.shrid.in${component.url}`
+            }
+        ]
+    };
+
+    const softwareSourceCode = {
+        "@context": "https://schema.org",
+        "@type": "SoftwareSourceCode",
+        "name": component.name,
+        "programmingLanguage": "TypeScript",
+        "author": {
+            "@type": "Person",
+            "name": "Shrid"
+        },
+        "description": component.description,
+        "codeRepository": "https://github.com/shridmishra/gsap-ui"
+    };
+
+    return (
+        <>
+            <JsonLd data={jsonLd} />
+            <JsonLd data={softwareSourceCode} />
+            <ComponentPageLayout componentId={slug} />
+        </>
+    );
 }
 
 export function generateStaticParams() {

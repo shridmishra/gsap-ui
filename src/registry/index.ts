@@ -45,6 +45,7 @@ export const componentRegistry: ComponentCategory[] = [
         description: "A scrolling spotlight gallery with GSAP animations.",
         url: "/components/gsap-section/spotlight-gallery",
         installation: "npm install gsap lenis",
+        keywords: ["GSAP", "Gallery", "Spotlight", "Scroll Animation", "React"],
       },
       { 
         name: "Sticky Scroll", 
@@ -53,6 +54,7 @@ export const componentRegistry: ComponentCategory[] = [
         description: "A sticky scroll section with transforming cards.",
         url: "/components/gsap-section/sticky-scroll",
         installation: "npm install gsap lenis",
+        keywords: ["GSAP", "Sticky", "Scroll", "Parallax", "React"],
       },
       { 
         name: "Hover Image", 
@@ -61,6 +63,7 @@ export const componentRegistry: ComponentCategory[] = [
         description: "A project gallery with cursor-following image thumbnails.",
         url: "/components/gsap-section/hover-image",
         installation: "npm install gsap",
+        keywords: ["GSAP", "Hover", "Image", "Cursor", "React"],
       },
     ],
   },
@@ -74,6 +77,7 @@ export const componentRegistry: ComponentCategory[] = [
         description: "A clean hero section with a title, description, and call-to-action buttons.",
         url: "/components/hero/simple-hero",
         installation: "npm install lucide-react react-icons",
+        keywords: ["Hero", "Simple", "Clean", "React", "Tailwind CSS"],
       },
       { 
         name: "Aurora Bars", 
@@ -82,6 +86,7 @@ export const componentRegistry: ComponentCategory[] = [
         description: "A visual hero background with animated aurora-like bars.",
         url: "/components/hero/aurora-bars",
         installation: "npm install motion react-icons lucide-react next-themes clsx tailwind-merge",
+        keywords: ["Hero", "Aurora", "Background", "Animation", "Framer Motion"],
       },
       { 
         name: "Raycast Hero", 
@@ -90,6 +95,7 @@ export const componentRegistry: ComponentCategory[] = [
         description: "A Raycast-inspired hero section with a glowing arc and dashboard preview.",
         url: "/components/hero/raycast-hero",
         installation: "npm install motion lucide-react clsx tailwind-merge",
+        keywords: ["Hero", "Raycast", "Glow", "Dark Mode", "Framer Motion"],
       },
       { 
         name: "Illustrated Hero", 
@@ -98,6 +104,7 @@ export const componentRegistry: ComponentCategory[] = [
         description: "A modern hero section with specific illustration.",
         url: "/components/hero/illustrated-hero",
         installation: "npm install motion lucide-react",
+        keywords: ["Hero", "Illustration", "Modern", "React", "Framer Motion"],
       },
     ],
   },
@@ -111,6 +118,7 @@ export const componentRegistry: ComponentCategory[] = [
         description: "A card with a glowing border effect that follows the mouse cursor.",
         url: "/components/cards/border-frame",
         installation: "npm install clsx tailwind-merge",
+        keywords: ["Card", "Border", "Glow", "Hover Effect", "Tailwind CSS"],
       },
       { 
         name: "Mango Cards", 
@@ -119,6 +127,7 @@ export const componentRegistry: ComponentCategory[] = [
         description: "Two mango product cards: a compact preview and an expanded immersive version.",
         url: "/components/cards/mango-cards",
         installation: "npm install motion",
+        keywords: ["Card", "Product", "Animation", "Transition", "Framer Motion"],
         
       },
       { 
@@ -129,6 +138,7 @@ export const componentRegistry: ComponentCategory[] = [
         url: "/components/cards/media-player",
         installation: "npm install lucide-react react-icons",
         previewBackground: "bg-foreground", 
+        keywords: ["Card", "Media Player", "Audio", "UI", "React"], 
       },
     ],
   },
@@ -149,7 +159,7 @@ export const componentMap: Record<string, React.ComponentType<any>> = {
   "hover-image": HoverImage,
 };
 
-export const codeMap: Record<string, string> = {
+export const codeMap: Record<string, import("@/types").RegistryCodeEntry> = {
   "border-frame": borderFrameCode,
   "simple-hero": simpleHeroCode,
   "aurora-bars": auroraBarsCode,

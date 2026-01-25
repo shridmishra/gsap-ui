@@ -31,6 +31,11 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
   const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
 
   const [packageManager, setPackageManager] = useState<"npm" | "pnpm" | "yarn" | "bun">("npm");
+
+  // Hoisted state
+  const [framework, setFramework] = useState<"react" | "html">("react");
+  const [language, setLanguage] = useState<"typescript" | "javascript">("typescript");
+
   const scrollViewportRef = useRef<HTMLDivElement>(null);
 
   const activeItem = useMemo(() => {
@@ -41,31 +46,23 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
 
   useEffect(() => {
     componentActions.setMounted(true);
-
-    // Set the active component from URL or prop
     if (componentId) {
       componentActions.setActiveComponentFromUrl(componentId);
     } else {
-      // Read component from URL on initial load
       const path = window.location.pathname;
-      // Match /components/[category]/[slug]
       const match = path.match(/^\/components\/[^/]+\/([^/]+)$/);
       if (match && match[1]) {
         componentActions.setActiveComponentFromUrl(match[1]);
       }
     }
 
-    const handleResize = () => {
-      // Keep sidebar closed on resize
-    };
-
+    const handleResize = () => { };
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         componentActions.openSearch();
       }
     };
-
     const handlePopState = () => {
       const path = window.location.pathname;
       const match = path.match(/^\/components\/[^/]+\/([^/]+)$/);
@@ -84,6 +81,12 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
       window.removeEventListener("popstate", handlePopState);
     };
   }, [componentId]);
+
+  // Reset framework when component changes
+  useEffect(() => {
+    setFramework("react");
+    setLanguage("typescript");
+  }, [activeComponentId]);
 
   if (!mounted) {
     return <LoadingSkeleton />;
@@ -214,6 +217,8 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
                         activeComponentId={activeComponentId}
                         usageCode={usageCode}
                         scrollViewportRef={scrollViewportRef}
+                        framework={framework}
+                        language={language}
                       />
                     </TabsContent>
                   </Tabs>
@@ -222,9 +227,29 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
 
                 {/* Code Section */}
                 <section className="space-y-4">
-                  <h2 className="text-xl font-semibold tracking-tight">Code</h2>
+                  <div className="flex items-center justify-between pb-2">
+                    <div className="space-y-1">
+                      <h2 className="text-2xl font-semibold tracking-tight">Code</h2>
+                    </div>
+                    <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-muted/40 rounded-lg border border-border/40 text-xs font-mono text-muted-foreground">
+                      <Code className="w-3.5 h-3.5" />
+                      <span>
+                        src/components/ui/
+                        <span className="text-foreground font-medium">
+                          {activeComponentId}.{framework === "html" ? "html" : (language === "typescript" ? "tsx" : "jsx")}
+                        </span>
+                      </span>
+                    </div>
+                  </div>
                   <div className="rounded-xl border border-code-border bg-code-bg shadow-sm overflow-hidden h-[600px] relative">
-                    <CodePanelContent hideInstall={true} showCloseButton={false} />
+                    <CodePanelContent
+                      hideInstall={true}
+                      showCloseButton={false}
+                      framework={framework}
+                      setFramework={setFramework}
+                      language={language}
+                      setLanguage={setLanguage}
+                    />
                   </div>
                 </section>
 
@@ -242,12 +267,16 @@ function ManualInstallation({
   activeItem,
   activeComponentId,
   usageCode,
-  scrollViewportRef
+  scrollViewportRef,
+  framework = "react",
+  language = "typescript"
 }: {
   activeItem: any,
   activeComponentId: string | null,
   usageCode: string,
-  scrollViewportRef: React.RefObject<HTMLDivElement | null>
+  scrollViewportRef: React.RefObject<HTMLDivElement | null>,
+  framework?: "react" | "html",
+  language?: "typescript" | "javascript"
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -257,6 +286,37 @@ function ManualInstallation({
   });
 
   const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  if (framework === "html") {
+    return (
+      <motion.div
+        ref={containerRef}
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+        className="space-y-10 relative"
+      >
+        <div className="absolute left-[15px] top-4 bottom-4 w-[2px] z-0">
+          <svg className="w-full h-full overflow-visible" preserveAspectRatio="none">
+            <line x1="1" y1="0" x2="1" y2="100%" className="stroke-border/40" strokeWidth="2" />
+            <motion.line x1="1" y1="0" x2="1" y2="100%" style={{ pathLength }} className="stroke-primary/40" strokeWidth="2" />
+          </svg>
+        </div>
+
+        <motion.div variants={staggerItem} className="relative pl-12">
+          <div className="absolute left-0 top-1 w-8 h-8 rounded-full bg-background border-2 border-primary flex items-center justify-center z-10">
+            <span className="text-sm font-bold">1</span>
+          </div>
+          <div className="space-y-3">
+            <h3 className="text-base font-semibold text-foreground">Create HTML file</h3>
+            <p className="text-sm text-muted-foreground">Create an <code className="bg-muted px-1 py-0.5 rounded">index.html</code> file and copy the code from the Code tab.</p>
+          </div>
+        </motion.div>
+
+        {/* We could add more steps like "Open in browser" but for now this is enough for simple HTML */}
+      </motion.div>
+    )
+  }
 
   return (
     <motion.div
@@ -320,7 +380,7 @@ function ManualInstallation({
           <div className="rounded-lg border border-border/60 bg-muted/5 p-4 text-sm">
             <div className="flex items-center gap-2">
               <code className="flex-1 px-2 py-1 rounded bg-code-bg text-code-fg font-mono text-sm">
-                components/ui/{activeComponentId}.tsx
+                components/ui/{activeComponentId}.{language === "typescript" ? "tsx" : "jsx"}
               </code>
             </div>
           </div>
@@ -338,8 +398,8 @@ function ManualInstallation({
           </div>
           <div className="relative rounded-lg border border-code-border bg-code-bg/50 overflow-hidden text-sm">
             <CodeBlock
-              code={usageCode}
-              language="tsx"
+              code={usageCode} // We might want to transform this usage code too if JS is selected
+              language={language === "typescript" ? "tsx" : "jsx"}
               fontSize="0.9375rem"
             />
             <div className="absolute top-2 right-2 z-10">

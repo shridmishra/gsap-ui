@@ -30,11 +30,11 @@ export const SponsorButton = () => {
                 <Button
                     variant="ghost"
                     size="icon"
-                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-md bg-red-100/50 dark:bg-red-900/50 backdrop-blur-sm sm:rounded-lg hover:bg-foreground/10 text-red-500 hover:text-red-600 dark:hover:text-red-400"
+                    className="w-7 h-7 sm:size-9 rounded-md bg-rose-500/10 backdrop-blur-sm sm:rounded-lg hover:bg-foreground/10 text-red-500 hover:text-red-600 dark:hover:text-red-400"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 >
-                    <Heart className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+                    <Heart className="size-5" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent

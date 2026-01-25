@@ -7,7 +7,22 @@ export interface ComponentItem {
   url: string;
   installation?: string;
   previewBackground?: string;
+  keywords?: string[];
 }
+
+export interface CodeFile {
+  fileName: string;
+  code: string;
+  language: string;
+}
+
+export type RegistryCodeEntry = 
+  | string 
+  | {
+      code: string; // The default/main code (React TS)
+      html?: string; // HTML variant (single string with embedded CSS/JS)
+    };
+
 
 export interface ComponentCategory {
   category: string;
