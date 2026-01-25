@@ -39,8 +39,23 @@ export const docsConfig = {
           items: [],
         },
         {
-          title: "GSAP Sections",
-          href: "/components/gsap-section",
+          title: "Hover Animations",
+          href: "/components/hover-animations",
+          items: [],
+        },
+        {
+          title: "Scroll Animations",
+          href: "/components/scroll-animations",
+          items: [],
+        },
+        {
+          title: "Text Animations",
+          href: "/components/text-animations",
+          items: [],
+        },
+        {
+          title: "Loading Animations",
+          href: "/components/loading-animations",
           items: [],
         },
       ],

@@ -36,11 +36,19 @@ export const PreviewArea = memo(function PreviewArea() {
   const isFullWidth = useMemo(() => {
     if (!activeItem) return false;
     const { category, item } = activeItem;
+
+    // Components that should always be centered/not full width
+    // border-frame: A small card component that looks best centered
+    if (item.id === "border-frame") {
+      return false;
+    }
+
     return (
       category === "Hero Section" ||
       category === "Landing Page" ||
       category === "Sections" ||
       category === "GSAP Section" ||
+      category.includes("Animations") ||
       item.id === "mango-cards"
     );
   }, [activeItem]);

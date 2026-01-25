@@ -36,14 +36,37 @@ export type { ComponentItem, ComponentCategory } from "@/types";
 
 export const componentRegistry: ComponentCategory[] = [
   {
-    category: "GSAP Section",
+    category: "Hover Animations",
+    items: [
+      { 
+        name: "Hover Image", 
+        id: "hover-image", 
+        isFree: true,
+        description: "A project gallery with cursor-following image thumbnails.",
+        url: "/components/hover-animations/hover-image",
+        installation: "npm install gsap",
+        keywords: ["GSAP", "Hover", "Image", "Cursor", "React"],
+      },
+      { 
+        name: "Border Frame", 
+        id: "border-frame", 
+        isFree: true,
+        description: "A card with a glowing border effect that follows the mouse cursor.",
+        url: "/components/hover-animations/border-frame",
+        installation: "npm install clsx tailwind-merge",
+        keywords: ["Card", "Border", "Glow", "Hover Effect", "Tailwind CSS"],
+      },
+    ],
+  },
+  {
+    category: "Scroll Animations",
     items: [
       { 
         name: "Spotlight Gallery", 
         id: "spotlight-gallery", 
         isFree: true,
         description: "A scrolling spotlight gallery with GSAP animations.",
-        url: "/components/gsap-section/spotlight-gallery",
+        url: "/components/scroll-animations/spotlight-gallery",
         installation: "npm install gsap lenis",
         keywords: ["GSAP", "Gallery", "Spotlight", "Scroll Animation", "React"],
       },
@@ -52,20 +75,19 @@ export const componentRegistry: ComponentCategory[] = [
         id: "sticky-scroll", 
         isFree: true,
         description: "A sticky scroll section with transforming cards.",
-        url: "/components/gsap-section/sticky-scroll",
+        url: "/components/scroll-animations/sticky-scroll",
         installation: "npm install gsap lenis",
         keywords: ["GSAP", "Sticky", "Scroll", "Parallax", "React"],
       },
-      { 
-        name: "Hover Image", 
-        id: "hover-image", 
-        isFree: true,
-        description: "A project gallery with cursor-following image thumbnails.",
-        url: "/components/gsap-section/hover-image",
-        installation: "npm install gsap",
-        keywords: ["GSAP", "Hover", "Image", "Cursor", "React"],
-      },
     ],
+  },
+  {
+    category: "Text Animations",
+    items: [],
+  },
+  {
+    category: "Loading Animations",
+    items: [],
   },
   {
     category: "Hero Section",
@@ -111,15 +133,6 @@ export const componentRegistry: ComponentCategory[] = [
   {
     category: "Cards",
     items: [
-      { 
-        name: "Border Frame", 
-        id: "border-frame", 
-        isFree: true,
-        description: "A card with a glowing border effect that follows the mouse cursor.",
-        url: "/components/cards/border-frame",
-        installation: "npm install clsx tailwind-merge",
-        keywords: ["Card", "Border", "Glow", "Hover Effect", "Tailwind CSS"],
-      },
       { 
         name: "Mango Cards", 
         id: "mango-cards", 

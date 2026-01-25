@@ -33,7 +33,7 @@
     "registryDependencies": [],
     "files": [
       {
-        "path": "registry/blocks/cards/border-frame.tsx",
+        "path": "registry/blocks/hover-animations/border-frame.tsx",
         "type": "components:ui"
       }
     ],
@@ -87,7 +87,7 @@
     "registryDependencies": [],
     "files": [
       {
-        "path": "registry/blocks/gsap-section/spotlight-gallery/spotlight-gallery.tsx",
+        "path": "registry/blocks/scroll-animations/spotlight-gallery/spotlight-gallery.tsx",
         "type": "components:ui"
       }
     ],
@@ -101,7 +101,7 @@
     "registryDependencies": [],
     "files": [
       {
-        "path": "registry/blocks/gsap-section/sticky-scroll/sticky-scroll.tsx",
+        "path": "registry/blocks/scroll-animations/sticky-scroll/sticky-scroll.tsx",
         "type": "components:ui"
       }
     ],
@@ -129,7 +129,7 @@
     "registryDependencies": [],
     "files": [
       {
-        "path": "registry/blocks/gsap-section/hover-image/hover-image.tsx",
+        "path": "registry/blocks/hover-animations/hover-image/hover-image.tsx",
         "type": "components:ui"
       }
     ],

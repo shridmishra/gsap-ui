@@ -27,14 +27,14 @@ interface ComponentConfig {
 const COMPONENTS: ComponentConfig[] = [
   { id: "aurora-bars", file: "src/registry/blocks/hero/aurora-bars.tsx", type: "components:ui" },
   { id: "simple-hero", file: "src/registry/blocks/hero/simple-hero.tsx", type: "components:ui" },
-  { id: "border-frame", file: "src/registry/blocks/cards/border-frame.tsx", type: "components:ui" },
+  { id: "border-frame", file: "src/registry/blocks/hover-animations/border-frame.tsx", type: "components:ui" },
   { id: "mango-cards", file: "src/registry/blocks/cards/mango-cards/mango-cards.tsx", type: "components:ui" },
   { id: "media-player", file: "src/registry/blocks/cards/media-player.tsx", type: "components:ui" },
   { id: "raycast-hero", file: "src/registry/blocks/hero/raycast-hero/raycast-hero.tsx", type: "components:ui" },
-  { id: "spotlight-gallery", file: "src/registry/blocks/gsap-section/spotlight-gallery/spotlight-gallery.tsx", type: "components:ui" },
-  { id: "sticky-scroll", file: "src/registry/blocks/gsap-section/sticky-scroll/sticky-scroll.tsx", type: "components:ui" },
+  { id: "spotlight-gallery", file: "src/registry/blocks/scroll-animations/spotlight-gallery/spotlight-gallery.tsx", type: "components:ui" },
+  { id: "sticky-scroll", file: "src/registry/blocks/scroll-animations/sticky-scroll/sticky-scroll.tsx", type: "components:ui" },
   { id: "illustrated-hero", file: "src/registry/blocks/hero/illustated-hero/illustrated.tsx", type: "components:ui" },
-  { id: "hover-image", file: "src/registry/blocks/gsap-section/hover-image/hover-image.tsx", type: "components:ui" },
+  { id: "hover-image", file: "src/registry/blocks/hover-animations/hover-image/hover-image.tsx", type: "components:ui" },
 ];
 
 const detectDependencies = (content: string): string[] => {

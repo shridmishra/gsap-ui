@@ -97,8 +97,6 @@ export const InfoIsland = memo(function InfoIsland() {
 
           <Divider />
 
-
-
           <Tooltip>
             <TooltipTrigger asChild>
               <button onClick={toggleTheme} className={buttonStyles}>
@@ -118,14 +116,12 @@ export const InfoIsland = memo(function InfoIsland() {
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <a
-                href={`/preview/${activeComponent}`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => window.open(`/preview/${activeComponent}`, "_blank")}
                 className={buttonStyles}
               >
                 <Maximize className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
-              </a>
+              </button>
             </TooltipTrigger>
             <TooltipContent>
               <p>Full Preview</p>

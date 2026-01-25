@@ -9,6 +9,7 @@ import { useActiveComponent, useSidebarOpen, componentActions } from "@/store";
 import { useMediaPreloader, useMediaQuery } from "@/hooks";
 import type { ComponentItem } from "@/types";
 import { InfoIsland } from "./info-island";
+import { Heart } from "lucide-react";
 
 // Memoized category section
 const CategorySection = memo(function CategorySection({
@@ -72,7 +73,7 @@ const SidebarItem = memo(function SidebarItem({
           {isActive && (
             <motion.div
               layoutId="activeIndicator"
-              className="absolute -left-[2.5px] top-1/2 -translate-y-1/2 w-1 h-4 bg-pink-500 rounded-full"
+              className="absolute -left-[2px] top-1/2 -translate-y-1/2 w-0.75 h-4 bg-rose-500 rounded-full"
             />
           )}
           {item.name}
@@ -146,14 +147,17 @@ export const Sidebar = memo(function Sidebar() {
                 }
             }
             className={cn(
-              "fixed inset-y-0 left-0 z-40 bg-background border-r border-border",
-              "lg:static lg:block lg:h-screen lg:border-r lg:border-border lg:bg-background lg:shadow-none",
+              "fixed inset-y-0 left-0 z-40 bg-background border-r border-border flex flex-col",
+              "lg:static lg:block lg:flex lg:h-screen lg:border-r lg:border-border lg:bg-background lg:shadow-none",
               "overflow-hidden"
             )}
           >
-            <div className="w-64 h-full overflow-y-auto py-6 px-4 pt-20 lg:pt-6">
+            <div className="flex-1 w-64 overflow-y-auto py-6 px-4 pt-20 lg:pt-6">
               <div className="flex items-center justify-between mb-6 px-2 py-2">
-                <a href="https://gsap-ui.shrid.in" className="flex items-center gap-2.5 ">
+                <button
+                  onClick={() => window.location.href = "https://gsap-ui.shrid.in"}
+                  className="flex items-center gap-2.5 cursor-pointer"
+                >
                   <div
                     className="size-6 bg-rose-500"
                     style={{
@@ -168,7 +172,7 @@ export const Sidebar = memo(function Sidebar() {
                     }}
                   />
                   <div className="font-medium text-3xl -mt-2 ">gsap-ui</div>
-                </a>
+                </button>
               </div>
 
               <nav className="space-y-6">
@@ -183,6 +187,18 @@ export const Sidebar = memo(function Sidebar() {
                   />
                 ))}
               </nav>
+            </div>
+
+            <div className="p-4 border-t border-zinc-800/50">
+              <button
+                onClick={() => window.open("https://shrid.in", "_blank")}
+                className="group flex w-full items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-medium text-foreground/40 hover:text-rose-500  transition-all duration-300 cursor-pointer"
+              >
+                <span>Created With</span>
+                <Heart className="size-3.5 fill-rose-500/10 text-rose-500 group-hover:fill-rose-500 transition-colors duration-300" />
+                <span>By</span>
+                <span className="font-semibold text-foreground/80 tracking-tight">Shrid Studios</span>
+              </button>
             </div>
           </motion.aside>
         </>
