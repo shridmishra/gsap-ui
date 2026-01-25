@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { Eye, Code } from "lucide-react";
+
+
+import { useEffect, useMemo, useState } from "react";
 import {
   Sidebar,
   PreviewArea,
-  ToggleButton,
   InfoIsland,
-  CodePanel,
+  CodePanelContent,
   CommandPalette,
   LoadingSkeleton
 } from "@/components/layout";
@@ -23,13 +25,13 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
   const mounted = useMounted();
   const isOpen = useSidebarOpen();
   const activeComponentId = useActiveComponent();
+  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
 
   const activeComponent = useMemo(() => {
     return componentRegistry
       .flatMap((c) => c.items)
       .find((i) => i.id === activeComponentId);
   }, [activeComponentId]);
-
 
 
   useEffect(() => {
@@ -89,10 +91,32 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
           <div className="px-4 pt-4 md:px-6 md:pt-6">
             <header className="flex items-center justify-between mb-4 min-h-[40px]">
               <div className="flex items-center gap-4">
-                {!isOpen && <ToggleButton />}
-                <h1 className="text-xl font-semibold tracking-tight">
-                  {activeComponent?.name || "UI Components Library"}
-                </h1>
+                <div className="flex p-1 bg-muted/50 border border-border/50 rounded-lg">
+                  <button
+                    onClick={() => setActiveTab("preview")}
+                    className={cn(
+                      "flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200",
+                      activeTab === "preview"
+                        ? "bg-background text-foreground shadow-sm ring-1 ring-black/5 dark:ring-white/5"
+                        : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+                    )}
+                  >
+                    <Eye className="w-4 h-4" />
+                    Preview
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("code")}
+                    className={cn(
+                      "flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-md transition-all duration-200",
+                      activeTab === "code"
+                        ? "bg-background text-foreground shadow-sm ring-1 ring-black/5 dark:ring-white/5"
+                        : "text-muted-foreground hover:text-foreground hover:bg-background/50"
+                    )}
+                  >
+                    <Code className="w-4 h-4" />
+                    Code
+                  </button>
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <SponsorButton />
@@ -108,12 +132,17 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
               "w-full h-full overflow-hidden relative",
               "rounded-xl border border-border bg-background shadow-sm"
             )}>
-              <PreviewArea />
+              {activeTab === "preview" ? (
+                <PreviewArea />
+              ) : (
+                <div className="w-full h-full overflow-hidden">
+                  <CodePanelContent showCloseButton={false} />
+                </div>
+              )}
             </div>
           </div>
         </div>
       </main>
-      <CodePanel />
       <CommandPalette />
     </div>
   );

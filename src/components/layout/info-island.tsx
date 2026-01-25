@@ -97,18 +97,7 @@ export const InfoIsland = memo(function InfoIsland() {
 
           <Divider />
 
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button onClick={componentActions.openCodePanel} className={buttonStyles}>
-                <Code2 className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>View source code</p>
-            </TooltipContent>
-          </Tooltip>
 
-          <Divider />
 
           <Tooltip>
             <TooltipTrigger asChild>

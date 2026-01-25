@@ -6,7 +6,6 @@ import {
   AuroraBars, auroraBarsCode,
   MangoCards, mangoCardsCode,
   MediaPlayerDemo, mediaPlayerCode,
-  RaycastBackground,
 
   RaycastHero, raycastHeroCode,
   IllustratedHero, illustratedHeroCode,
@@ -24,7 +23,6 @@ export {
   
   MangoCards, mangoCardsCode,
   MediaPlayerDemo, mediaPlayerCode,
-  RaycastBackground,
 
   RaycastHero, raycastHeroCode,
   IllustratedHero, illustratedHeroCode,
@@ -134,19 +132,6 @@ export const componentRegistry: ComponentCategory[] = [
       },
     ],
   },
-  {
-    category: "Backgrounds",
-    items: [
-      { 
-        name: "Raycast Background", 
-        id: "raycast-background", 
-        isFree: true,
-        description: "A glowing beam background effect inspired by Raycast.",
-        url: "/backgrounds/raycast-background",
-        installation: "npm install clsx tailwind-merge",
-      },
-    ],
-  },
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -156,7 +141,6 @@ export const componentMap: Record<string, React.ComponentType<any>> = {
   "aurora-bars": AuroraBars,
   "mango-cards": MangoCards,
   "media-player": MediaPlayerDemo,
-  "raycast-background": RaycastBackground,
 
   "raycast-hero": RaycastHero,
   "illustrated-hero": IllustratedHero,

@@ -6,9 +6,8 @@ import { cn } from "@/lib/utils";
 import { sidebarVariants, springTransition } from "@/lib/animations";
 import { componentRegistry } from "@/registry";
 import { useActiveComponent, useSidebarOpen, componentActions } from "@/store";
-import { useMediaPreloader } from "@/hooks";
+import { useMediaPreloader, useMediaQuery } from "@/hooks";
 import type { ComponentItem } from "@/types";
-import { ToggleButton } from "./toggle-button";
 import { InfoIsland } from "./info-island";
 
 // Memoized category section
@@ -86,6 +85,7 @@ const SidebarItem = memo(function SidebarItem({
 export const Sidebar = memo(function Sidebar() {
   const activeComponent = useActiveComponent();
   const isOpen = useSidebarOpen();
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const { prefetchOnHover } = useMediaPreloader();
 
   const handleItemClick = useCallback(
@@ -105,20 +105,22 @@ export const Sidebar = memo(function Sidebar() {
 
   return (
     <AnimatePresence mode="wait">
-      {isOpen && (
+      {(isOpen || isDesktop) && (
         <>
           {/* Backdrop overlay - closes sidebar on click */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-30 bg-black/20 lg:hidden"
-            onClick={() => componentActions.setSidebarOpen(false)}
-            aria-hidden="true"
-          />
+          {!isDesktop && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-30 bg-black/20 lg:hidden"
+              onClick={() => componentActions.setSidebarOpen(false)}
+              aria-hidden="true"
+            />
+          )}
           <motion.aside
-            initial={{ width: 0, x: -20, opacity: 0 }}
+            initial={isDesktop ? false : { width: 0, x: -20, opacity: 0 }}
             animate={{
               width: 256,
               x: 0,
@@ -129,16 +131,20 @@ export const Sidebar = memo(function Sidebar() {
                 opacity: { duration: 0.2 }
               }
             }}
-            exit={{
-              width: 0,
-              x: -20,
-              opacity: 0,
-              transition: {
-                width: { duration: 0.2, ease: "easeInOut" },
-                x: { duration: 0.2, ease: "easeInOut" },
-                opacity: { duration: 0.1 }
-              }
-            }}
+            exit={
+              isDesktop
+                ? undefined
+                : {
+                  width: 0,
+                  x: -20,
+                  opacity: 0,
+                  transition: {
+                    width: { duration: 0.2, ease: "easeInOut" },
+                    x: { duration: 0.2, ease: "easeInOut" },
+                    opacity: { duration: 0.1 }
+                  }
+                }
+            }
             className={cn(
               "fixed inset-y-0 left-0 z-40 bg-background border-r border-border",
               "lg:static lg:block lg:h-screen lg:border-r lg:border-border lg:bg-background lg:shadow-none",
@@ -148,9 +154,6 @@ export const Sidebar = memo(function Sidebar() {
             <div className="w-64 h-full overflow-y-auto py-6 px-4 pt-20 lg:pt-6">
               <div className="flex items-center justify-between mb-6 px-2">
                 <a href="https://gsap-ui.shrid.in" className="font-extralight text-2xl font-instrument-serif">GSAP UI </a>
-                <div className="flex items-center gap-2">
-                  <ToggleButton />
-                </div>
               </div>
 
               <nav className="space-y-6">
