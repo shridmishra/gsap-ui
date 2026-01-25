@@ -1,0 +1,138 @@
+[
+  {
+    "name": "aurora-bars",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/hero/aurora-bars.tsx",
+        "type": "components:ui"
+      }
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "simple-hero",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/hero/simple-hero.tsx",
+        "type": "components:ui"
+      }
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "border-frame",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/cards/border-frame.tsx",
+        "type": "components:ui"
+      }
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "mango-cards",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/cards/mango-cards/mango-cards.tsx",
+        "type": "components:ui"
+      }
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "media-player",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/cards/media-player.tsx",
+        "type": "components:ui"
+      }
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "raycast-hero",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/hero/raycast-hero/raycast-hero.tsx",
+        "type": "components:ui"
+      }
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "spotlight-gallery",
+    "dependencies": [
+      "gsap"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/gsap-section/spotlight-gallery/spotlight-gallery.tsx",
+        "type": "components:ui"
+      }
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "sticky-scroll",
+    "dependencies": [
+      "gsap"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/gsap-section/sticky-scroll/sticky-scroll.tsx",
+        "type": "components:ui"
+      }
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "illustrated-hero",
+    "dependencies": [
+      "lucide-react"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/hero/illustated-hero/illustrated.tsx",
+        "type": "components:ui"
+      }
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "hover-image",
+    "dependencies": [
+      "gsap"
+    ],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/gsap-section/hover-image/hover-image.tsx",
+        "type": "components:ui"
+      }
+    ],
+    "type": "components:ui"
+  }
+]

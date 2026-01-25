@@ -17,5 +17,4 @@ export * from "./media";
 // Layout Components
 export * from "./layout";
 
-// Showcase Components
-export * from "./showcase";
+

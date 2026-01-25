@@ -13,16 +13,16 @@ const HASH_FILE = path.join(ROOT_DIR, ".code-strings-hash");
 
 // Component source files to extract
 const COMPONENTS: ComponentConfig[] = [
-  { id: "aurora-bars", file: "src/components/showcase/hero/aurora-bars.tsx" },
-  { id: "simple-hero", file: "src/components/showcase/hero/simple-hero.tsx" },
-  { id: "border-frame", file: "src/components/showcase/cards/border-frame.tsx" },
-  { id: "mango-cards", file: "src/components/showcase/cards/mango-cards/mango-cards.tsx" },
-  { id: "media-player", file: "src/components/showcase/cards/media-player.tsx" },
-  { id: "raycast-hero", file: "src/components/showcase/hero/raycast-hero/raycast-hero.tsx" },
-  { id: "spotlight-gallery", file: "src/components/showcase/gsap-section/spotlight-gallery/spotlight-gallery.tsx" },
-  { id: "sticky-scroll", file: "src/components/showcase/gsap-section/sticky-scroll/sticky-scroll.tsx" },
-  { id: "illustrated-hero", file: "src/components/showcase/hero/illustated-hero/illustrated.tsx" },
-  { id: "hover-image", file: "src/components/showcase/gsap-section/hover-image/hover-image.tsx" },
+  { id: "aurora-bars", file: "src/registry/blocks/hero/aurora-bars.tsx" },
+  { id: "simple-hero", file: "src/registry/blocks/hero/simple-hero.tsx" },
+  { id: "border-frame", file: "src/registry/blocks/cards/border-frame.tsx" },
+  { id: "mango-cards", file: "src/registry/blocks/cards/mango-cards/mango-cards.tsx" },
+  { id: "media-player", file: "src/registry/blocks/cards/media-player.tsx" },
+  { id: "raycast-hero", file: "src/registry/blocks/hero/raycast-hero/raycast-hero.tsx" },
+  { id: "spotlight-gallery", file: "src/registry/blocks/gsap-section/spotlight-gallery/spotlight-gallery.tsx" },
+  { id: "sticky-scroll", file: "src/registry/blocks/gsap-section/sticky-scroll/sticky-scroll.tsx" },
+  { id: "illustrated-hero", file: "src/registry/blocks/hero/illustated-hero/illustrated.tsx" },
+  { id: "hover-image", file: "src/registry/blocks/gsap-section/hover-image/hover-image.tsx" },
 ];
 
 const toVariableName = (id: string): string =>

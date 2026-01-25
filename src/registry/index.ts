@@ -12,7 +12,7 @@ import {
   SpotlightGallery, spotlightGalleryCode,
   StickyScroll, stickyScrollCode,
   HoverImage, hoverImageCode,
-} from "@/components/showcase";
+} from "@/registry/blocks";
 
 // Re-export showcase components for convenience
 export { 
@@ -29,7 +29,7 @@ export {
   SpotlightGallery, spotlightGalleryCode,
   StickyScroll, stickyScrollCode,
   HoverImage, hoverImageCode,
-} from "@/components/showcase";
+} from "@/registry/blocks";
 
 // Re-export types from centralized location
 export type { ComponentItem, ComponentCategory } from "@/types";
@@ -43,7 +43,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "spotlight-gallery", 
         isFree: true,
         description: "A scrolling spotlight gallery with GSAP animations.",
-        url: "/sections/spotlight-gallery",
+        url: "/components/gsap-section/spotlight-gallery",
         installation: "npm install gsap lenis",
       },
       { 
@@ -51,7 +51,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "sticky-scroll", 
         isFree: true,
         description: "A sticky scroll section with transforming cards.",
-        url: "/sections/sticky-scroll",
+        url: "/components/gsap-section/sticky-scroll",
         installation: "npm install gsap lenis",
       },
       { 
@@ -59,7 +59,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "hover-image", 
         isFree: true,
         description: "A project gallery with cursor-following image thumbnails.",
-        url: "/sections/hover-image",
+        url: "/components/gsap-section/hover-image",
         installation: "npm install gsap",
       },
     ],
@@ -72,7 +72,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "simple-hero", 
         isFree: true,
         description: "A clean hero section with a title, description, and call-to-action buttons.",
-        url: "/hero/simple-hero",
+        url: "/components/hero/simple-hero",
         installation: "npm install lucide-react react-icons",
       },
       { 
@@ -80,7 +80,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "aurora-bars", 
         isFree: true,
         description: "A visual hero background with animated aurora-like bars.",
-        url: "/hero/aurora-bars",
+        url: "/components/hero/aurora-bars",
         installation: "npm install motion react-icons lucide-react next-themes clsx tailwind-merge",
       },
       { 
@@ -88,7 +88,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "raycast-hero", 
         isFree: true,
         description: "A Raycast-inspired hero section with a glowing arc and dashboard preview.",
-        url: "/hero/raycast-hero",
+        url: "/components/hero/raycast-hero",
         installation: "npm install motion lucide-react clsx tailwind-merge",
       },
       { 
@@ -96,7 +96,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "illustrated-hero", 
         isFree: true,
         description: "A modern hero section with specific illustration.",
-        url: "/hero/illustrated-hero",
+        url: "/components/hero/illustrated-hero",
         installation: "npm install motion lucide-react",
       },
     ],
@@ -109,7 +109,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "border-frame", 
         isFree: true,
         description: "A card with a glowing border effect that follows the mouse cursor.",
-        url: "/cards/border-frame",
+        url: "/components/cards/border-frame",
         installation: "npm install clsx tailwind-merge",
       },
       { 
@@ -117,7 +117,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "mango-cards", 
         isFree: true,
         description: "Two mango product cards: a compact preview and an expanded immersive version.",
-        url: "/cards/mango-cards",
+        url: "/components/cards/mango-cards",
         installation: "npm install motion",
         
       },
@@ -126,7 +126,7 @@ export const componentRegistry: ComponentCategory[] = [
         id: "media-player", 
         isFree: true,
         description: "A minimal, modern media player device with a soft rounded-square shape.",
-        url: "/cards/media-player",
+        url: "/components/cards/media-player",
         installation: "npm install lucide-react react-icons",
         previewBackground: "bg-foreground", 
       },

@@ -119,7 +119,7 @@ export const PreviewArea = memo(function PreviewArea() {
         <div
           className={cn(
             "relative z-10 w-full",
-            !isFullWidth ? "max-w-4xl px-4 py-12" : "h-full"
+            !isFullWidth ? "max-w-4xl px-2 py-4" : "h-full"
           )}
         >
           {loading ? (

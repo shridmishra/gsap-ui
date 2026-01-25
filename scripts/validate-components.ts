@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 const ROOT_DIR = path.resolve(__dirname, "..");
-const SHOWCASE_DIR = path.join(ROOT_DIR, "src/components/showcase");
+const SHOWCASE_DIR = path.join(ROOT_DIR, "src/registry/blocks");
 const STOCK_DIR = path.join(ROOT_DIR, "public/assets/stock");
 
 // Regex patterns for validation

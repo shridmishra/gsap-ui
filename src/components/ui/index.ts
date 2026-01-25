@@ -7,3 +7,5 @@ export { Separator } from "./separator";
 export { Skeleton } from "./skeleton";
 export { Backdrop } from "./backdrop";
 export { SponsorButton } from "./sponsor-button";
+export { CodeBlock } from "./code-block";
+export { CopyButton } from "./copy-button";
