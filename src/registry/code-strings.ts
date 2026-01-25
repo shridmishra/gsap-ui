@@ -196,7 +196,7 @@ export const SimpleHero = () => {
           <div className="w-8 h-8 bg-black text-white rounded-lg flex items-center justify-center">
             <Command className="w-5 h-5" />
           </div>
-          Shrid UI
+          GSAP UI
         </div>
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-black/80">
           <a href="#" className="hover:text-black transition-colors">Components</a>
@@ -224,7 +224,7 @@ export const SimpleHero = () => {
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-8 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60">
             Build faster with <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60">Shrid UI</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60">GSAP UI</span>
           </h1>
 
 
@@ -412,7 +412,7 @@ export function MangoCards() {
     const [index2, setIndex2] = useState(0);
 
     return (
-        <div className="flex flex-col md:flex-row gap-8 items-center justify-center p-8 bg-zinc-100 dark:bg-zinc-900 min-h-[600px] h-full w-full">
+        <div className="flex flex-col md:flex-row gap-8 items-center justify-center p-8 bg-zinc-100 dark:bg-zinc-900 min-h-screen w-full">
             {/* Card 1: Compact Version */}
             <div className="relative w-[320px] h-[480px] bg-white dark:bg-zinc-900 dark:border dark:border-zinc-800 rounded-[32px] shadow-xl overflow-hidden flex flex-col group transition-transform hover:scale-[1.02] duration-300">
                 {/* Image Section */}
@@ -474,7 +474,7 @@ export function MangoCards() {
                 <div className="absolute inset-0">
                     <Carousel setIndex={setIndex2} />
                     {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-linear-to-t from-[#D98808] via-[#D98808]/80 to-transparent pt-40 pointer-events-none z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#D98808] via-[#D98808]/80 to-transparent pt-40 pointer-events-none z-10" />
                 </div>
 
                 <div className="absolute top-4 right-4 bg-black/10 backdrop-blur-md text-white text-xs font-medium px-3 py-1.5 rounded-full z-20">
@@ -963,12 +963,12 @@ export function SpotlightGallery() {
     const titleRefs = useRef<(HTMLHeadingElement | null)[]>([]);
 
     useEffect(() => {
-        const scrollContainer = document.querySelector(".preview-scroll-container") as HTMLElement;
+        const scrollContainer = containerRef.current?.closest(".preview-scroll-container") as HTMLElement;
 
         // Initialize Lenis
         const lenis = new Lenis({
             wrapper: scrollContainer || window,
-            content: scrollContainer ? containerRef.current! : undefined, // We might need to be careful here
+            content: scrollContainer ? containerRef.current! : undefined,
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
@@ -1053,11 +1053,15 @@ export function SpotlightGallery() {
         });
 
         const ctx = gsap.context(() => {
+            const scrollContainer = containerRef.current?.closest(".preview-scroll-container") as HTMLElement;
+
             ScrollTrigger.create({
                 trigger: spotlightRef.current,
+                scroller: scrollContainer || window,
                 start: "top top",
                 end: \`+=\${window.innerHeight * 10}px\`,
                 pin: true,
+                pinType: scrollContainer ? "transform" : "fixed",
                 pinSpacing: true,
                 scrub: 1,
                 onUpdate: (self) => {

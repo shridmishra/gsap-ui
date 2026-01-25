@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { componentRegistry } from "@/registry";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://shrid.in";
+  const baseUrl = "https://gsap-ui.shrid.in";
 
   const componentUrls = componentRegistry.flatMap((category) =>
     category.items.map((item) => ({

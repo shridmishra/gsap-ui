@@ -3,10 +3,10 @@ import "./globals.css";
 import { Providers } from "@/context/provider";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://shrid.in"),
+  metadataBase: new URL("https://gsap-ui.shrid.in"),
   title: {
-    default: "Shrid UI | ui.shrid.in",
-    template: "%s | shrid.in",
+    default: "GSAP UI | gsap-ui.shrid.in",
+    template: "%s | gsap-ui.shrid.in",
   },
   description:
     "Beautiful, animated UI components for your next project. Built with React, Tailwind CSS, and Framer Motion.",
@@ -20,28 +20,28 @@ export const metadata: Metadata = {
     "Animation",
     "Design System",
   ],
-  authors: [{ name: "Shrid", url: "https://shrid.in" }],
+  authors: [{ name: "Shrid", url: "https://gsap-ui.shrid.in" }],
   creator: "Shrid",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://shrid.in",
-    title: "UI Components | shrid.in",
+    url: "https://gsap-ui.shrid.in",
+    title: "UI Components | gsap-ui.shrid.in",
     description:
       "Beautiful, animated UI components for your next project. Built with React, Tailwind CSS, and Framer Motion.",
-    siteName: "shrid.in",
+    siteName: "gsap-ui.shrid.in",
     images: [
       {
         url: "/assets/brand/logo.png",
         width: 1200,
         height: 630,
-        alt: "UI Components | shrid.in",
+        alt: "UI Components | gsap-ui.shrid.in",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "UI Components | shrid.in",
+    title: "UI Components | gsap-ui.shrid.in",
     description:
       "Beautiful, animated UI components for your next project. Built with React, Tailwind CSS, and Framer Motion.",
     images: ["/assets/brand/logo.png"],

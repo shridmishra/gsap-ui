@@ -36,12 +36,12 @@ export function SpotlightGallery() {
     const titleRefs = useRef<(HTMLHeadingElement | null)[]>([]);
 
     useEffect(() => {
-        const scrollContainer = document.querySelector(".preview-scroll-container") as HTMLElement;
+        const scrollContainer = containerRef.current?.closest(".preview-scroll-container") as HTMLElement;
 
         // Initialize Lenis
         const lenis = new Lenis({
             wrapper: scrollContainer || window,
-            content: scrollContainer ? containerRef.current! : undefined, // We might need to be careful here
+            content: scrollContainer ? containerRef.current! : undefined,
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
@@ -126,11 +126,15 @@ export function SpotlightGallery() {
         });
 
         const ctx = gsap.context(() => {
+            const scrollContainer = containerRef.current?.closest(".preview-scroll-container") as HTMLElement;
+
             ScrollTrigger.create({
                 trigger: spotlightRef.current,
+                scroller: scrollContainer || window,
                 start: "top top",
                 end: `+=${window.innerHeight * 10}px`,
                 pin: true,
+                pinType: scrollContainer ? "transform" : "fixed",
                 pinSpacing: true,
                 scrub: 1,
                 onUpdate: (self) => {

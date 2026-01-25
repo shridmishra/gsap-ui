@@ -147,7 +147,7 @@ export const Sidebar = memo(function Sidebar() {
           >
             <div className="w-64 h-full overflow-y-auto py-6 px-4 pt-20 lg:pt-6">
               <div className="flex items-center justify-between mb-6 px-2">
-                <a href="https://shrid.in" className="font-extralight text-2xl font-instrument-serif">Shrid Mishra </a>
+                <a href="https://gsap-ui.shrid.in" className="font-extralight text-2xl font-instrument-serif">GSAP UI </a>
                 <div className="flex items-center gap-2">
                   <ToggleButton />
                 </div>

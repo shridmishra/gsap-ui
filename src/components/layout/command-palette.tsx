@@ -147,7 +147,7 @@ export const CommandPalette = memo(function CommandPalette() {
       name: "Go to Home",
       icon: <Home className="w-4 h-4" />,
       action: () => {
-        window.location.href = "https://shrid.in";
+        window.location.href = "https://gsap-ui.shrid.in";
       },
     },
     {

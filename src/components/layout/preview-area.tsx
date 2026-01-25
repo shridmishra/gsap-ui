@@ -9,6 +9,9 @@ import { useActiveComponent } from "@/store";
 import { previewVariants, previewTransition } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
+const NO_SCALE_CATEGORIES: string[] = [];
+const NO_SCALE_IDS = ["spotlight-gallery"];
+
 export const PreviewArea = memo(function PreviewArea() {
   const activeComponent = useActiveComponent();
   const isDesktop = useIsDesktop();
@@ -42,9 +45,58 @@ export const PreviewArea = memo(function PreviewArea() {
     );
   }, [activeItem]);
 
+  const shouldScale = useMemo(() => {
+    if (!activeItem) return false;
+    const { category, item } = activeItem;
+
+    // Check if the component should NOT be scaled
+    // 1. Check strict no-scale categories
+    if (NO_SCALE_CATEGORIES.includes(category)) return false;
+    // 2. Check specific component IDs
+    if (NO_SCALE_IDS.includes(item.id)) return false;
+
+    return isFullWidth;
+  }, [activeItem, isFullWidth]);
+
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    if (!shouldScale || !containerRef.current) {
+      setScale(1);
+      return;
+    }
+
+    const updateScale = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      // We want to scale the component (which is min-h-screen)
+      // so it fits into the current container height.
+      if (viewportHeight > 0) {
+        const newScale = Math.min(1, rect.height / viewportHeight);
+        setScale(newScale);
+      }
+    };
+
+    updateScale();
+    window.addEventListener("resize", updateScale);
+
+    // Also use ResizeObserver for more accurate container size tracking
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(containerRef.current);
+
+    return () => {
+      window.removeEventListener("resize", updateScale);
+      observer.disconnect();
+    };
+  }, [shouldScale, activeComponent]);
+
   return (
     <div
-      className="h-full w-full overflow-auto scrollbar-hide preview-scroll-container"
+      ref={containerRef}
+      className="h-full w-full overflow-hidden preview-scroll-container"
     >
       <div
         className={cn(
@@ -89,7 +141,23 @@ export const PreviewArea = memo(function PreviewArea() {
                   !isFullWidth ? "flex items-center justify-center" : "h-full"
                 )}
               >
-                {ActiveComponentRender && <ActiveComponentRender />}
+                {shouldScale ? (
+                  <div
+                    style={{
+                      transformOrigin: "top center",
+                      width: `${(1 / scale) * 100}%`,
+                      height: `${(1 / scale) * 100}%`,
+                      position: "absolute",
+                      top: 0,
+                      left: "50%",
+                      transform: `translateX(-50%) scale(${scale})`,
+                    }}
+                  >
+                    {ActiveComponentRender && <ActiveComponentRender />}
+                  </div>
+                ) : (
+                  ActiveComponentRender && <ActiveComponentRender />
+                )}
               </motion.div>
             </AnimatePresence>
           )}

@@ -30,14 +30,7 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
       .find((i) => i.id === activeComponentId);
   }, [activeComponentId]);
 
-  const isFullWidth = useMemo(() => {
-    const category = componentRegistry.find((cat) =>
-      cat.items.some((item) => item.id === activeComponentId)
-    );
-    return (
-      activeComponentId === "mango-cards"
-    );
-  }, [activeComponentId]);
+
 
   useEffect(() => {
     componentActions.setMounted(true);
@@ -109,11 +102,11 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
           </div>
           <div className={cn(
             "flex-1 w-full overflow-hidden relative",
-            !isFullWidth && "px-4 pb-4 md:px-6 md:pb-6"
+            "px-4 pb-4 md:px-6 md:pb-6"
           )}>
             <div className={cn(
               "w-full h-full overflow-hidden relative",
-              !isFullWidth && "rounded-xl border border-border bg-background shadow-sm"
+              "rounded-xl border border-border bg-background shadow-sm"
             )}>
               <PreviewArea />
             </div>

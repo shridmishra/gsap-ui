@@ -24,7 +24,7 @@ export const SimpleHero = () => {
           <div className="w-8 h-8 bg-black text-white rounded-lg flex items-center justify-center">
             <Command className="w-5 h-5" />
           </div>
-          Shrid UI
+          GSAP UI
         </div>
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-black/80">
           <a href="#" className="hover:text-black transition-colors">Components</a>
@@ -52,7 +52,7 @@ export const SimpleHero = () => {
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-8 leading-tight text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60">
             Build faster with <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60">Shrid UI</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-black to-black/60">GSAP UI</span>
           </h1>
 
 

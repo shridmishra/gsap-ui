@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://shrid.in/sitemap.xml",
+    sitemap: "https://gsap-ui.shrid.in/sitemap.xml",
   };
 }
