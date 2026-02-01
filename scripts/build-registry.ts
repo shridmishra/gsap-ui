@@ -27,21 +27,21 @@ interface ComponentConfig {
 // Reuse the component list - manually synced for now
 const COMPONENTS: ComponentConfig[] = [
   // React components
-  { id: "aurora-bars", file: "src/registry/blocks/hero/aurora-bars.tsx", type: "components:ui" },
-  { id: "simple-hero", file: "src/registry/blocks/hero/simple-hero.tsx", type: "components:ui" },
-  { id: "border-frame", file: "src/registry/blocks/hover-animations/border-frame.tsx", type: "components:ui" },
-  { id: "mango-cards", file: "src/registry/blocks/cards/mango-cards/mango-cards.tsx", type: "components:ui" },
-  { id: "media-player", file: "src/registry/blocks/cards/media-player.tsx", type: "components:ui" },
-  { id: "raycast-hero", file: "src/registry/blocks/hero/raycast-hero/raycast-hero.tsx", type: "components:ui" },
-  { id: "spotlight-gallery", file: "src/registry/blocks/scroll-animations/spotlight-gallery/spotlight-gallery.tsx", type: "components:ui" },
-  { id: "sticky-scroll", file: "src/registry/blocks/scroll-animations/sticky-scroll/sticky-scroll.tsx", type: "components:ui" },
-  { id: "illustrated-hero", file: "src/registry/blocks/hero/illustated-hero/illustrated.tsx", type: "components:ui" },
-  { id: "hover-image", file: "src/registry/blocks/hover-animations/hover-image/hover-image.tsx", type: "components:ui" },
+  { id: "aurora-bars", file: "src/registry/blocks/hero/aurora-bars.tsx", type: "registry:ui" },
+  { id: "simple-hero", file: "src/registry/blocks/hero/simple-hero.tsx", type: "registry:ui" },
+  { id: "border-frame", file: "src/registry/blocks/hover-animations/border-frame.tsx", type: "registry:ui" },
+  { id: "mango-cards", file: "src/registry/blocks/cards/mango-cards/mango-cards.tsx", type: "registry:ui" },
+  { id: "media-player", file: "src/registry/blocks/cards/media-player.tsx", type: "registry:ui" },
+  { id: "raycast-hero", file: "src/registry/blocks/hero/raycast-hero/raycast-hero.tsx", type: "registry:ui" },
+  { id: "spotlight-gallery", file: "src/registry/blocks/scroll-animations/spotlight-gallery/spotlight-gallery.tsx", type: "registry:ui" },
+  { id: "sticky-scroll", file: "src/registry/blocks/scroll-animations/sticky-scroll/sticky-scroll.tsx", type: "registry:ui" },
+  { id: "illustrated-hero", file: "src/registry/blocks/hero/illustated-hero/illustrated.tsx", type: "registry:ui" },
+  { id: "hover-image", file: "src/registry/blocks/hover-animations/hover-image/hover-image.tsx", type: "registry:ui" },
 
   // HTML-only components (no asset processing needed, uses CDN)
-  { id: "text-on-scroll", file: "src/registry/blocks/text-animations/text-on-scroll/text-on-scroll.html", type: "components:html", componentType: "html" },
-  { id: "mouse-image-trail", file: "src/registry/blocks/hover-animations/mouse-image-trail/mouse-image-trail.html", type: "components:html", componentType: "html" },
-  { id: "text-loader", file: "src/registry/blocks/loading-animations/text-loader/text-loader.html", type: "components:html", componentType: "html" },
+  { id: "text-on-scroll", file: "src/registry/blocks/text-animations/text-on-scroll/text-on-scroll.html", type: "registry:block", componentType: "html" },
+  { id: "mouse-image-trail", file: "src/registry/blocks/hover-animations/mouse-image-trail/mouse-image-trail.html", type: "registry:block", componentType: "html" },
+  { id: "text-loader", file: "src/registry/blocks/loading-animations/text-loader/text-loader.html", type: "registry:block", componentType: "html" },
 ];
 
 
@@ -129,14 +129,14 @@ const buildRegistry = () => {
 
     const payload = {
       name: id,
-      type: type || "components:ui",
+      type: type || "registry:ui",
       dependencies,
       registryDependencies: [], // can be enhanced if we have internal deps
       files: [
         {
           path: file.replace("src/", ""), // relative path in user's project
           content: content,
-          type: type || "components:ui"
+          type: type || "registry:ui"
         }
       ]
     };
@@ -151,8 +151,8 @@ const buildRegistry = () => {
       name: id,
       dependencies,
       registryDependencies: [],
-      files: [{ path: file.replace("src/", ""), type: type || "components:ui" }],
-      type: type || "components:ui",
+      files: [{ path: file.replace("src/", ""), type: type || "registry:ui" }],
+      type: type || "registry:ui",
     });
 
     console.log(`✓ Generated registry for ${id}${componentType === "html" ? " (HTML)" : ""}`);

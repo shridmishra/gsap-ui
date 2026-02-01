@@ -360,13 +360,13 @@ Edit `scripts/build-registry.ts` and add the component to the `COMPONENTS` array
 ### For React Components
 
 ```typescript
-{ id: "component-id", file: "src/registry/blocks/<category>/<component>/<file>.tsx", type: "components:ui" },
+{ id: "component-id", file: "src/registry/blocks/<category>/<component>/<file>.tsx", type: "registry:ui" },
 ```
 
 ### For HTML Components
 
 ```typescript
-{ id: "component-id", file: "src/registry/blocks/<category>/<component>/<file>.html", type: "components:html", componentType: "html" },
+{ id: "component-id", file: "src/registry/blocks/<category>/<component>/<file>.html", type: "registry:block", componentType: "html" },
 ```
 
 ---

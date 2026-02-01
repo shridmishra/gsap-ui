@@ -8,10 +8,10 @@
     "files": [
       {
         "path": "registry/blocks/hero/aurora-bars.tsx",
-        "type": "components:ui"
+        "type": "registry:ui"
       }
     ],
-    "type": "components:ui"
+    "type": "registry:ui"
   },
   {
     "name": "simple-hero",
@@ -22,10 +22,10 @@
     "files": [
       {
         "path": "registry/blocks/hero/simple-hero.tsx",
-        "type": "components:ui"
+        "type": "registry:ui"
       }
     ],
-    "type": "components:ui"
+    "type": "registry:ui"
   },
   {
     "name": "border-frame",
@@ -34,10 +34,10 @@
     "files": [
       {
         "path": "registry/blocks/hover-animations/border-frame.tsx",
-        "type": "components:ui"
+        "type": "registry:ui"
       }
     ],
-    "type": "components:ui"
+    "type": "registry:ui"
   },
   {
     "name": "mango-cards",
@@ -46,10 +46,10 @@
     "files": [
       {
         "path": "registry/blocks/cards/mango-cards/mango-cards.tsx",
-        "type": "components:ui"
+        "type": "registry:ui"
       }
     ],
-    "type": "components:ui"
+    "type": "registry:ui"
   },
   {
     "name": "media-player",
@@ -60,10 +60,10 @@
     "files": [
       {
         "path": "registry/blocks/cards/media-player.tsx",
-        "type": "components:ui"
+        "type": "registry:ui"
       }
     ],
-    "type": "components:ui"
+    "type": "registry:ui"
   },
   {
     "name": "raycast-hero",
@@ -74,10 +74,10 @@
     "files": [
       {
         "path": "registry/blocks/hero/raycast-hero/raycast-hero.tsx",
-        "type": "components:ui"
+        "type": "registry:ui"
       }
     ],
-    "type": "components:ui"
+    "type": "registry:ui"
   },
   {
     "name": "spotlight-gallery",
@@ -88,10 +88,10 @@
     "files": [
       {
         "path": "registry/blocks/scroll-animations/spotlight-gallery/spotlight-gallery.tsx",
-        "type": "components:ui"
+        "type": "registry:ui"
       }
     ],
-    "type": "components:ui"
+    "type": "registry:ui"
   },
   {
     "name": "sticky-scroll",
@@ -102,10 +102,10 @@
     "files": [
       {
         "path": "registry/blocks/scroll-animations/sticky-scroll/sticky-scroll.tsx",
-        "type": "components:ui"
+        "type": "registry:ui"
       }
     ],
-    "type": "components:ui"
+    "type": "registry:ui"
   },
   {
     "name": "illustrated-hero",
@@ -116,10 +116,10 @@
     "files": [
       {
         "path": "registry/blocks/hero/illustated-hero/illustrated.tsx",
-        "type": "components:ui"
+        "type": "registry:ui"
       }
     ],
-    "type": "components:ui"
+    "type": "registry:ui"
   },
   {
     "name": "hover-image",
@@ -130,10 +130,10 @@
     "files": [
       {
         "path": "registry/blocks/hover-animations/hover-image/hover-image.tsx",
-        "type": "components:ui"
+        "type": "registry:ui"
       }
     ],
-    "type": "components:ui"
+    "type": "registry:ui"
   },
   {
     "name": "text-on-scroll",
@@ -142,10 +142,10 @@
     "files": [
       {
         "path": "registry/blocks/text-animations/text-on-scroll/text-on-scroll.html",
-        "type": "components:html"
+        "type": "registry:block"
       }
     ],
-    "type": "components:html"
+    "type": "registry:block"
   },
   {
     "name": "mouse-image-trail",
@@ -154,10 +154,10 @@
     "files": [
       {
         "path": "registry/blocks/hover-animations/mouse-image-trail/mouse-image-trail.html",
-        "type": "components:html"
+        "type": "registry:block"
       }
     ],
-    "type": "components:html"
+    "type": "registry:block"
   },
   {
     "name": "text-loader",
@@ -166,9 +166,9 @@
     "files": [
       {
         "path": "registry/blocks/loading-animations/text-loader/text-loader.html",
-        "type": "components:html"
+        "type": "registry:block"
       }
     ],
-    "type": "components:html"
+    "type": "registry:block"
   }
 ]
