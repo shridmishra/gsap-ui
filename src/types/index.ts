@@ -9,6 +9,7 @@ export interface ComponentItem {
   previewBackground?: string;
   keywords?: string[];
   componentType?: "react" | "html"; // Default: "react"
+  needsReload?: boolean; // Show reload button to replay animations
 }
 
 

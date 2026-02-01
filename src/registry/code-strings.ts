@@ -1943,7 +1943,7 @@ export const textOnScrollCode = {
                 </div>
                 <div class="nav_item">
                     <span>Based in
-                    Paris (FR)</span>
+                    Mumbai (IN)</span>
                 </div>
                 <div class="nav_item">
                     <li>Index</li>
@@ -2035,6 +2035,291 @@ export const textOnScrollCode = {
                 duration: 0.3,
                 ease: 'power2.out'
             }, 0.7);
+        });
+    </script>
+</body>
+
+</html>`,
+};
+
+export const mouseImageTrailCode = {
+  html: `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Mouse Image Trail</title>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <style>
+        /* Dark/Light Mode CSS Variables */
+        /* Light mode (default) */
+        :root {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #e2e2e2;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark mode via data-theme attribute (injected by parent) */
+        :root[data-theme="dark"],
+        html[data-theme="dark"] {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --shadow-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Fallback: Dark mode via system preference (for standalone viewing) */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --shadow-color: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        /* Reset & base layout */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            background: var(--bg-primary);
+            overflow: hidden;
+        }
+
+        .img {
+            position: absolute;
+            width: 100px;
+            height: 150px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="img">
+        <img src="/assets/stock/Ethereal Cavern Scene.png">
+    </div>
+    <div class="img">
+        <img src="/assets/stock/Ethereal Motion Scene.png">
+    </div>
+    <div class="img">
+        <img src="/assets/stock/Floral Fusion Figure.png">
+    </div>
+    <div class="img">
+        <img src="/assets/stock/Mystical Portal Landscape.png">
+    </div>
+
+    <div class="img">
+        <img src="/assets/stock/Pastoral Monolith Scene.png">
+    </div>
+
+    <div class="img">
+        <img src="/assets/stock/Serene Daisy Meadow.png">
+    </div>
+
+    <div class="img">
+        <img src="/assets/stock/Serene Green Hills.png">
+    </div>
+
+    <div class="img">
+        <img src="/assets/stock/Serene Landscape of Rolling Hills.png">
+    </div>
+
+    <div class="img">
+        <img src="/assets/stock/Solitude Amidst Grandeur.png">
+    </div>
+
+    <script>
+        document.addEventListener('mousemove', e => {
+            gsap.to(".img", {
+                x: e.clientX,
+                y: e.clientY,
+                stagger: -0.1,
+            });
+
+
+        })
+
+    </script>
+</body>
+
+</html>`,
+};
+
+export const textLoaderCode = {
+  html: `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Loader</title>
+    <style>
+        /* Light mode (default) */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: rgba(26, 26, 26, 0.2);
+            --accent-color: #f43f5e;
+        }
+
+        /* Dark mode via data-theme attribute (synced from parent website) */
+        :root[data-theme="dark"],
+        html[data-theme="dark"] {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: rgba(245, 245, 245, 0.2);
+            --accent-color: #f43f5e;
+        }
+
+        /* Fallback: Dark mode via system preference (for standalone viewing) */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #1a1a1a;
+                --text-primary: #f5f5f5;
+                --text-secondary: rgba(245, 245, 245, 0.2);
+                --accent-color: #f43f5e;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: "Oswald", "Bebas Neue", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-primary);
+            overflow: hidden;
+        }
+
+        .loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .text {
+            display: flex;
+            font-size: 6.5rem;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .text {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .text {
+                font-size: 2.5rem;
+            }
+        }
+
+        .text span {
+            display: inline-block;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1;
+            transform: translateY(100px);
+            --clipPath: inset(100% 0 0 0);
+        }
+
+        .text span::before {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--accent-color);
+            clip-path: var(--clipPath);
+            -webkit-clip-path: var(--clipPath);
+            transition: clip-path 0s;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+
+<body>
+    <div class="loader">
+        <div class="text">
+            <span data-text="S">S</span>
+            <span data-text="H">H</span>
+            <span data-text="R">R</span>
+            <span data-text="I">I</span>
+            <span data-text="D">D</span>
+            <span data-text="S">S</span>
+            <span data-text="T">T</span>
+            <span data-text="U">U</span>
+            <span data-text="D">D</span>
+            <span data-text="I">I</span>
+            <span data-text="O">O</span>
+            <span data-text="S">S</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const letters = document.querySelectorAll(".text span");
+            const tl = gsap.timeline();
+            tl.to(letters, {
+                duration: 0.6,
+                y: 0,
+                stagger: 0.05,
+                ease: "power2.out",
+            })
+                .to(letters, {
+                    "--clipPath": "inset(0% 0 0 0)",
+                    duration: 0.8,
+                    delay: 0.3,
+                    ease: "power1.inOut",
+                })
+                .to(letters, {
+                    duration: 0.6,
+                    y: 100,
+                    stagger: 0.05,
+                    delay: 0.5,
+                });
         });
     </script>
 </body>

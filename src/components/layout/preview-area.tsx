@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, memo, useMemo } from "react";
+import React, { useState, useEffect, memo, useMemo, useCallback } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "motion/react";
 import { componentMap, componentRegistry, codeMap } from "@/registry";
@@ -8,6 +8,8 @@ import { useIsDesktop } from "@/hooks";
 import { useActiveComponent } from "@/store";
 import { previewVariants, previewTransition } from "@/lib/animations";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
+import { RefreshCw } from "lucide-react";
 
 const NO_SCALE_CATEGORIES: string[] = [];
 const NO_SCALE_IDS = ["spotlight-gallery"];
@@ -20,10 +22,41 @@ const getHtmlCode = (codeEntry: import("@/types").RegistryCodeEntry | undefined)
   return null;
 };
 
+// Inject theme into HTML code by adding data-theme attribute to html tag
+const injectThemeIntoHtml = (htmlCode: string, theme: string | undefined): string => {
+  const isDark = theme === "dark";
+
+  // Inject a script that sets the color-scheme and data-theme on document
+  const themeScript = `
+    <script>
+      (function() {
+        const isDark = ${isDark};
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+      })();
+    </script>
+  `;
+
+  // Insert the script right after <head> or at the beginning of <body>
+  if (htmlCode.includes('<head>')) {
+    return htmlCode.replace('<head>', '<head>' + themeScript);
+  } else if (htmlCode.includes('<body>')) {
+    return htmlCode.replace('<body>', '<body>' + themeScript);
+  }
+  return themeScript + htmlCode;
+};
+
 export const PreviewArea = memo(function PreviewArea() {
   const activeComponent = useActiveComponent();
   const isDesktop = useIsDesktop();
   const [loading, setLoading] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const [componentKey, setComponentKey] = useState(0);
+
+  // Reload function for components with one-time animations
+  const handleReload = useCallback(() => {
+    setComponentKey((prev) => prev + 1);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -50,8 +83,11 @@ export const PreviewArea = memo(function PreviewArea() {
 
   const htmlCode = useMemo(() => {
     if (!isHtmlOnly) return null;
-    return getHtmlCode(codeMap[activeComponent]);
-  }, [activeComponent, isHtmlOnly]);
+    const rawHtml = getHtmlCode(codeMap[activeComponent]);
+    if (!rawHtml) return null;
+    // Inject theme into HTML for dark/light mode sync
+    return injectThemeIntoHtml(rawHtml, resolvedTheme);
+  }, [activeComponent, isHtmlOnly, resolvedTheme]);
 
   const isFullWidth = useMemo(() => {
     if (!activeItem) return false;
@@ -130,32 +166,79 @@ export const PreviewArea = memo(function PreviewArea() {
   // Render content based on component type
   const renderContent = () => {
     if (isHtmlOnly && htmlCode) {
-      // Render HTML-only component in iframe
+      // Render HTML-only component in iframe with optional reload button
       return (
-        <iframe
-          srcDoc={htmlCode}
-          title={activeItem?.item.name || "HTML Preview"}
-          className="w-full h-full min-h-[600px] border-0 rounded-lg bg-white"
-          sandbox="allow-scripts allow-same-origin"
-          style={{ colorScheme: "light dark" }}
-        />
+        <div className="relative w-full h-full">
+          {/* Reload button - only shown for components with needsReload flag */}
+          {activeItem?.item.needsReload && (
+            <button
+              onClick={handleReload}
+              className="absolute top-3 right-3 z-20 p-2 rounded-lg bg-background/80 hover:bg-background border border-border/60 shadow-sm backdrop-blur-sm transition-all duration-200 hover:scale-105 group"
+              title="Reload animation"
+              aria-label="Reload animation"
+            >
+              <RefreshCw className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+            </button>
+          )}
+          <iframe
+            key={componentKey}
+            srcDoc={htmlCode}
+            title={activeItem?.item.name || "HTML Preview"}
+            className="w-full min-h-screen border-0 rounded-lg"
+            sandbox="allow-scripts allow-same-origin"
+            style={{ colorScheme: "light dark", height: "100%" }}
+          />
+        </div>
       );
     }
 
     if (shouldScale) {
       return (
-        <div
-          style={{
-            transformOrigin: "top center",
-            width: `${(1 / scale) * 100}%`,
-            height: `${(1 / scale) * 100}%`,
-            position: "absolute",
-            top: 0,
-            left: "50%",
-            transform: `translateX(-50%) scale(${scale})`,
-          }}
-        >
-          {ActiveComponentRender && <ActiveComponentRender />}
+        <div className="relative w-full h-full">
+          {/* Reload button for React components with needsReload */}
+          {activeItem?.item.needsReload && (
+            <button
+              onClick={handleReload}
+              className="absolute top-3 right-3 z-20 p-2 rounded-lg bg-background/80 hover:bg-background border border-border/60 shadow-sm backdrop-blur-sm transition-all duration-200 hover:scale-105 group"
+              title="Reload animation"
+              aria-label="Reload animation"
+            >
+              <RefreshCw className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+            </button>
+          )}
+          <div
+            key={componentKey}
+            style={{
+              transformOrigin: "top center",
+              width: `${(1 / scale) * 100}%`,
+              height: `${(1 / scale) * 100}%`,
+              position: "absolute",
+              top: 0,
+              left: "50%",
+              transform: `translateX(-50%) scale(${scale})`,
+            }}
+          >
+            {ActiveComponentRender && <ActiveComponentRender />}
+          </div>
+        </div>
+      );
+    }
+
+    // Non-scaled React components
+    if (activeItem?.item.needsReload) {
+      return (
+        <div className="relative w-full h-full">
+          <button
+            onClick={handleReload}
+            className="absolute top-3 right-3 z-20 p-2 rounded-lg bg-background/80 hover:bg-background border border-border/60 shadow-sm backdrop-blur-sm transition-all duration-200 hover:scale-105 group"
+            title="Reload animation"
+            aria-label="Reload animation"
+          >
+            <RefreshCw className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+          </button>
+          <div key={componentKey}>
+            {ActiveComponentRender && <ActiveComponentRender />}
+          </div>
         </div>
       );
     }
@@ -170,7 +253,8 @@ export const PreviewArea = memo(function PreviewArea() {
     >
       <div
         className={cn(
-          "min-h-full w-full relative transition-colors duration-300 bg-background",
+          "w-full relative transition-colors duration-300 bg-background",
+          isHtmlOnly ? "h-full min-h-screen" : "min-h-full",
           !isFullWidth && "flex items-center justify-center",
           activeItem?.item.previewBackground
         )}
@@ -209,7 +293,7 @@ export const PreviewArea = memo(function PreviewArea() {
                 className={cn(
                   "w-full",
                   !isFullWidth ? "flex items-center justify-center" : "h-full",
-                  isHtmlOnly && "min-h-[600px]"
+                  isHtmlOnly && "h-full min-h-screen"
                 )}
               >
                 {renderContent()}

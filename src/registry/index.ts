@@ -13,6 +13,8 @@ import {
   StickyScroll, stickyScrollCode,
   HoverImage, hoverImageCode,
   textOnScrollCode,
+  mouseImageTrailCode,
+  textLoaderCode,
 } from "@/registry/blocks";
 
 // Re-export showcase components for convenience
@@ -57,6 +59,16 @@ export const componentRegistry: ComponentCategory[] = [
         installation: "npm install clsx tailwind-merge",
         keywords: ["Card", "Border", "Glow", "Hover Effect", "Tailwind CSS"],
       },
+      {
+        name: "Mouse Image Trail",
+        id: "mouse-image-trail",
+        isFree: true,
+        description: "A mouse-following image trail effect with GSAP stagger animations.",
+        url: "/components/hover-animations/mouse-image-trail",
+        installation: "Uses CDN - no npm install required",
+        keywords: ["GSAP", "Mouse", "Trail", "Image", "Animation", "Cursor"],
+        componentType: "html",
+      },
     ],
   },
   {
@@ -99,7 +111,19 @@ export const componentRegistry: ComponentCategory[] = [
   },
   {
     category: "Loading Animations",
-    items: [],
+    items: [
+      {
+        name: "Text Loader",
+        id: "text-loader",
+        isFree: true,
+        description: "A stunning text reveal loader animation with GSAP-powered staggered letter animations.",
+        url: "/components/loading-animations/text-loader",
+        installation: "Uses CDN - no npm install required",
+        keywords: ["GSAP", "Loader", "Text", "Animation", "Loading", "HTML"],
+        componentType: "html",
+        needsReload: true,
+      },
+    ],
   },
   {
     category: "Hero Section",
@@ -121,6 +145,7 @@ export const componentRegistry: ComponentCategory[] = [
         url: "/components/hero/aurora-bars",
         installation: "npm install motion react-icons lucide-react next-themes clsx tailwind-merge",
         keywords: ["Hero", "Aurora", "Background", "Animation", "Framer Motion"],
+        needsReload: true,
       },
       {
         name: "Raycast Hero",
@@ -198,5 +223,7 @@ export const codeMap: Record<string, import("@/types").RegistryCodeEntry> = {
   "sticky-scroll": stickyScrollCode,
   "hover-image": hoverImageCode,
   "text-on-scroll": textOnScrollCode,
+  "mouse-image-trail": mouseImageTrailCode,
+  "text-loader": textLoaderCode,
 };
 

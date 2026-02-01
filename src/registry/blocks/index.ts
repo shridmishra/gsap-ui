@@ -11,7 +11,6 @@ export { SpotlightGallery } from "./scroll-animations/spotlight-gallery/spotligh
 export { HoverImage } from "./hover-animations/hover-image/hover-image";
 export { StickyScroll } from "./scroll-animations/sticky-scroll/sticky-scroll";
 
-// Re-export code strings from generated file
 export {
   auroraBarsCode,
   simpleHeroCode,
@@ -24,6 +23,8 @@ export {
   illustratedHeroCode,
   hoverImageCode,
   textOnScrollCode,
+  mouseImageTrailCode,
+  textLoaderCode,
 } from "@/registry/code-strings";
 
 

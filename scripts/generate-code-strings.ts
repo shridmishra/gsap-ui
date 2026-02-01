@@ -28,6 +28,8 @@ const COMPONENTS: ComponentConfig[] = [
 
   // HTML-only components
   { id: "text-on-scroll", file: "src/registry/blocks/text-animations/text-on-scroll/text-on-scroll.html", type: "html" },
+  { id: "mouse-image-trail", file: "src/registry/blocks/hover-animations/mouse-image-trail/mouse-image-trail.html", type: "html" },
+  { id: "text-loader", file: "src/registry/blocks/loading-animations/text-loader/text-loader.html", type: "html" },
 ];
 
 const toVariableName = (id: string): string =>

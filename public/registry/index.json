@@ -146,5 +146,29 @@
       }
     ],
     "type": "components:html"
+  },
+  {
+    "name": "mouse-image-trail",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/hover-animations/mouse-image-trail/mouse-image-trail.html",
+        "type": "components:html"
+      }
+    ],
+    "type": "components:html"
+  },
+  {
+    "name": "text-loader",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/loading-animations/text-loader/text-loader.html",
+        "type": "components:html"
+      }
+    ],
+    "type": "components:html"
   }
 ]
