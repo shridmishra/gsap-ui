@@ -3,7 +3,7 @@
 import React, { useState, useEffect, memo, useMemo } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "motion/react";
-import { componentMap, componentRegistry } from "@/registry";
+import { componentMap, componentRegistry, codeMap } from "@/registry";
 import { useIsDesktop } from "@/hooks";
 import { useActiveComponent } from "@/store";
 import { previewVariants, previewTransition } from "@/lib/animations";
@@ -11,6 +11,14 @@ import { cn } from "@/lib/utils";
 
 const NO_SCALE_CATEGORIES: string[] = [];
 const NO_SCALE_IDS = ["spotlight-gallery"];
+
+// Helper to get HTML code from a code entry
+const getHtmlCode = (codeEntry: import("@/types").RegistryCodeEntry | undefined): string | null => {
+  if (!codeEntry) return null;
+  if (typeof codeEntry === "string") return null;
+  if ("html" in codeEntry && codeEntry.html) return codeEntry.html;
+  return null;
+};
 
 export const PreviewArea = memo(function PreviewArea() {
   const activeComponent = useActiveComponent();
@@ -33,9 +41,24 @@ export const PreviewArea = memo(function PreviewArea() {
     return null;
   }, [activeComponent]);
 
+  // Check if this is an HTML-only component
+  const isHtmlOnly = useMemo(() => {
+    if (ActiveComponentRender) return false; // Has a React component
+    const codeEntry = codeMap[activeComponent];
+    return !!getHtmlCode(codeEntry);
+  }, [activeComponent, ActiveComponentRender]);
+
+  const htmlCode = useMemo(() => {
+    if (!isHtmlOnly) return null;
+    return getHtmlCode(codeMap[activeComponent]);
+  }, [activeComponent, isHtmlOnly]);
+
   const isFullWidth = useMemo(() => {
     if (!activeItem) return false;
     const { category, item } = activeItem;
+
+    // HTML-only components are always full width for iframe
+    if (isHtmlOnly) return true;
 
     // Components that should always be centered/not full width
     // border-frame: A small card component that looks best centered
@@ -51,11 +74,14 @@ export const PreviewArea = memo(function PreviewArea() {
       category.includes("Animations") ||
       item.id === "mango-cards"
     );
-  }, [activeItem]);
+  }, [activeItem, isHtmlOnly]);
 
   const shouldScale = useMemo(() => {
     if (!activeItem) return false;
     const { category, item } = activeItem;
+
+    // HTML components use iframe, no scaling needed
+    if (isHtmlOnly) return false;
 
     // Check if the component should NOT be scaled
     // 1. Check strict no-scale categories
@@ -64,7 +90,7 @@ export const PreviewArea = memo(function PreviewArea() {
     if (NO_SCALE_IDS.includes(item.id)) return false;
 
     return isFullWidth;
-  }, [activeItem, isFullWidth]);
+  }, [activeItem, isFullWidth, isHtmlOnly]);
 
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
@@ -100,6 +126,42 @@ export const PreviewArea = memo(function PreviewArea() {
       observer.disconnect();
     };
   }, [shouldScale, activeComponent]);
+
+  // Render content based on component type
+  const renderContent = () => {
+    if (isHtmlOnly && htmlCode) {
+      // Render HTML-only component in iframe
+      return (
+        <iframe
+          srcDoc={htmlCode}
+          title={activeItem?.item.name || "HTML Preview"}
+          className="w-full h-full min-h-[600px] border-0 rounded-lg bg-white"
+          sandbox="allow-scripts allow-same-origin"
+          style={{ colorScheme: "light dark" }}
+        />
+      );
+    }
+
+    if (shouldScale) {
+      return (
+        <div
+          style={{
+            transformOrigin: "top center",
+            width: `${(1 / scale) * 100}%`,
+            height: `${(1 / scale) * 100}%`,
+            position: "absolute",
+            top: 0,
+            left: "50%",
+            transform: `translateX(-50%) scale(${scale})`,
+          }}
+        >
+          {ActiveComponentRender && <ActiveComponentRender />}
+        </div>
+      );
+    }
+
+    return ActiveComponentRender && <ActiveComponentRender />;
+  };
 
   return (
     <div
@@ -146,26 +208,11 @@ export const PreviewArea = memo(function PreviewArea() {
                 transition={previewTransition}
                 className={cn(
                   "w-full",
-                  !isFullWidth ? "flex items-center justify-center" : "h-full"
+                  !isFullWidth ? "flex items-center justify-center" : "h-full",
+                  isHtmlOnly && "min-h-[600px]"
                 )}
               >
-                {shouldScale ? (
-                  <div
-                    style={{
-                      transformOrigin: "top center",
-                      width: `${(1 / scale) * 100}%`,
-                      height: `${(1 / scale) * 100}%`,
-                      position: "absolute",
-                      top: 0,
-                      left: "50%",
-                      transform: `translateX(-50%) scale(${scale})`,
-                    }}
-                  >
-                    {ActiveComponentRender && <ActiveComponentRender />}
-                  </div>
-                ) : (
-                  ActiveComponentRender && <ActiveComponentRender />
-                )}
+                {renderContent()}
               </motion.div>
             </AnimatePresence>
           )}

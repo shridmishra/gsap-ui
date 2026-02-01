@@ -7,9 +7,9 @@ This guide outlines the process for adding a new component to the `shrid-ui` sho
 Before adding your component, ensure adherence to these rules:
 
 1.  **Format Input Handling**:
-    *   **HTML Input**: Convert strictly to JSX/TSX.
-    *   **JSX Input**: Convert to TSX. **Never** convert back to HTML.
-    *   **Separate Files**: If provided as HTML/CSS/JS, combine them into a single file structure first.
+    *   **HTML Input**: Show only HTML, CSS, and JS for the component. Do NOT convert to JSX or TSX.
+    *   **JSX/TSX Input**: Show only the React (TSX/JSX) version. Do NOT convert to HTML/CSS/JS.
+    *   **Separate Files**: If provided as HTML/CSS/JS, keep them organized as needed.
 
 2.  **Syntax Validations**:
     *   Use `className` instead of `class`.

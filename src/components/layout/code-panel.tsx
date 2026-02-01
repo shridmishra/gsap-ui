@@ -50,17 +50,22 @@ export const CodePanelContent = memo(function CodePanelContent({
   const { theme } = useTheme();
 
   // Parse the code entry
-  const { currentCode, showFrameworkToggle } = useMemo(() => {
+  const { currentCode, showFrameworkToggle, isHtmlOnly } = useMemo(() => {
     let parsedCode = { react: "", html: "" };
     let hasHtml = false;
+    let htmlOnly = false;
 
     if (typeof codeEntry === "string") {
       parsedCode.react = codeEntry;
     } else {
-      parsedCode.react = codeEntry.code;
+      parsedCode.react = codeEntry.code || "";
       if (codeEntry.html) {
         parsedCode.html = codeEntry.html;
         hasHtml = true;
+        // If there's HTML but no React code, it's HTML-only
+        if (!codeEntry.code) {
+          htmlOnly = true;
+        }
       }
     }
 
@@ -77,18 +82,20 @@ export const CodePanelContent = memo(function CodePanelContent({
 
     return {
       currentCode: displayCode || "// No code found",
-      showFrameworkToggle: hasHtml
+      showFrameworkToggle: hasHtml,
+      isHtmlOnly: htmlOnly
     };
   }, [codeEntry, framework, language]);
 
   // Adjust framework state if needed when activeComponent changes
   React.useEffect(() => {
-    if (typeof codeEntry !== "string" && codeEntry.html) {
-      // If the component has HTML, we *could* default to it? No, default to React.
-    } else {
+    if (typeof codeEntry !== "string" && codeEntry.html && !codeEntry.code) {
+      // HTML-only component, default to HTML
+      setFramework("html");
+    } else if (typeof codeEntry === "string" || !codeEntry.html) {
       setFramework("react");
     }
-  }, [codeEntry]);
+  }, [codeEntry, setFramework]);
 
 
   const syntaxStyle = useMemo(() => {
@@ -125,7 +132,7 @@ export const CodePanelContent = memo(function CodePanelContent({
         <div className="flex items-center justify-between px-4 sticky top-0 z-20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
           <div className="flex items-center gap-6 relative">
             {/* Tabs */}
-            {(showFrameworkToggle ? ["TypeScript", "JavaScript", "HTML"] : ["TypeScript", "JavaScript"]).map((tab) => {
+            {(isHtmlOnly ? ["HTML"] : showFrameworkToggle ? ["TypeScript", "JavaScript", "HTML"] : ["TypeScript", "JavaScript"]).map((tab) => {
               const isActive =
                 (tab === "HTML" && framework === "html") ||
                 (tab === "TypeScript" && framework === "react" && language === "typescript") ||

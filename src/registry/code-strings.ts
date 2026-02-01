@@ -1725,3 +1725,319 @@ export function HoverImage({ projects = defaultProjects }: HoverImageProps) {
     );
 }
 `;
+
+export const textOnScrollCode = {
+  html: `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text on scroll</title>
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap');
+
+        :root {
+            --primary: #0c0c0c;
+            --secondary: #f4f4f4
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* lenis settings */
+        html.lenis,
+        html.lenis body {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lennis-stopped {
+            overflow: hidden;
+        }
+
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
+        html {
+            font-size: calc(100vw/ 1920 * 10);
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+
+        h3 {
+            font-size: 8rem;
+            text-transform: uppercase;
+        }
+
+        p,
+        li,
+        span {
+            font-size: 2.4rem;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        /* Splitting.js word styles */
+        .word {
+            display: inline-block;
+            will-change: opacity;
+        }
+
+        /* nav-section */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+
+        .nav_wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) 2fr;
+            grid-template-rows: 1fr;
+            padding: 6.4rem;
+        }
+
+        .nav_item:nth-child(1) {
+            grid-area: 1/1/2/2;
+        }
+
+        .nav_item:nth-child(2) {
+            grid-area: 1/2/2/3;
+        }
+
+        .nav_item:nth-child(3) {
+            grid-area: 1/3/2/4;
+        }
+
+        .nav_item:nth-child(4) {
+            grid-area: 1/4/2/5;
+            display: inline-flex;
+            width: fit-content;
+            justify-self: end;
+            gap: 4rem;
+        }
+
+        .nav span {
+            display: block;
+        }
+
+        /* hero */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 300vh;
+        }
+
+        .hero_wrapper {
+            padding: 6.4rem;
+        }
+
+        .hero_paragraph {
+            padding-top: 80vh;
+            padding-left: 80rem;
+            padding-bottom: 40rem;
+        }
+
+        .hero_paragraph_text,
+        .hero_paragraph_text span {
+            font-size: 8rem;
+            line-height: 1.2;
+        }
+
+        .hero_paragraph_text::before {
+            content: 'Info';
+            border: 1px solid var(--secondary);
+            border-radius: 20rem;
+            padding: 0.4rem 1.2rem;
+            margin-right: 1.6rem;
+            font-size: 4rem;
+        }
+
+        .hero_background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero_background_img {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            scale: 1.1;
+        }
+
+        @media screen and (max-width: 768px) {
+            html {
+                font-size: calc(100vw / 768 * 10);
+            }
+
+            h3 {
+                font-size: 2.4rem;
+            }
+
+            p,
+            li,
+            span {
+                font-size: 3.4rem;
+            }
+
+            .nav_wrapper {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .nav_item:nth-child(3) {
+                display: none;
+            }
+
+            .nav_item:nth-child(4) {
+                display: none;
+            }
+
+            .hero_paragraph {
+                padding-left: 0;
+            }
+
+            .hero_background_img {
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="app">
+        <div class="nav">
+            <div class="nav_wrapper">
+                <div class="nav_item">
+                    <span>SR</span>
+                </div>
+                <div class="nav_item">
+                    <span>Motion Developer</span>
+                </div>
+                <div class="nav_item">
+                    <span>Based in
+                    Paris (FR)</span>
+                </div>
+                <div class="nav_item">
+                    <li>Index</li>
+                    <li>Works</li>
+                    <li>Gallery</li>
+                    <li>Contacts</li>
+                </div>
+            </div>
+        </div>
+
+        <section class="hero">
+            <div class="hero_wrapper">
+                <div class="hero_paragraph">
+                    <p class="hero_paragraph_text">
+                        Shrid Mishra, a motion developer based in Mumbai, specializes in creating captivating
+                        visual narratives with GSAP that blend creativity and technology.
+                        His innovative style allows him to craft unique experiences that resonate with audiences
+                        worldwide.
+                    </p>
+                </div>
+            </div>
+            <div class="hero_background">
+                <img src="/assets/stock/Black and White.png" alt="Background" class="hero_background_img">
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+
+    <script>
+        // Register ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Wait for DOM to load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Initialize Splitting to break text into words
+            Splitting({
+                target: '.hero_paragraph_text',
+                by: 'words'
+            });
+
+            // Get references after Splitting has created word spans
+            const words = document.querySelectorAll('.hero_paragraph_text .word');
+            const image = document.querySelector('.hero_background');
+            const navItems = document.querySelectorAll(".nav_item");
+
+            // Set initial styles for words (dim)
+            gsap.set(words, { opacity: 0.3 });
+
+            // Create a timeline for word-by-word reveal
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.hero',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 0.5,
+                }
+            });
+
+            // Add each word to timeline with its own position
+            // This ensures word-by-word sequential animation
+            words.forEach((word, index) => {
+                const startPosition = index / words.length;
+                const endPosition = (index + 1) / words.length;
+
+                tl.to(word, {
+                    opacity: 1,
+                    duration: endPosition - startPosition,
+                    ease: 'none'
+                }, startPosition);
+            });
+
+            // Background image animation - starts immediately and fades throughout
+            tl.to(image, {
+                scale: 0.95,
+                opacity: 0,
+                yPercent: -5,
+                duration: 0.6,
+                ease: 'power2.out'
+            }, 0);
+
+            // Nav items animation - starts at 70% scroll
+            tl.to([navItems[1], navItems[2]], {
+                yPercent: -100,
+                opacity: 0,
+                duration: 0.3,
+                ease: 'power2.out'
+            }, 0.7);
+        });
+    </script>
+</body>
+
+</html>`,
+};

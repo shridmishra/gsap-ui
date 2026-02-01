@@ -23,5 +23,7 @@ export {
   mediaPlayerCode,
   illustratedHeroCode,
   hoverImageCode,
+  textOnScrollCode,
 } from "@/registry/code-strings";
+
 

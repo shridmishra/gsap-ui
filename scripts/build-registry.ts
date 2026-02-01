@@ -21,10 +21,12 @@ interface ComponentConfig {
   id: string;
   file: string;
   type?: string;
+  componentType?: "react" | "html"; // For distinguishing React vs HTML-only components
 }
 
 // Reuse the component list - manually synced for now
 const COMPONENTS: ComponentConfig[] = [
+  // React components
   { id: "aurora-bars", file: "src/registry/blocks/hero/aurora-bars.tsx", type: "components:ui" },
   { id: "simple-hero", file: "src/registry/blocks/hero/simple-hero.tsx", type: "components:ui" },
   { id: "border-frame", file: "src/registry/blocks/hover-animations/border-frame.tsx", type: "components:ui" },
@@ -35,11 +37,15 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "sticky-scroll", file: "src/registry/blocks/scroll-animations/sticky-scroll/sticky-scroll.tsx", type: "components:ui" },
   { id: "illustrated-hero", file: "src/registry/blocks/hero/illustated-hero/illustrated.tsx", type: "components:ui" },
   { id: "hover-image", file: "src/registry/blocks/hover-animations/hover-image/hover-image.tsx", type: "components:ui" },
+
+  // HTML-only components (no asset processing needed, uses CDN)
+  { id: "text-on-scroll", file: "src/registry/blocks/text-animations/text-on-scroll/text-on-scroll.html", type: "components:html", componentType: "html" },
 ];
+
 
 const detectDependencies = (content: string): string[] => {
   const dependencies = new Set<string>();
-  
+
   // Common libraries used in the project
   const candidates = [
     "motion",
@@ -64,35 +70,35 @@ const detectDependencies = (content: string): string[] => {
 
 // Helper to replace local assets with Unsplash URLs
 const processContent = (content: string): string => {
-    let imageIndex = 0;
-    
-    // Helper to return appropriate replacement based on extension
-    const getReplacement = (ext: string) => {
-        if (ext === "mp4" || ext === "webm") return SAMPLE_VIDEO;
-        const url = UNSPLASH_IMAGES[imageIndex % UNSPLASH_IMAGES.length];
-        imageIndex++;
-        return url;
-    };
+  let imageIndex = 0;
 
-    // Replace import statements for images/videos
-    let processed = content.replace(
-      /import\s+(\w+)\s+from\s+["'](\/.*?\.(png|jpg|jpeg|webp|gif|svg|mp4|webm))["'];?/gi,
-      (match, varName, path, ext) => {
-        const url = getReplacement(ext);
-        return `const ${varName} = "${url}";`;
-      }
-    );
+  // Helper to return appropriate replacement based on extension
+  const getReplacement = (ext: string) => {
+    if (ext === "mp4" || ext === "webm") return SAMPLE_VIDEO;
+    const url = UNSPLASH_IMAGES[imageIndex % UNSPLASH_IMAGES.length];
+    imageIndex++;
+    return url;
+  };
 
-    // Replace string literals referencing assets
-    processed = processed.replace(
-        /["'](\/assets\/.*?\.(png|jpg|jpeg|webp|gif|svg|mp4|webm))["']/gi,
-        (match, path, ext) => {
-            const url = getReplacement(ext);
-            return `"${url}"`;
-        }
-    );
+  // Replace import statements for images/videos
+  let processed = content.replace(
+    /import\s+(\w+)\s+from\s+["'](\/.*?\.(png|jpg|jpeg|webp|gif|svg|mp4|webm))["'];?/gi,
+    (match, varName, path, ext) => {
+      const url = getReplacement(ext);
+      return `const ${varName} = "${url}";`;
+    }
+  );
 
-    return processed;
+  // Replace string literals referencing assets
+  processed = processed.replace(
+    /["'](\/assets\/.*?\.(png|jpg|jpeg|webp|gif|svg|mp4|webm))["']/gi,
+    (match, path, ext) => {
+      const url = getReplacement(ext);
+      return `"${url}"`;
+    }
+  );
+
+  return processed;
 };
 
 const buildRegistry = () => {
@@ -102,7 +108,7 @@ const buildRegistry = () => {
 
   const registryIndex = [];
 
-  for (const { id, file, type } of COMPONENTS) {
+  for (const { id, file, type, componentType } of COMPONENTS) {
     const filePath = path.join(ROOT_DIR, file);
 
     if (!fs.existsSync(filePath)) {
@@ -111,8 +117,13 @@ const buildRegistry = () => {
     }
 
     const rawContent = fs.readFileSync(filePath, "utf-8");
-    const content = processContent(rawContent);
-    const dependencies = detectDependencies(rawContent); // Use raw content for deps to be safe
+
+    // For HTML components, use raw content (no asset processing needed)
+    // For React components, process assets to use Unsplash URLs
+    const content = componentType === "html" ? rawContent : processContent(rawContent);
+
+    // HTML components don't have npm dependencies (they use CDN)
+    const dependencies = componentType === "html" ? [] : detectDependencies(rawContent);
 
     const payload = {
       name: id,
@@ -121,7 +132,7 @@ const buildRegistry = () => {
       registryDependencies: [], // can be enhanced if we have internal deps
       files: [
         {
-          path: file.replace("src/", ""), // relative path in user's project? actually shadcn usually just putting it in a single file
+          path: file.replace("src/", ""), // relative path in user's project
           content: content,
           type: type || "components:ui"
         }
@@ -138,11 +149,11 @@ const buildRegistry = () => {
       name: id,
       dependencies,
       registryDependencies: [],
-      files: [{ path: file.replace("src/", ""), type: "components:ui" }], // Simplified for index
-      type: "components:ui",
+      files: [{ path: file.replace("src/", ""), type: type || "components:ui" }],
+      type: type || "components:ui",
     });
 
-    console.log(`✓ Generated registry for ${id}`);
+    console.log(`✓ Generated registry for ${id}${componentType === "html" ? " (HTML)" : ""}`);
   }
 
   // Write index
@@ -150,8 +161,9 @@ const buildRegistry = () => {
     path.join(OUTPUT_DIR, "index.json"),
     JSON.stringify(registryIndex, null, 2)
   );
-  
+
   console.log(`\n✓ Registry build complete. Output: ${OUTPUT_DIR}`);
 };
+
 
 buildRegistry();

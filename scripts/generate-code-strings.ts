@@ -5,6 +5,7 @@ import crypto from "crypto";
 interface ComponentConfig {
   id: string;
   file: string;
+  type?: "react" | "html"; // Default: "react"
 }
 
 const ROOT_DIR = path.resolve(__dirname, "..");
@@ -13,6 +14,7 @@ const HASH_FILE = path.join(ROOT_DIR, ".code-strings-hash");
 
 // Component source files to extract
 const COMPONENTS: ComponentConfig[] = [
+  // React components (TSX)
   { id: "aurora-bars", file: "src/registry/blocks/hero/aurora-bars.tsx" },
   { id: "simple-hero", file: "src/registry/blocks/hero/simple-hero.tsx" },
   { id: "border-frame", file: "src/registry/blocks/hover-animations/border-frame.tsx" },
@@ -23,6 +25,9 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "sticky-scroll", file: "src/registry/blocks/scroll-animations/sticky-scroll/sticky-scroll.tsx" },
   { id: "illustrated-hero", file: "src/registry/blocks/hero/illustated-hero/illustrated.tsx" },
   { id: "hover-image", file: "src/registry/blocks/hover-animations/hover-image/hover-image.tsx" },
+
+  // HTML-only components
+  { id: "text-on-scroll", file: "src/registry/blocks/text-animations/text-on-scroll/text-on-scroll.html", type: "html" },
 ];
 
 const toVariableName = (id: string): string =>
@@ -34,7 +39,7 @@ const escapeTemplateString = (content: string): string =>
 // Calculate hash of all source files
 const calculateHash = (): string => {
   const hash = crypto.createHash("md5");
-  
+
   for (const { file } of COMPONENTS) {
     const filePath = path.join(ROOT_DIR, file);
     if (fs.existsSync(filePath)) {
@@ -42,7 +47,7 @@ const calculateHash = (): string => {
       hash.update(content);
     }
   }
-  
+
   return hash.digest("hex");
 };
 
@@ -50,13 +55,13 @@ const calculateHash = (): string => {
 const needsRegeneration = (): boolean => {
   // Always regenerate if output doesn't exist
   if (!fs.existsSync(OUTPUT_FILE)) return true;
-  
+
   // Check hash file
   if (!fs.existsSync(HASH_FILE)) return true;
-  
+
   const storedHash = fs.readFileSync(HASH_FILE, "utf-8").trim();
   const currentHash = calculateHash();
-  
+
   return storedHash !== currentHash;
 };
 
@@ -72,7 +77,7 @@ const generateCodeStrings = (): void => {
     "",
   ];
 
-  for (const { id, file } of COMPONENTS) {
+  for (const { id, file, type = "react" } of COMPONENTS) {
     const filePath = path.join(ROOT_DIR, file);
 
     if (!fs.existsSync(filePath)) {
@@ -84,16 +89,24 @@ const generateCodeStrings = (): void => {
     const escaped = escapeTemplateString(content);
     const varName = toVariableName(id);
 
-    lines.push(`export const ${varName} = \`${escaped}\`;`);
+    if (type === "html") {
+      // HTML components export an object with html property
+      lines.push(`export const ${varName} = {`);
+      lines.push(`  html: \`${escaped}\`,`);
+      lines.push(`};`);
+    } else {
+      // React components export a plain string
+      lines.push(`export const ${varName} = \`${escaped}\`;`);
+    }
     lines.push("");
   }
 
   fs.writeFileSync(OUTPUT_FILE, lines.join("\n"));
-  
+
   // Save current hash
   const currentHash = calculateHash();
   fs.writeFileSync(HASH_FILE, currentHash);
-  
+
   console.log(`✓ Generated ${path.relative(ROOT_DIR, OUTPUT_FILE)}`);
 };
 

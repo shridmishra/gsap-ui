@@ -8,7 +8,9 @@ export interface ComponentItem {
   installation?: string;
   previewBackground?: string;
   keywords?: string[];
+  componentType?: "react" | "html"; // Default: "react"
 }
+
 
 export interface CodeFile {
   fileName: string;
@@ -16,12 +18,17 @@ export interface CodeFile {
   language: string;
 }
 
-export type RegistryCodeEntry = 
-  | string 
+export type RegistryCodeEntry =
+  | string // Plain React code as string
   | {
-      code: string; // The default/main code (React TS)
-      html?: string; // HTML variant (single string with embedded CSS/JS)
-    };
+    code: string; // React code (required for React components)
+    html?: string; // Optional HTML variant
+  }
+  | {
+    html: string; // HTML-only component
+    code?: never; // No React code
+  };
+
 
 
 export interface ComponentCategory {

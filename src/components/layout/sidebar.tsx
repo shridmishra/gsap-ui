@@ -1,14 +1,12 @@
 "use client";
 
-import React, { memo, useCallback } from "react";
+import { memo, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import { componentRegistry } from "@/registry";
 import { useActiveComponent, useSidebarOpen, componentActions } from "@/store";
 import { useMediaPreloader, useMediaQuery } from "@/hooks";
 import type { ComponentItem } from "@/types";
-import { InfoIsland } from "./info-island";
 import { Heart } from "lucide-react";
 
 // Memoized category section
@@ -66,7 +64,7 @@ const SidebarItem = memo(function SidebarItem({
           "relative w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm transition-all",
           isActive
             ? " text-foreground font-medium"
-            : "text-foreground/60 hover:text-foreground hover:bg-foreground/5"
+            : "text-foreground/60 hover:text-foreground"
         )}
       >
         <span className="flex items-center">

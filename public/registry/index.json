@@ -134,5 +134,17 @@
       }
     ],
     "type": "components:ui"
+  },
+  {
+    "name": "text-on-scroll",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/text-animations/text-on-scroll/text-on-scroll.html",
+        "type": "components:html"
+      }
+    ],
+    "type": "components:html"
   }
 ]
