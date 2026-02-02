@@ -1,37 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GSAP UI
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+**A collection of beautiful, animated components built with GSAP, Motion, and Radix UI.**
+<br />
+Tailored for modern **Next.js** applications and compatible with **shadcn/ui**.
+
+[Explore Components](https://gsap-ui.shrid.in) · [Report Bug](https://github.com/shridmishra/gsap-ui/issues) · [Request Feature](https://github.com/shridmishra/gsap-ui/issues)
+
+</div>
+
+---
+
+## Introduction
+
+**GSAP UI** bridges the gap between high-performance animations and accessible, headless primitives. It provides a set of meaningful, copy-paste components that you can drop directly into your project.
+
+Unlike traditional component libraries that lock you into an API, GSAP UI gives you the code. You own it, you customize it.
+
+## Features
+
+- **🎨 Beautiful Mutations**: Powered by [GSAP](https://gsap.com) for fluid, industry-standard animations.
+- **♿ Accessible Primitives**: Built on [Radix UI](https://www.radix-ui.com) to ensure full accessibility and keyboard navigation.
+- **🧱 Shadcn Compatible**: Designed to integrate seamlessly with standard shadcn/ui setups.
+- **🛠️ Zero Lock-in**: Copy the code, own the component. No heavy monolith dependency.
+- **⚡ Modern Stack**: Fully typed **TypeScript** components for **Next.js 15+**.
+
+## Tech Stack
+
+We stand on the shoulders of giants:
+
+| Technology | Purpose |
+|------------|---------|
+| [Next.js 15](https://nextjs.org) | The React Framework for the Web |
+| [Tailwind CSS](https://tailwindcss.com) | Utility-first CSS framework |
+| [GSAP](https://gsap.com) | Professional-grade animation library |
+| [Radix UI](https://www.radix-ui.com) | Unstyled, accessible components |
+| [Lucide](https://lucide.dev) | Beautiful & consistent icons |
+
+## Usage
+
+This library is designed to work with the `shadcn` CLI. You can add components directly to your project using the remote registry.
+
+### Installation
+
+Ensure you have the necessary dependencies in your project:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install gsap @gsap/react motion clsx tailwind-merge lucide-react
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Adding Components
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To add a component to your project, run the following command using the component's ID:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npx shadcn@latest add https://gsap-ui.shrid.in/registry/[component-name].json
+```
 
-## Learn More
+For example, to add the `magnetic-button`:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx shadcn@latest add https://gsap-ui.shrid.in/registry/magnetic-button.json
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The component will be placed in your `components/ui` directory, ready to use and customize.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development
 
-## Deploy on Vercel
+If you want to contribute or explore the components locally:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/shridmishra/gsap-ui.git
+   cd gsap-ui
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# shrid-ui
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the documentation site.
+
+## Philosophy
+
+We believe animations should be meaningful, performant, and delightful. By combining the declarative power of React with the imperative precision of GSAP, we create interfaces that feel alive without sacrificing accessibility or control.

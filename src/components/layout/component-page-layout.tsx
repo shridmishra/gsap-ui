@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye, Code } from "lucide-react";
+import { Eye, Code, Github } from "lucide-react";
 
 
 import { useEffect, useMemo, useState, useRef } from "react";
@@ -13,7 +13,7 @@ import {
   CommandPalette,
   LoadingSkeleton
 } from "@/components/layout";
-import { CopyButton, SponsorButton, CodeBlock } from "@/components/ui";
+import { CopyButton, SponsorButton, CodeBlock, Button } from "@/components/ui";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -137,6 +137,14 @@ export function ComponentPageLayout({ componentId }: ComponentPageLayoutProps) {
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="w-7 h-7 sm:size-9 rounded-md sm:rounded-lg hover:bg-foreground/10 text-foreground/60 hover:text-foreground transition-colors"
+                onClick={() => window.open("https://github.com/shridmishra/gsap-ui", "_blank")}
+              >
+                <Github className="size-5" />
+              </Button>
               <SponsorButton />
               <InfoIsland />
             </div>
