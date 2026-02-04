@@ -15,6 +15,8 @@ import {
   textOnScrollCode,
   mouseImageTrailCode,
   textLoaderCode,
+  colorPaletteShowcaseCode,
+  mouseImageMaskCode,
 } from "@/registry/blocks";
 
 // Re-export showcase components for convenience
@@ -67,6 +69,16 @@ export const componentRegistry: ComponentCategory[] = [
         url: "/components/hover-animations/mouse-image-trail",
         installation: "Uses CDN - no npm install required",
         keywords: ["GSAP", "Mouse", "Trail", "Image", "Animation", "Cursor"],
+        componentType: "html",
+      },
+      {
+        name: "Mouse Image Mask",
+        id: "mouse-image-mask",
+        isFree: true,
+        description: "A masking effect where a second image is revealed on hover using GSAP.",
+        url: "/components/hover-animations/mouse-image-mask",
+        installation: "Uses CDN - no npm install required",
+        keywords: ["GSAP", "Mask", "Hover", "Image", "Animation"],
         componentType: "html",
       },
     ],
@@ -125,6 +137,7 @@ export const componentRegistry: ComponentCategory[] = [
       },
     ],
   },
+
   {
     category: "Hero Section",
     items: [
@@ -168,14 +181,14 @@ export const componentRegistry: ComponentCategory[] = [
     ],
   },
   {
-    category: "Cards",
+    category: "Just for Fun",
     items: [
       {
         name: "Mango Cards",
         id: "mango-cards",
         isFree: true,
         description: "Two mango product cards: a compact preview and an expanded immersive version.",
-        url: "/components/cards/mango-cards",
+        url: "/components/just-for-fun/mango-cards",
         installation: "npm install motion",
         keywords: ["Card", "Product", "Animation", "Transition", "Framer Motion"],
 
@@ -185,10 +198,20 @@ export const componentRegistry: ComponentCategory[] = [
         id: "media-player",
         isFree: true,
         description: "A minimal, modern media player device with a soft rounded-square shape.",
-        url: "/components/cards/media-player",
+        url: "/components/just-for-fun/media-player",
         installation: "npm install lucide-react react-icons",
         previewBackground: "bg-foreground",
         keywords: ["Card", "Media Player", "Audio", "UI", "React"],
+      },
+      {
+        name: "Color Palette Showcase",
+        id: "color-palette-showcase",
+        isFree: true,
+        description: "A 3D card-based color palette showcase with hover animations.",
+        url: "/components/just-for-fun/color-palette-showcase",
+        installation: "Uses CDN - no npm install required",
+        keywords: ["GSAP", "3D", "Cards", "Color Palette", "Animation", "HTML"],
+        componentType: "html",
       },
     ],
   },
@@ -225,5 +248,7 @@ export const codeMap: Record<string, import("@/types").RegistryCodeEntry> = {
   "text-on-scroll": textOnScrollCode,
   "mouse-image-trail": mouseImageTrailCode,
   "text-loader": textLoaderCode,
+  "color-palette-showcase": colorPaletteShowcaseCode,
+  "mouse-image-mask": mouseImageMaskCode,
 };
 

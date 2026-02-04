@@ -58,6 +58,11 @@ export const docsConfig = {
           href: "/components/loading-animations",
           items: [],
         },
+        {
+          title: "Just for Fun",
+          href: "/components/just-for-fun",
+          items: [],
+        },
       ],
     },
   ],

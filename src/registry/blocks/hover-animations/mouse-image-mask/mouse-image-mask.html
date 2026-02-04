@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Image Mask</title>
+    <!-- Use CDN for GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+
+<style>
+    /* CSS Variables for Theming */
+    :root {
+        --bg-primary: #111111;
+        --mask-bg: #DDFC3E;
+    }
+
+    [data-theme="light"] {
+        --bg-primary: #ffffff;
+    }
+
+    body, .mask, .og {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        margin: 0;
+        background: var(--bg-primary);
+    }
+
+    /* Fallback for standalone viewing */
+    @media (prefers-color-scheme: light) {
+        body {
+            background: #ffffff;
+        }
+    }
+
+    img {
+        width: 300px;
+        height: 500px;
+        object-fit: cover;
+    }
+
+    .og {
+        position: absolute;
+    }
+
+    .mask {
+        position: absolute;
+        /* Use relative path to assets */
+        mask-image: url(/assets/showcase/hover-animations/mouse-image-mask/circle.png);
+        background: var(--mask-bg);
+        mask-repeat: no-repeat;
+        mask-size: var(--mask-size, 20px);
+        mask-position: var(--mask-x, -50px) var(--mask-y, -50px);
+        pointer-events: none;
+    }
+
+</style>
+
+<body>
+   
+    <div class="og">
+        <!-- Stock Image 1 -->
+        <img src="/assets/stock/Black and White.png" alt="Original Image">
+    </div>
+    <div class="mask">
+        <!-- Stock Image 2 -->
+        <img src="/assets/stock/Floral Fusion Figure.png" alt="Masked Image">
+    </div>
+
+    <script>
+        const mask = document.querySelector('.mask');
+        const og = document.querySelector('.og');
+
+        const maskSizeSmall = 20;
+        const maskSizeLarge = 300; // Increased for better visibility
+
+        let currentSize = maskSizeSmall;
+        
+        // Add event listener to window or body to ensure tracking works across the whole area
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(mask, {
+                '--mask-x': `${e.clientX - currentSize / 2}px`,    
+                '--mask-y': `${e.clientY - currentSize / 2}px`, 
+                '--mask-size': `${currentSize}px`,
+                duration: 0.6,
+                ease: "back.out(1.7)"
+             });
+        });
+
+        const img = og.querySelector("img");
+        
+        img.addEventListener("mouseenter", () => {
+            currentSize = maskSizeLarge;
+        });
+           
+        img.addEventListener("mouseleave", () => {
+            currentSize = maskSizeSmall;
+        });
+    </script>
+</body>
+</html>

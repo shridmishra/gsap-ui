@@ -30,6 +30,8 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "text-on-scroll", file: "src/registry/blocks/text-animations/text-on-scroll/text-on-scroll.html", type: "html" },
   { id: "mouse-image-trail", file: "src/registry/blocks/hover-animations/mouse-image-trail/mouse-image-trail.html", type: "html" },
   { id: "text-loader", file: "src/registry/blocks/loading-animations/text-loader/text-loader.html", type: "html" },
+  { id: "color-palette-showcase", file: "src/registry/blocks/color-palette/color-palette-showcase/color-palette-showcase.html", type: "html" },
+  { id: "mouse-image-mask", file: "src/registry/blocks/hover-animations/mouse-image-mask/mouse-image-mask.html", type: "html" },
 ];
 
 const toVariableName = (id: string): string =>

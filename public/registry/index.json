@@ -170,5 +170,29 @@
       }
     ],
     "type": "registry:block"
+  },
+  {
+    "name": "color-palette-showcase",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/color-palette/color-palette-showcase/color-palette-showcase.html",
+        "type": "registry:block"
+      }
+    ],
+    "type": "registry:block"
+  },
+  {
+    "name": "mouse-image-mask",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/hover-animations/mouse-image-mask/mouse-image-mask.html",
+        "type": "registry:block"
+      }
+    ],
+    "type": "registry:block"
   }
 ]

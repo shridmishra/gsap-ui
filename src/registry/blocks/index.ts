@@ -25,6 +25,8 @@ export {
   textOnScrollCode,
   mouseImageTrailCode,
   textLoaderCode,
+  colorPaletteShowcaseCode,
+  mouseImageMaskCode,
 } from "@/registry/code-strings";
 
 
