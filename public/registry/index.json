@@ -172,6 +172,18 @@
     "type": "registry:block"
   },
   {
+    "name": "merge-at-center",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/loading-animations/merge-at-center/merge-at-center.html",
+        "type": "registry:block"
+      }
+    ],
+    "type": "registry:block"
+  },
+  {
     "name": "color-palette-showcase",
     "dependencies": [],
     "registryDependencies": [],

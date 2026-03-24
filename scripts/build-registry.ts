@@ -42,6 +42,7 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "text-on-scroll", file: "src/registry/blocks/text-animations/text-on-scroll/text-on-scroll.html", type: "registry:block", componentType: "html" },
   { id: "mouse-image-trail", file: "src/registry/blocks/hover-animations/mouse-image-trail/mouse-image-trail.html", type: "registry:block", componentType: "html" },
   { id: "text-loader", file: "src/registry/blocks/loading-animations/text-loader/text-loader.html", type: "registry:block", componentType: "html" },
+  { id: "merge-at-center", file: "src/registry/blocks/loading-animations/merge-at-center/merge-at-center.html", type: "registry:block", componentType: "html" },
   { id: "color-palette-showcase", file: "src/registry/blocks/color-palette/color-palette-showcase/color-palette-showcase.html", type: "registry:block", componentType: "html" },
   { id: "mouse-image-mask", file: "src/registry/blocks/hover-animations/mouse-image-mask/mouse-image-mask.html", type: "registry:block", componentType: "html" },
   { id: "view-more-mouse", file: "src/registry/blocks/hover-animations/view-more-mouse/view-more-mouse.html", type: "registry:block", componentType: "html" },

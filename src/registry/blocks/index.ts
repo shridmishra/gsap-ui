@@ -25,6 +25,7 @@ export {
   textOnScrollCode,
   mouseImageTrailCode,
   textLoaderCode,
+  mergeAtCenterCode,
   colorPaletteShowcaseCode,
   mouseImageMaskCode,
   viewMoreMouseCode,

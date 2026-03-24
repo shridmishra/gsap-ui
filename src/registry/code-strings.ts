@@ -2327,6 +2327,129 @@ export const textLoaderCode = {
 </html>`,
 };
 
+export const mergeAtCenterCode = {
+  html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merge At Center</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f5;
+      --text-primary: #111111;
+      --text-secondary: #404040;
+      --accent-color: #3b82f6;
+    }
+
+    :root[data-theme="dark"],
+    html[data-theme="dark"] {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #1a1a1a;
+      --text-primary: #f5f5f5;
+      --text-secondary: #b0b0b0;
+      --accent-color: #60a5fa;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --text-primary: #f5f5f5;
+        --text-secondary: #b0b0b0;
+        --accent-color: #60a5fa;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      color: var(--text-primary);
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: radial-gradient(circle at 30% 20%, var(--bg-secondary), var(--bg-primary));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      padding: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 10vw, 6.25rem);
+      overflow: hidden;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      text-transform: lowercase;
+    }
+
+    h1 span {
+      display: inline-block;
+      will-change: transform, opacity;
+    }
+  </style>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <h1>shridstudios</h1>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      function breakText() {
+        const h1 = document.querySelector("h1");
+        const h1Text = h1.textContent;
+        const splitText = h1Text.split("");
+        let clutter = "";
+        const halfValue = splitText.length / 2;
+
+        splitText.forEach((char, idx) => {
+          if (idx < halfValue) {
+            clutter += \`<span class="a">\${char}</span>\`;
+          } else {
+            clutter += \`<span class="b">\${char}</span>\`;
+          }
+        });
+
+        h1.innerHTML = clutter;
+      }
+
+      breakText();
+
+      gsap.from("h1 .a", {
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        delay: 0.5,
+        stagger: 0.15,
+        ease: "power2.out",
+      });
+
+      gsap.from("h1 .b", {
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        delay: 0.5,
+        stagger: -0.15,
+        ease: "power2.out",
+      });
+    });
+  </script>
+</body>
+</html>
+`,
+};
+
 export const colorPaletteShowcaseCode = {
   html: `<!DOCTYPE html>
 <html lang="en">
