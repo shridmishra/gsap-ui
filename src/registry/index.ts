@@ -17,6 +17,7 @@ import {
   textLoaderCode,
   colorPaletteShowcaseCode,
   mouseImageMaskCode,
+  viewMoreMouseCode,
   reverseStickyScrollCode,
   guitarStringCode,
 } from "@/registry/blocks";
@@ -81,6 +82,16 @@ export const componentRegistry: ComponentCategory[] = [
         url: "/components/hover-animations/mouse-image-mask",
         installation: "Uses CDN - no npm install required",
         keywords: ["GSAP", "Mask", "Hover", "Image", "Animation"],
+        componentType: "html",
+      },
+      {
+        name: "View More Mouse",
+        id: "view-more-mouse",
+        isFree: true,
+        description: "An interactive hover preview with a custom mouse cursor that expands to show view-more text.",
+        url: "/components/hover-animations/view-more-mouse",
+        installation: "Uses CDN - no npm install required",
+        keywords: ["GSAP", "Cursor", "Hover", "Image", "Overlay", "HTML"],
         componentType: "html",
       },
     ],
@@ -272,6 +283,7 @@ export const codeMap: Record<string, import("@/types").RegistryCodeEntry> = {
   "text-loader": textLoaderCode,
   "color-palette-showcase": colorPaletteShowcaseCode,
   "mouse-image-mask": mouseImageMaskCode,
+  "view-more-mouse": viewMoreMouseCode,
   "reverse-sticky-scroll": reverseStickyScrollCode,
   "guitar-string": guitarStringCode,
 };

@@ -196,6 +196,18 @@
     "type": "registry:block"
   },
   {
+    "name": "view-more-mouse",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/hover-animations/view-more-mouse/view-more-mouse.html",
+        "type": "registry:block"
+      }
+    ],
+    "type": "registry:block"
+  },
+  {
     "name": "reverse-sticky-scroll",
     "dependencies": [],
     "registryDependencies": [],
