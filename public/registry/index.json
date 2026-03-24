@@ -194,5 +194,17 @@
       }
     ],
     "type": "registry:block"
+  },
+  {
+    "name": "reverse-sticky-scroll",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/scroll-animations/reverse-sticky-scroll/reverse-sticky-scroll.html",
+        "type": "registry:block"
+      }
+    ],
+    "type": "registry:block"
   }
 ]

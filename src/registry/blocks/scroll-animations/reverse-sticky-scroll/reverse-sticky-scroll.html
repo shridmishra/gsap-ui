@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reverse Sticky Scroll</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bricolage+Grotesque:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f5;
+      --text-primary: #1a1a1a;
+      --text-secondary: #666666;
+      --border-color: #e0e0e0;
+      --accent-color: #3b82f6;
+
+      --s1-bg: #e85a2b;
+      --s1-text: #111111;
+      --s2-bg: #111111;
+      --s2-text: #f5f5f5;
+      --s3-bg: #f5f0e8;
+      --s3-text: #111111;
+      --s4-bg: #1a3de8;
+      --s4-text: #f5f5f5;
+      --s4-hr: #89a0ff;
+      --s5-bg: #e8e02b;
+      --s5-text: #111111;
+    }
+
+    :root[data-theme="dark"],
+    html[data-theme="dark"] {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #1a1a1a;
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --border-color: #333333;
+      --accent-color: #60a5fa;
+
+      --s1-bg: #a63b1a;
+      --s1-text: #f5f5f5;
+      --s2-bg: #080808;
+      --s2-text: #f5f5f5;
+      --s3-bg: #2f2a24;
+      --s3-text: #f5f5f5;
+      --s4-bg: #112391;
+      --s4-text: #f5f5f5;
+      --s4-hr: #7c97ff;
+      --s5-bg: #8d861c;
+      --s5-text: #f5f5f5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg-primary: #0a0a0a;
+        --bg-secondary: #1a1a1a;
+        --text-primary: #f5f5f5;
+        --text-secondary: #a0a0a0;
+        --border-color: #333333;
+        --accent-color: #60a5fa;
+
+        --s1-bg: #a63b1a;
+        --s1-text: #f5f5f5;
+        --s2-bg: #080808;
+        --s2-text: #f5f5f5;
+        --s3-bg: #2f2a24;
+        --s3-text: #f5f5f5;
+        --s4-bg: #112391;
+        --s4-text: #f5f5f5;
+        --s4-hr: #7c97ff;
+        --s5-bg: #8d861c;
+        --s5-text: #f5f5f5;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    html {
+      scrollbar-width: none;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    body {
+      font-family: "Bricolage Grotesque", sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    section {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      padding: 4vw;
+      padding-top: clamp(2rem, 8vw, 4vw);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.5rem;
+      transform-origin: bottom left;
+      will-change: transform;
+    }
+
+    .big {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: clamp(3.5rem, 12vw, 14rem);
+      font-weight: 400;
+      line-height: 0.85;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    .sub {
+      font-size: clamp(1rem, 2.5vw, 2rem);
+      max-width: 50ch;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+
+    .tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+
+    .right {
+      text-align: right;
+      align-self: flex-end;
+    }
+
+    .bottom {
+      margin-top: auto;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid currentColor;
+      opacity: 0.6;
+      margin: 2vw 0;
+    }
+
+    .cols {
+      display: flex;
+      gap: 3vw;
+      flex-wrap: wrap;
+    }
+
+    .cols > div {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .label {
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .detail {
+      font-size: clamp(0.85rem, 1.3vw, 1.05rem);
+      line-height: 1.5;
+      opacity: 0.75;
+    }
+
+    .s1 .container {
+      background: var(--s1-bg);
+      color: var(--s1-text);
+    }
+
+    .s1 hr {
+      border-color: var(--s1-text);
+      opacity: 1;
+    }
+
+    .s2 .container {
+      background: var(--s2-bg);
+      color: var(--s2-text);
+    }
+
+    .s3 .container {
+      background: var(--s3-bg);
+      color: var(--s3-text);
+    }
+
+    .s4 .container {
+      background: var(--s4-bg);
+      color: var(--s4-text);
+    }
+
+    .s4 hr {
+      border-color: var(--s4-hr);
+    }
+
+    .s5 .container {
+      background: var(--s5-bg);
+      color: var(--s5-text);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="s1">
+      <div class="container">
+        <p class="tag">01 - Who we are</p>
+        <hr />
+        <div>
+          <h1 class="big">Create<br />Without<br />Limits</h1>
+        </div>
+        <hr />
+        <p class="sub bottom">
+          We believe every artist deserves a platform that puts creativity first. No algorithms, no noise - just pure art and the people who make it.
+        </p>
+      </div>
+    </section>
+
+    <section class="s2">
+      <div class="container">
+        <p class="tag">02 - The mission</p>
+        <hr />
+        <div>
+          <h2 class="big">Art<br />First<br />Always</h2>
+        </div>
+        <hr />
+        <div>
+          <p class="sub">
+            A global community built for artists, by artists. We're rewriting the rules of how creative work gets seen, shared, and valued.
+          </p>
+        </div>
+        <hr />
+        <div class="cols">
+          <div>
+            <p class="label">Discovery</p>
+            <p class="detail">
+              Human-curated collections that put real eyes on real art. No algorithms deciding your fate. We believe the best work rises when real people champion it.
+            </p>
+          </div>
+          <div>
+            <p class="label">Community</p>
+            <p class="detail">
+              Find collaborators, mentors, and fellow creatives who push your work forward. Build lasting relationships that fuel your practice for years to come.
+            </p>
+          </div>
+          <div>
+            <p class="label">Value</p>
+            <p class="detail">
+              Fair pricing. Transparent commissions. Artists keep what they earn. Always. No hidden platform fees, no surprise deductions, no middlemen.
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div class="cols">
+          <div>
+            <p class="label">Exhibitions</p>
+            <p class="detail">
+              Virtual and physical showcases curated from our global network. Get your work in front of the right audiences without gallery gatekeeping.
+            </p>
+          </div>
+          <div>
+            <p class="label">Mentorship</p>
+            <p class="detail">
+              Paired guidance from established artists who've walked the path. Learn the business of art from people who actually live it.
+            </p>
+          </div>
+          <div>
+            <p class="label">Residencies</p>
+            <p class="detail">
+              Access funded creative retreats around the world. Dedicated time and space to experiment, create, and grow without distraction.
+            </p>
+          </div>
+        </div>
+        <hr />
+        <p class="sub bottom right">
+          Every feature we build starts with one question - does this serve the artist?
+        </p>
+      </div>
+    </section>
+
+    <section class="s3">
+      <div class="container">
+        <p class="tag">03 - How it works</p>
+        <hr />
+        <div>
+          <h2 class="big">Show<br />Up.<br />Stand<br />Out.</h2>
+        </div>
+        <hr />
+        <p class="sub">Three steps. Zero complexity. Your creative career starts moving the moment you sign up.</p>
+        <hr />
+        <div class="cols">
+          <div>
+            <p class="label">01 - Upload</p>
+            <p class="detail">
+              Drag, drop, done. Your portfolio goes live in seconds with full creative control. Organize by series, medium, or timeline. Present your work exactly how you want it seen.
+            </p>
+          </div>
+          <div>
+            <p class="label">02 - Connect</p>
+            <p class="detail">
+              Match with collectors, galleries, and brands actively looking for your style. Our network spans 80+ countries and every creative discipline you can think of.
+            </p>
+          </div>
+          <div>
+            <p class="label">03 - Grow</p>
+            <p class="detail">
+              Track engagement, manage commissions, and scale your practice - all in one place. Real analytics that help you understand your audience and make smarter decisions.
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div class="cols">
+          <div>
+            <p class="label">04 - Sell</p>
+            <p class="detail">
+              Set your prices, manage editions, handle licensing. Built-in commerce tools that let you sell directly - no third-party marketplace needed.
+            </p>
+          </div>
+          <div>
+            <p class="label">05 - Collaborate</p>
+            <p class="detail">
+              Find your people. Joint projects, split commissions, shared studios. Creative partnerships made effortless through built-in collaboration tools.
+            </p>
+          </div>
+          <div>
+            <p class="label">06 - Evolve</p>
+            <p class="detail">
+              Your practice changes. Your platform should too. Flexible tools that adapt as your work grows, shifts, and finds new directions over time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s4">
+      <div class="container">
+        <p class="tag">04 - The vision</p>
+        <hr />
+        <div>
+          <h2 class="big">Future<br />Of<br />Art</h2>
+        </div>
+        <hr />
+        <div>
+          <p class="sub">
+            We're not just building a platform. We're building a movement - one where emerging voices are amplified and every brushstroke matters.
+          </p>
+        </div>
+        <hr />
+        <div class="cols">
+          <div>
+            <p class="label">10K+</p>
+            <p class="detail">
+              Artists from 80 countries already shaping the future with us. Painters, sculptors, digital creators, photographers - every medium represented.
+            </p>
+          </div>
+          <div>
+            <p class="label">$2M+</p>
+            <p class="detail">
+              Paid directly to creators in our first year. Zero hidden fees. Money flows from collectors to artists - we just make the connection happen.
+            </p>
+          </div>
+          <div>
+            <p class="label">100%</p>
+            <p class="detail">
+              Artist-owned. Every decision we make starts with the creator. Our advisory board is made entirely of working artists.
+            </p>
+          </div>
+        </div>
+        <hr />
+        <div>
+          <p class="sub">
+            The art world has been broken for decades. Galleries take 50%. Algorithms bury talent. We're here to change that - permanently.
+          </p>
+        </div>
+        <hr />
+        <div class="cols">
+          <div>
+            <p class="label">Open access</p>
+            <p class="detail">
+              No invite codes. No waiting lists. If you make art, you belong here. Period. We don't gatekeep creativity.
+            </p>
+          </div>
+          <div>
+            <p class="label">Global reach</p>
+            <p class="detail">
+              Your work seen in 120+ countries from day one. Built-in translation, multi-currency support, and worldwide shipping partnerships.
+            </p>
+          </div>
+          <div>
+            <p class="label">Artist-first economics</p>
+            <p class="detail">
+              You keep 90% of every sale. The remaining 10% funds the platform, the community, and the mission. Nothing goes to shareholders.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s5">
+      <div class="container">
+        <p class="tag">05 - Join us</p>
+        <hr />
+        <div>
+          <h2 class="big">Ready<br />To<br />Begin?</h2>
+        </div>
+        <hr />
+        <p class="sub bottom">
+          Take control of your creative journey. Join now and let's shape the future of the art world together.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="https://unpkg.com/lenis@1.3.17/dist/lenis.min.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const lenis = new Lenis();
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+
+      const sections = gsap.utils.toArray("section");
+
+      sections.forEach((section, i) => {
+        const container = section.querySelector(".container");
+
+        if (i > 0) {
+          gsap.set(container, {
+            rotation: 30,
+          });
+
+          gsap.to(container, {
+            rotation: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "top 25%",
+              scrub: true,
+            },
+          });
+        }
+
+        if (i < sections.length - 1) {
+          ScrollTrigger.create({
+            trigger: section,
+            start: "bottom bottom",
+            end: "bottom top",
+            pin: true,
+            pinSpacing: false,
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

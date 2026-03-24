@@ -27,6 +27,6 @@ export {
   textLoaderCode,
   colorPaletteShowcaseCode,
   mouseImageMaskCode,
+  reverseStickyScrollCode,
 } from "@/registry/code-strings";
-
 

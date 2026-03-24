@@ -17,6 +17,7 @@ import {
   textLoaderCode,
   colorPaletteShowcaseCode,
   mouseImageMaskCode,
+  reverseStickyScrollCode,
 } from "@/registry/blocks";
 
 // Re-export showcase components for convenience
@@ -103,6 +104,16 @@ export const componentRegistry: ComponentCategory[] = [
         url: "/components/scroll-animations/sticky-scroll",
         installation: "npm install gsap lenis",
         keywords: ["GSAP", "Sticky", "Scroll", "Parallax", "React"],
+      },
+      {
+        name: "Reverse Sticky Scroll",
+        id: "reverse-sticky-scroll",
+        isFree: true,
+        description: "A full-page reverse sticky scroll narrative with rotating section transitions.",
+        url: "/components/scroll-animations/reverse-sticky-scroll",
+        installation: "Uses CDN - no npm install required",
+        keywords: ["GSAP", "ScrollTrigger", "Lenis", "Sticky", "Scroll", "HTML"],
+        componentType: "html",
       },
     ],
   },
@@ -250,5 +261,5 @@ export const codeMap: Record<string, import("@/types").RegistryCodeEntry> = {
   "text-loader": textLoaderCode,
   "color-palette-showcase": colorPaletteShowcaseCode,
   "mouse-image-mask": mouseImageMaskCode,
+  "reverse-sticky-scroll": reverseStickyScrollCode,
 };
-

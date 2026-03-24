@@ -32,6 +32,7 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "text-loader", file: "src/registry/blocks/loading-animations/text-loader/text-loader.html", type: "html" },
   { id: "color-palette-showcase", file: "src/registry/blocks/color-palette/color-palette-showcase/color-palette-showcase.html", type: "html" },
   { id: "mouse-image-mask", file: "src/registry/blocks/hover-animations/mouse-image-mask/mouse-image-mask.html", type: "html" },
+  { id: "reverse-sticky-scroll", file: "src/registry/blocks/scroll-animations/reverse-sticky-scroll/reverse-sticky-scroll.html", type: "html" },
 ];
 
 const toVariableName = (id: string): string =>
