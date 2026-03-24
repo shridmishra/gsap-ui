@@ -20,6 +20,7 @@ import {
   mouseImageMaskCode,
   viewMoreMouseCode,
   reverseStickyScrollCode,
+  marqueScrollCode,
   guitarStringCode,
 } from "@/registry/blocks";
 
@@ -126,6 +127,16 @@ export const componentRegistry: ComponentCategory[] = [
         url: "/components/scroll-animations/reverse-sticky-scroll",
         installation: "Uses CDN - no npm install required",
         keywords: ["GSAP", "ScrollTrigger", "Lenis", "Sticky", "Scroll", "HTML"],
+        componentType: "html",
+      },
+      {
+        name: "Marque Scroll",
+        id: "marque-scroll",
+        isFree: true,
+        description: "A scroll-direction driven marquee strip that reverses motion with GSAP.",
+        url: "/components/scroll-animations/marque-scroll",
+        installation: "Uses CDN - no npm install required",
+        keywords: ["GSAP", "Marquee", "Scroll", "Direction", "Ticker", "HTML"],
         componentType: "html",
       },
     ],
@@ -298,5 +309,6 @@ export const codeMap: Record<string, import("@/types").RegistryCodeEntry> = {
   "mouse-image-mask": mouseImageMaskCode,
   "view-more-mouse": viewMoreMouseCode,
   "reverse-sticky-scroll": reverseStickyScrollCode,
+  "marque-scroll": marqueScrollCode,
   "guitar-string": guitarStringCode,
 };

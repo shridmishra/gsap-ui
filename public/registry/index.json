@@ -232,6 +232,18 @@
     "type": "registry:block"
   },
   {
+    "name": "marque-scroll",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/scroll-animations/marque-scroll/marque-scroll.html",
+        "type": "registry:block"
+      }
+    ],
+    "type": "registry:block"
+  },
+  {
     "name": "guitar-string",
     "dependencies": [],
     "registryDependencies": [],

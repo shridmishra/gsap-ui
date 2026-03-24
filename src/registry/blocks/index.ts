@@ -30,5 +30,6 @@ export {
   mouseImageMaskCode,
   viewMoreMouseCode,
   reverseStickyScrollCode,
+  marqueScrollCode,
   guitarStringCode,
 } from "@/registry/code-strings";

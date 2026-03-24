@@ -35,6 +35,7 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "mouse-image-mask", file: "src/registry/blocks/hover-animations/mouse-image-mask/mouse-image-mask.html", type: "html" },
   { id: "view-more-mouse", file: "src/registry/blocks/hover-animations/view-more-mouse/view-more-mouse.html", type: "html" },
   { id: "reverse-sticky-scroll", file: "src/registry/blocks/scroll-animations/reverse-sticky-scroll/reverse-sticky-scroll.html", type: "html" },
+  { id: "marque-scroll", file: "src/registry/blocks/scroll-animations/marque-scroll/marque-scroll.html", type: "html" },
   { id: "guitar-string", file: "src/registry/blocks/just-for-fun/guitar-string/guitar-string.html", type: "html" },
 ];
 

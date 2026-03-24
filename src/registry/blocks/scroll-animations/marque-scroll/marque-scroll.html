@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background-color: black;
+        }
+
+        .page1,
+        .page2,
+        .page3 {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .move {
+            background-color: lawngreen;
+            display: flex;
+            padding: 3vw 0;
+            overflow-x: hidden;
+        }
+
+        .marque h1 {
+            font-size: 70px;
+            font-weight: 500;
+            color: black;
+        }
+
+        .marque img {
+            height: 4vw;
+        }
+
+        .marque {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 3vw;
+            padding: 0 1.5vw;
+            transform: translateX(-100%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page1"></div>
+
+    <div class="page2">
+        <div class="move">
+            <div class="marque">
+                <h1>THRIVE BEYOND LIMITS</h1>
+                <img src="https://www.brandium.nl/wp-content/uploads/2023/07/arrow-br.svg" alt="">
+            </div>
+            <div class="marque">
+                <h1>THRIVE BEYOND LIMITS</h1>
+                <img src="https://www.brandium.nl/wp-content/uploads/2023/07/arrow-br.svg" alt="">
+            </div>
+            <div class="marque">
+                <h1>THRIVE BEYOND LIMITS</h1>
+                <img src="https://www.brandium.nl/wp-content/uploads/2023/07/arrow-br.svg" alt="">
+            </div>
+            <div class="marque">
+                <h1>THRIVE BEYOND LIMITS</h1>
+                <img src="https://www.brandium.nl/wp-content/uploads/2023/07/arrow-br.svg" alt="">
+            </div>
+            <div class="marque">
+                <h1>THRIVE BEYOND LIMITS</h1>
+                <img src="https://www.brandium.nl/wp-content/uploads/2023/07/arrow-br.svg" alt="">
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="page3"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        window.addEventListener("wheel", function (dets) {
+            if (dets.deltaY > 0) {
+                gsap.to(".marque", {
+                    transform: "translateX(-200%)",
+                    repeat: -1,
+                    duration: 3,
+                    ease: "none"
+                })
+
+                gsap.to(".marque img", {
+                    rotate: 180
+                })
+
+            } else {
+                gsap.to(".marque", {
+                    transform: "translateX(0%)",
+                    repeat: -1,
+                    duration: 3,
+                    ease: "none"
+                })
+
+                gsap.to(".marque img", {
+                    rotate: 0
+                })
+
+
+            }
+        })
+    </script>
+</body>
+
+</html>
