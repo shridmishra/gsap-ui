@@ -206,5 +206,17 @@
       }
     ],
     "type": "registry:block"
+  },
+  {
+    "name": "guitar-string",
+    "dependencies": [],
+    "registryDependencies": [],
+    "files": [
+      {
+        "path": "registry/blocks/just-for-fun/guitar-string/guitar-string.html",
+        "type": "registry:block"
+      }
+    ],
+    "type": "registry:block"
   }
 ]

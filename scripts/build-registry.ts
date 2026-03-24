@@ -45,6 +45,7 @@ const COMPONENTS: ComponentConfig[] = [
   { id: "color-palette-showcase", file: "src/registry/blocks/color-palette/color-palette-showcase/color-palette-showcase.html", type: "registry:block", componentType: "html" },
   { id: "mouse-image-mask", file: "src/registry/blocks/hover-animations/mouse-image-mask/mouse-image-mask.html", type: "registry:block", componentType: "html" },
   { id: "reverse-sticky-scroll", file: "src/registry/blocks/scroll-animations/reverse-sticky-scroll/reverse-sticky-scroll.html", type: "registry:block", componentType: "html" },
+  { id: "guitar-string", file: "src/registry/blocks/just-for-fun/guitar-string/guitar-string.html", type: "registry:block", componentType: "html" },
 ];
 
 

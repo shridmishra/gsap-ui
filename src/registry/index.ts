@@ -18,6 +18,7 @@ import {
   colorPaletteShowcaseCode,
   mouseImageMaskCode,
   reverseStickyScrollCode,
+  guitarStringCode,
 } from "@/registry/blocks";
 
 // Re-export showcase components for convenience
@@ -224,6 +225,16 @@ export const componentRegistry: ComponentCategory[] = [
         keywords: ["GSAP", "3D", "Cards", "Color Palette", "Animation", "HTML"],
         componentType: "html",
       },
+      {
+        name: "Guitar String",
+        id: "guitar-string",
+        isFree: true,
+        description: "An interactive guitar-string curve that bends on mouse move and rebounds with GSAP.",
+        url: "/components/just-for-fun/guitar-string",
+        installation: "Uses CDN - no npm install required",
+        keywords: ["GSAP", "SVG", "Interactive", "Mouse", "String", "HTML"],
+        componentType: "html",
+      },
     ],
   },
 ];
@@ -262,4 +273,5 @@ export const codeMap: Record<string, import("@/types").RegistryCodeEntry> = {
   "color-palette-showcase": colorPaletteShowcaseCode,
   "mouse-image-mask": mouseImageMaskCode,
   "reverse-sticky-scroll": reverseStickyScrollCode,
+  "guitar-string": guitarStringCode,
 };

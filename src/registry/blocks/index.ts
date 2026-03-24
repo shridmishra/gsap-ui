@@ -28,5 +28,5 @@ export {
   colorPaletteShowcaseCode,
   mouseImageMaskCode,
   reverseStickyScrollCode,
+  guitarStringCode,
 } from "@/registry/code-strings";
-
